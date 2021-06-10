@@ -127,6 +127,11 @@ export namespace ProtocolProxyApi {
          */
         on(event: 'messageAdded', listener: (params: Protocol.Console.MessageAddedEvent) => void): void;
 
+        /**
+         * Issued when new console message is added.
+         */
+        messageAdded(): Promise<Protocol.Console.MessageAddedEvent>;
+
     }
 
     export interface DebuggerApi {
@@ -297,9 +302,19 @@ export namespace ProtocolProxyApi {
         on(event: 'breakpointResolved', listener: (params: Protocol.Debugger.BreakpointResolvedEvent) => void): void;
 
         /**
+         * Fired when breakpoint is resolved to an actual script and location.
+         */
+        breakpointResolved(): Promise<Protocol.Debugger.BreakpointResolvedEvent>;
+
+        /**
          * Fired when the virtual machine stopped on breakpoint or exception or any other stop criteria.
          */
         on(event: 'paused', listener: (params: Protocol.Debugger.PausedEvent) => void): void;
+
+        /**
+         * Fired when the virtual machine stopped on breakpoint or exception or any other stop criteria.
+         */
+        paused(): Promise<Protocol.Debugger.PausedEvent>;
 
         /**
          * Fired when the virtual machine resumed execution.
@@ -307,15 +322,31 @@ export namespace ProtocolProxyApi {
         on(event: 'resumed', listener: () => void): void;
 
         /**
+         * Fired when the virtual machine resumed execution.
+         */
+        resumed(): Promise<void>;
+
+        /**
          * Fired when virtual machine fails to parse the script.
          */
         on(event: 'scriptFailedToParse', listener: (params: Protocol.Debugger.ScriptFailedToParseEvent) => void): void;
+
+        /**
+         * Fired when virtual machine fails to parse the script.
+         */
+        scriptFailedToParse(): Promise<Protocol.Debugger.ScriptFailedToParseEvent>;
 
         /**
          * Fired when virtual machine parses script. This event is also fired for all known and uncollected
          * scripts upon enabling debugger.
          */
         on(event: 'scriptParsed', listener: (params: Protocol.Debugger.ScriptParsedEvent) => void): void;
+
+        /**
+         * Fired when virtual machine parses script. This event is also fired for all known and uncollected
+         * scripts upon enabling debugger.
+         */
+        scriptParsed(): Promise<Protocol.Debugger.ScriptParsedEvent>;
 
     }
 
@@ -350,10 +381,17 @@ export namespace ProtocolProxyApi {
 
         on(event: 'addHeapSnapshotChunk', listener: (params: Protocol.HeapProfiler.AddHeapSnapshotChunkEvent) => void): void;
 
+        addHeapSnapshotChunk(): Promise<Protocol.HeapProfiler.AddHeapSnapshotChunkEvent>;
+
         /**
          * If heap objects tracking has been started then backend may send update for one or more fragments
          */
         on(event: 'heapStatsUpdate', listener: (params: Protocol.HeapProfiler.HeapStatsUpdateEvent) => void): void;
+
+        /**
+         * If heap objects tracking has been started then backend may send update for one or more fragments
+         */
+        heapStatsUpdate(): Promise<Protocol.HeapProfiler.HeapStatsUpdateEvent>;
 
         /**
          * If heap objects tracking has been started then backend regularly sends a current value for last
@@ -362,9 +400,20 @@ export namespace ProtocolProxyApi {
          */
         on(event: 'lastSeenObjectId', listener: (params: Protocol.HeapProfiler.LastSeenObjectIdEvent) => void): void;
 
+        /**
+         * If heap objects tracking has been started then backend regularly sends a current value for last
+         * seen object id and corresponding timestamp. If the were changes in the heap since last event
+         * then one or more heapStatsUpdate events will be sent before a new lastSeenObjectId event.
+         */
+        lastSeenObjectId(): Promise<Protocol.HeapProfiler.LastSeenObjectIdEvent>;
+
         on(event: 'reportHeapSnapshotProgress', listener: (params: Protocol.HeapProfiler.ReportHeapSnapshotProgressEvent) => void): void;
 
+        reportHeapSnapshotProgress(): Promise<Protocol.HeapProfiler.ReportHeapSnapshotProgressEvent>;
+
         on(event: 'resetProfiles', listener: () => void): void;
+
+        resetProfiles(): Promise<void>;
 
     }
 
@@ -454,10 +503,17 @@ export namespace ProtocolProxyApi {
 
         on(event: 'consoleProfileFinished', listener: (params: Protocol.Profiler.ConsoleProfileFinishedEvent) => void): void;
 
+        consoleProfileFinished(): Promise<Protocol.Profiler.ConsoleProfileFinishedEvent>;
+
         /**
          * Sent when new profile recording is started using console.profile() call.
          */
         on(event: 'consoleProfileStarted', listener: (params: Protocol.Profiler.ConsoleProfileStartedEvent) => void): void;
+
+        /**
+         * Sent when new profile recording is started using console.profile() call.
+         */
+        consoleProfileStarted(): Promise<Protocol.Profiler.ConsoleProfileStartedEvent>;
 
         /**
          * Reports coverage delta since the last poll (either from an event like this, or from
@@ -466,6 +522,14 @@ export namespace ProtocolProxyApi {
          * trigger collection of coverage data immediatelly at a certain point in time.
          */
         on(event: 'preciseCoverageDeltaUpdate', listener: (params: Protocol.Profiler.PreciseCoverageDeltaUpdateEvent) => void): void;
+
+        /**
+         * Reports coverage delta since the last poll (either from an event like this, or from
+         * `takePreciseCoverage` for the current isolate. May only be sent if precise code
+         * coverage has been started. This event can be trigged by the embedder to, for example,
+         * trigger collection of coverage data immediatelly at a certain point in time.
+         */
+        preciseCoverageDeltaUpdate(): Promise<Protocol.Profiler.PreciseCoverageDeltaUpdateEvent>;
 
     }
 
@@ -589,9 +653,19 @@ export namespace ProtocolProxyApi {
         on(event: 'bindingCalled', listener: (params: Protocol.Runtime.BindingCalledEvent) => void): void;
 
         /**
+         * Notification is issued every time when binding is called.
+         */
+        bindingCalled(): Promise<Protocol.Runtime.BindingCalledEvent>;
+
+        /**
          * Issued when console API was called.
          */
         on(event: 'consoleAPICalled', listener: (params: Protocol.Runtime.ConsoleAPICalledEvent) => void): void;
+
+        /**
+         * Issued when console API was called.
+         */
+        consoleAPICalled(): Promise<Protocol.Runtime.ConsoleAPICalledEvent>;
 
         /**
          * Issued when unhandled exception was revoked.
@@ -599,9 +673,19 @@ export namespace ProtocolProxyApi {
         on(event: 'exceptionRevoked', listener: (params: Protocol.Runtime.ExceptionRevokedEvent) => void): void;
 
         /**
+         * Issued when unhandled exception was revoked.
+         */
+        exceptionRevoked(): Promise<Protocol.Runtime.ExceptionRevokedEvent>;
+
+        /**
          * Issued when exception was thrown and unhandled.
          */
         on(event: 'exceptionThrown', listener: (params: Protocol.Runtime.ExceptionThrownEvent) => void): void;
+
+        /**
+         * Issued when exception was thrown and unhandled.
+         */
+        exceptionThrown(): Promise<Protocol.Runtime.ExceptionThrownEvent>;
 
         /**
          * Issued when new execution context is created.
@@ -609,9 +693,19 @@ export namespace ProtocolProxyApi {
         on(event: 'executionContextCreated', listener: (params: Protocol.Runtime.ExecutionContextCreatedEvent) => void): void;
 
         /**
+         * Issued when new execution context is created.
+         */
+        executionContextCreated(): Promise<Protocol.Runtime.ExecutionContextCreatedEvent>;
+
+        /**
          * Issued when execution context is destroyed.
          */
         on(event: 'executionContextDestroyed', listener: (params: Protocol.Runtime.ExecutionContextDestroyedEvent) => void): void;
+
+        /**
+         * Issued when execution context is destroyed.
+         */
+        executionContextDestroyed(): Promise<Protocol.Runtime.ExecutionContextDestroyedEvent>;
 
         /**
          * Issued when all executionContexts were cleared in browser
@@ -619,10 +713,21 @@ export namespace ProtocolProxyApi {
         on(event: 'executionContextsCleared', listener: () => void): void;
 
         /**
+         * Issued when all executionContexts were cleared in browser
+         */
+        executionContextsCleared(): Promise<void>;
+
+        /**
          * Issued when object should be inspected (for example, as a result of inspect() command line API
          * call).
          */
         on(event: 'inspectRequested', listener: (params: Protocol.Runtime.InspectRequestedEvent) => void): void;
+
+        /**
+         * Issued when object should be inspected (for example, as a result of inspect() command line API
+         * call).
+         */
+        inspectRequested(): Promise<Protocol.Runtime.InspectRequestedEvent>;
 
     }
 
@@ -730,14 +835,29 @@ export namespace ProtocolProxyApi {
         on(event: 'animationCanceled', listener: (params: Protocol.Animation.AnimationCanceledEvent) => void): void;
 
         /**
+         * Event for when an animation has been cancelled.
+         */
+        animationCanceled(): Promise<Protocol.Animation.AnimationCanceledEvent>;
+
+        /**
          * Event for each animation that has been created.
          */
         on(event: 'animationCreated', listener: (params: Protocol.Animation.AnimationCreatedEvent) => void): void;
 
         /**
+         * Event for each animation that has been created.
+         */
+        animationCreated(): Promise<Protocol.Animation.AnimationCreatedEvent>;
+
+        /**
          * Event for animation that has been started.
          */
         on(event: 'animationStarted', listener: (params: Protocol.Animation.AnimationStartedEvent) => void): void;
+
+        /**
+         * Event for animation that has been started.
+         */
+        animationStarted(): Promise<Protocol.Animation.AnimationStartedEvent>;
 
     }
 
@@ -765,7 +885,11 @@ export namespace ProtocolProxyApi {
 
         on(event: 'applicationCacheStatusUpdated', listener: (params: Protocol.ApplicationCache.ApplicationCacheStatusUpdatedEvent) => void): void;
 
+        applicationCacheStatusUpdated(): Promise<Protocol.ApplicationCache.ApplicationCacheStatusUpdatedEvent>;
+
         on(event: 'networkStateUpdated', listener: (params: Protocol.ApplicationCache.NetworkStateUpdatedEvent) => void): void;
+
+        networkStateUpdated(): Promise<Protocol.ApplicationCache.NetworkStateUpdatedEvent>;
 
     }
 
@@ -794,6 +918,8 @@ export namespace ProtocolProxyApi {
         checkContrast(params: Protocol.Audits.CheckContrastRequest): Promise<void>;
 
         on(event: 'issueAdded', listener: (params: Protocol.Audits.IssueAddedEvent) => void): void;
+
+        issueAdded(): Promise<Protocol.Audits.IssueAddedEvent>;
 
     }
 
@@ -824,10 +950,21 @@ export namespace ProtocolProxyApi {
         on(event: 'recordingStateChanged', listener: (params: Protocol.BackgroundService.RecordingStateChangedEvent) => void): void;
 
         /**
+         * Called when the recording state for the service has been updated.
+         */
+        recordingStateChanged(): Promise<Protocol.BackgroundService.RecordingStateChangedEvent>;
+
+        /**
          * Called with all existing backgroundServiceEvents when enabled, and all new
          * events afterwards if enabled and recording.
          */
         on(event: 'backgroundServiceEventReceived', listener: (params: Protocol.BackgroundService.BackgroundServiceEventReceivedEvent) => void): void;
+
+        /**
+         * Called with all existing backgroundServiceEvents when enabled, and all new
+         * events afterwards if enabled and recording.
+         */
+        backgroundServiceEventReceived(): Promise<Protocol.BackgroundService.BackgroundServiceEventReceivedEvent>;
 
     }
 
@@ -924,9 +1061,19 @@ export namespace ProtocolProxyApi {
         on(event: 'downloadWillBegin', listener: (params: Protocol.Browser.DownloadWillBeginEvent) => void): void;
 
         /**
+         * Fired when page is about to start a download.
+         */
+        downloadWillBegin(): Promise<Protocol.Browser.DownloadWillBeginEvent>;
+
+        /**
          * Fired when download makes progress. Last call has |done| == true.
          */
         on(event: 'downloadProgress', listener: (params: Protocol.Browser.DownloadProgressEvent) => void): void;
+
+        /**
+         * Fired when download makes progress. Last call has |done| == true.
+         */
+        downloadProgress(): Promise<Protocol.Browser.DownloadProgressEvent>;
 
     }
 
@@ -1078,10 +1225,22 @@ export namespace ProtocolProxyApi {
         on(event: 'fontsUpdated', listener: (params: Protocol.CSS.FontsUpdatedEvent) => void): void;
 
         /**
+         * Fires whenever a web font is updated.  A non-empty font parameter indicates a successfully loaded
+         * web font
+         */
+        fontsUpdated(): Promise<Protocol.CSS.FontsUpdatedEvent>;
+
+        /**
          * Fires whenever a MediaQuery result changes (for example, after a browser window has been
          * resized.) The current implementation considers only viewport-dependent media features.
          */
         on(event: 'mediaQueryResultChanged', listener: () => void): void;
+
+        /**
+         * Fires whenever a MediaQuery result changes (for example, after a browser window has been
+         * resized.) The current implementation considers only viewport-dependent media features.
+         */
+        mediaQueryResultChanged(): Promise<void>;
 
         /**
          * Fired whenever an active document stylesheet is added.
@@ -1089,14 +1248,29 @@ export namespace ProtocolProxyApi {
         on(event: 'styleSheetAdded', listener: (params: Protocol.CSS.StyleSheetAddedEvent) => void): void;
 
         /**
+         * Fired whenever an active document stylesheet is added.
+         */
+        styleSheetAdded(): Promise<Protocol.CSS.StyleSheetAddedEvent>;
+
+        /**
          * Fired whenever a stylesheet is changed as a result of the client operation.
          */
         on(event: 'styleSheetChanged', listener: (params: Protocol.CSS.StyleSheetChangedEvent) => void): void;
 
         /**
+         * Fired whenever a stylesheet is changed as a result of the client operation.
+         */
+        styleSheetChanged(): Promise<Protocol.CSS.StyleSheetChangedEvent>;
+
+        /**
          * Fired whenever an active document stylesheet is removed.
          */
         on(event: 'styleSheetRemoved', listener: (params: Protocol.CSS.StyleSheetRemovedEvent) => void): void;
+
+        /**
+         * Fired whenever an active document stylesheet is removed.
+         */
+        styleSheetRemoved(): Promise<Protocol.CSS.StyleSheetRemovedEvent>;
 
     }
 
@@ -1166,10 +1340,22 @@ export namespace ProtocolProxyApi {
         on(event: 'sinksUpdated', listener: (params: Protocol.Cast.SinksUpdatedEvent) => void): void;
 
         /**
+         * This is fired whenever the list of available sinks changes. A sink is a
+         * device or a software surface that you can cast to.
+         */
+        sinksUpdated(): Promise<Protocol.Cast.SinksUpdatedEvent>;
+
+        /**
          * This is fired whenever the outstanding issue/error message changes.
          * |issueMessage| is empty if there is no issue.
          */
         on(event: 'issueUpdated', listener: (params: Protocol.Cast.IssueUpdatedEvent) => void): void;
+
+        /**
+         * This is fired whenever the outstanding issue/error message changes.
+         * |issueMessage| is empty if there is no issue.
+         */
+        issueUpdated(): Promise<Protocol.Cast.IssueUpdatedEvent>;
 
     }
 
@@ -1428,9 +1614,19 @@ export namespace ProtocolProxyApi {
         on(event: 'attributeModified', listener: (params: Protocol.DOM.AttributeModifiedEvent) => void): void;
 
         /**
+         * Fired when `Element`'s attribute is modified.
+         */
+        attributeModified(): Promise<Protocol.DOM.AttributeModifiedEvent>;
+
+        /**
          * Fired when `Element`'s attribute is removed.
          */
         on(event: 'attributeRemoved', listener: (params: Protocol.DOM.AttributeRemovedEvent) => void): void;
+
+        /**
+         * Fired when `Element`'s attribute is removed.
+         */
+        attributeRemoved(): Promise<Protocol.DOM.AttributeRemovedEvent>;
 
         /**
          * Mirrors `DOMCharacterDataModified` event.
@@ -1438,9 +1634,19 @@ export namespace ProtocolProxyApi {
         on(event: 'characterDataModified', listener: (params: Protocol.DOM.CharacterDataModifiedEvent) => void): void;
 
         /**
+         * Mirrors `DOMCharacterDataModified` event.
+         */
+        characterDataModified(): Promise<Protocol.DOM.CharacterDataModifiedEvent>;
+
+        /**
          * Fired when `Container`'s child node count has changed.
          */
         on(event: 'childNodeCountUpdated', listener: (params: Protocol.DOM.ChildNodeCountUpdatedEvent) => void): void;
+
+        /**
+         * Fired when `Container`'s child node count has changed.
+         */
+        childNodeCountUpdated(): Promise<Protocol.DOM.ChildNodeCountUpdatedEvent>;
 
         /**
          * Mirrors `DOMNodeInserted` event.
@@ -1448,9 +1654,19 @@ export namespace ProtocolProxyApi {
         on(event: 'childNodeInserted', listener: (params: Protocol.DOM.ChildNodeInsertedEvent) => void): void;
 
         /**
+         * Mirrors `DOMNodeInserted` event.
+         */
+        childNodeInserted(): Promise<Protocol.DOM.ChildNodeInsertedEvent>;
+
+        /**
          * Mirrors `DOMNodeRemoved` event.
          */
         on(event: 'childNodeRemoved', listener: (params: Protocol.DOM.ChildNodeRemovedEvent) => void): void;
+
+        /**
+         * Mirrors `DOMNodeRemoved` event.
+         */
+        childNodeRemoved(): Promise<Protocol.DOM.ChildNodeRemovedEvent>;
 
         /**
          * Called when distribution is changed.
@@ -1458,9 +1674,19 @@ export namespace ProtocolProxyApi {
         on(event: 'distributedNodesUpdated', listener: (params: Protocol.DOM.DistributedNodesUpdatedEvent) => void): void;
 
         /**
+         * Called when distribution is changed.
+         */
+        distributedNodesUpdated(): Promise<Protocol.DOM.DistributedNodesUpdatedEvent>;
+
+        /**
          * Fired when `Document` has been totally updated. Node ids are no longer valid.
          */
         on(event: 'documentUpdated', listener: () => void): void;
+
+        /**
+         * Fired when `Document` has been totally updated. Node ids are no longer valid.
+         */
+        documentUpdated(): Promise<void>;
 
         /**
          * Fired when `Element`'s inline style is modified via a CSS property modification.
@@ -1468,14 +1694,29 @@ export namespace ProtocolProxyApi {
         on(event: 'inlineStyleInvalidated', listener: (params: Protocol.DOM.InlineStyleInvalidatedEvent) => void): void;
 
         /**
+         * Fired when `Element`'s inline style is modified via a CSS property modification.
+         */
+        inlineStyleInvalidated(): Promise<Protocol.DOM.InlineStyleInvalidatedEvent>;
+
+        /**
          * Called when a pseudo element is added to an element.
          */
         on(event: 'pseudoElementAdded', listener: (params: Protocol.DOM.PseudoElementAddedEvent) => void): void;
 
         /**
+         * Called when a pseudo element is added to an element.
+         */
+        pseudoElementAdded(): Promise<Protocol.DOM.PseudoElementAddedEvent>;
+
+        /**
          * Called when a pseudo element is removed from an element.
          */
         on(event: 'pseudoElementRemoved', listener: (params: Protocol.DOM.PseudoElementRemovedEvent) => void): void;
+
+        /**
+         * Called when a pseudo element is removed from an element.
+         */
+        pseudoElementRemoved(): Promise<Protocol.DOM.PseudoElementRemovedEvent>;
 
         /**
          * Fired when backend wants to provide client with the missing DOM structure. This happens upon
@@ -1484,14 +1725,30 @@ export namespace ProtocolProxyApi {
         on(event: 'setChildNodes', listener: (params: Protocol.DOM.SetChildNodesEvent) => void): void;
 
         /**
+         * Fired when backend wants to provide client with the missing DOM structure. This happens upon
+         * most of the calls requesting node ids.
+         */
+        setChildNodes(): Promise<Protocol.DOM.SetChildNodesEvent>;
+
+        /**
          * Called when shadow root is popped from the element.
          */
         on(event: 'shadowRootPopped', listener: (params: Protocol.DOM.ShadowRootPoppedEvent) => void): void;
 
         /**
+         * Called when shadow root is popped from the element.
+         */
+        shadowRootPopped(): Promise<Protocol.DOM.ShadowRootPoppedEvent>;
+
+        /**
          * Called when shadow root is pushed into the element.
          */
         on(event: 'shadowRootPushed', listener: (params: Protocol.DOM.ShadowRootPushedEvent) => void): void;
+
+        /**
+         * Called when shadow root is pushed into the element.
+         */
+        shadowRootPushed(): Promise<Protocol.DOM.ShadowRootPushedEvent>;
 
     }
 
@@ -1598,11 +1855,19 @@ export namespace ProtocolProxyApi {
 
         on(event: 'domStorageItemAdded', listener: (params: Protocol.DOMStorage.DomStorageItemAddedEvent) => void): void;
 
+        domStorageItemAdded(): Promise<Protocol.DOMStorage.DomStorageItemAddedEvent>;
+
         on(event: 'domStorageItemRemoved', listener: (params: Protocol.DOMStorage.DomStorageItemRemovedEvent) => void): void;
+
+        domStorageItemRemoved(): Promise<Protocol.DOMStorage.DomStorageItemRemovedEvent>;
 
         on(event: 'domStorageItemUpdated', listener: (params: Protocol.DOMStorage.DomStorageItemUpdatedEvent) => void): void;
 
+        domStorageItemUpdated(): Promise<Protocol.DOMStorage.DomStorageItemUpdatedEvent>;
+
         on(event: 'domStorageItemsCleared', listener: (params: Protocol.DOMStorage.DomStorageItemsClearedEvent) => void): void;
+
+        domStorageItemsCleared(): Promise<Protocol.DOMStorage.DomStorageItemsClearedEvent>;
 
     }
 
@@ -1622,6 +1887,8 @@ export namespace ProtocolProxyApi {
         getDatabaseTableNames(params: Protocol.Database.GetDatabaseTableNamesRequest): Promise<Protocol.Database.GetDatabaseTableNamesResponse>;
 
         on(event: 'addDatabase', listener: (params: Protocol.Database.AddDatabaseEvent) => void): void;
+
+        addDatabase(): Promise<Protocol.Database.AddDatabaseEvent>;
 
     }
 
@@ -1769,6 +2036,11 @@ export namespace ProtocolProxyApi {
          */
         on(event: 'virtualTimeBudgetExpired', listener: () => void): void;
 
+        /**
+         * Notification sent after the virtual time budget for the current VirtualTimePolicy has run out.
+         */
+        virtualTimeBudgetExpired(): Promise<void>;
+
     }
 
     export interface HeadlessExperimentalApi {
@@ -1796,6 +2068,13 @@ export namespace ProtocolProxyApi {
          * beginFrame to detect whether the frames were suppressed.
          */
         on(event: 'needsBeginFramesChanged', listener: (params: Protocol.HeadlessExperimental.NeedsBeginFramesChangedEvent) => void): void;
+
+        /**
+         * Issued when the target starts or stops needing BeginFrames.
+         * Deprecated. Issue beginFrame unconditionally instead and use result from
+         * beginFrame to detect whether the frames were suppressed.
+         */
+        needsBeginFramesChanged(): Promise<Protocol.HeadlessExperimental.NeedsBeginFramesChangedEvent>;
 
     }
 
@@ -1929,6 +2208,12 @@ export namespace ProtocolProxyApi {
          */
         on(event: 'dragIntercepted', listener: (params: Protocol.Input.DragInterceptedEvent) => void): void;
 
+        /**
+         * Emitted only when `Input.setInterceptDrags` is enabled. Use this data with `Input.dispatchDragEvent` to
+         * restore normal drag and drop behavior.
+         */
+        dragIntercepted(): Promise<Protocol.Input.DragInterceptedEvent>;
+
     }
 
     export interface InspectorApi {
@@ -1948,14 +2233,29 @@ export namespace ProtocolProxyApi {
         on(event: 'detached', listener: (params: Protocol.Inspector.DetachedEvent) => void): void;
 
         /**
+         * Fired when remote debugging connection is about to be terminated. Contains detach reason.
+         */
+        detached(): Promise<Protocol.Inspector.DetachedEvent>;
+
+        /**
          * Fired when debugging target has crashed
          */
         on(event: 'targetCrashed', listener: () => void): void;
 
         /**
+         * Fired when debugging target has crashed
+         */
+        targetCrashed(): Promise<void>;
+
+        /**
          * Fired when debugging target has reloaded after crash
          */
         on(event: 'targetReloadedAfterCrash', listener: () => void): void;
+
+        /**
+         * Fired when debugging target has reloaded after crash
+         */
+        targetReloadedAfterCrash(): Promise<void>;
 
     }
 
@@ -2004,7 +2304,11 @@ export namespace ProtocolProxyApi {
 
         on(event: 'layerPainted', listener: (params: Protocol.LayerTree.LayerPaintedEvent) => void): void;
 
+        layerPainted(): Promise<Protocol.LayerTree.LayerPaintedEvent>;
+
         on(event: 'layerTreeDidChange', listener: (params: Protocol.LayerTree.LayerTreeDidChangeEvent) => void): void;
+
+        layerTreeDidChange(): Promise<Protocol.LayerTree.LayerTreeDidChangeEvent>;
 
     }
 
@@ -2039,6 +2343,11 @@ export namespace ProtocolProxyApi {
          * Issued when new message was logged.
          */
         on(event: 'entryAdded', listener: (params: Protocol.Log.EntryAddedEvent) => void): void;
+
+        /**
+         * Issued when new message was logged.
+         */
+        entryAdded(): Promise<Protocol.Log.EntryAddedEvent>;
 
     }
 
@@ -2271,9 +2580,19 @@ export namespace ProtocolProxyApi {
         on(event: 'dataReceived', listener: (params: Protocol.Network.DataReceivedEvent) => void): void;
 
         /**
+         * Fired when data chunk was received over the network.
+         */
+        dataReceived(): Promise<Protocol.Network.DataReceivedEvent>;
+
+        /**
          * Fired when EventSource message is received.
          */
         on(event: 'eventSourceMessageReceived', listener: (params: Protocol.Network.EventSourceMessageReceivedEvent) => void): void;
+
+        /**
+         * Fired when EventSource message is received.
+         */
+        eventSourceMessageReceived(): Promise<Protocol.Network.EventSourceMessageReceivedEvent>;
 
         /**
          * Fired when HTTP request has failed to load.
@@ -2281,9 +2600,19 @@ export namespace ProtocolProxyApi {
         on(event: 'loadingFailed', listener: (params: Protocol.Network.LoadingFailedEvent) => void): void;
 
         /**
+         * Fired when HTTP request has failed to load.
+         */
+        loadingFailed(): Promise<Protocol.Network.LoadingFailedEvent>;
+
+        /**
          * Fired when HTTP request has finished loading.
          */
         on(event: 'loadingFinished', listener: (params: Protocol.Network.LoadingFinishedEvent) => void): void;
+
+        /**
+         * Fired when HTTP request has finished loading.
+         */
+        loadingFinished(): Promise<Protocol.Network.LoadingFinishedEvent>;
 
         /**
          * Details of an intercepted HTTP request, which must be either allowed, blocked, modified or
@@ -2293,9 +2622,21 @@ export namespace ProtocolProxyApi {
         on(event: 'requestIntercepted', listener: (params: Protocol.Network.RequestInterceptedEvent) => void): void;
 
         /**
+         * Details of an intercepted HTTP request, which must be either allowed, blocked, modified or
+         * mocked.
+         * Deprecated, use Fetch.requestPaused instead.
+         */
+        requestIntercepted(): Promise<Protocol.Network.RequestInterceptedEvent>;
+
+        /**
          * Fired if request ended up loading from cache.
          */
         on(event: 'requestServedFromCache', listener: (params: Protocol.Network.RequestServedFromCacheEvent) => void): void;
+
+        /**
+         * Fired if request ended up loading from cache.
+         */
+        requestServedFromCache(): Promise<Protocol.Network.RequestServedFromCacheEvent>;
 
         /**
          * Fired when page is about to send HTTP request.
@@ -2303,9 +2644,19 @@ export namespace ProtocolProxyApi {
         on(event: 'requestWillBeSent', listener: (params: Protocol.Network.RequestWillBeSentEvent) => void): void;
 
         /**
+         * Fired when page is about to send HTTP request.
+         */
+        requestWillBeSent(): Promise<Protocol.Network.RequestWillBeSentEvent>;
+
+        /**
          * Fired when resource loading priority is changed
          */
         on(event: 'resourceChangedPriority', listener: (params: Protocol.Network.ResourceChangedPriorityEvent) => void): void;
+
+        /**
+         * Fired when resource loading priority is changed
+         */
+        resourceChangedPriority(): Promise<Protocol.Network.ResourceChangedPriorityEvent>;
 
         /**
          * Fired when a signed exchange was received over the network
@@ -2313,9 +2664,19 @@ export namespace ProtocolProxyApi {
         on(event: 'signedExchangeReceived', listener: (params: Protocol.Network.SignedExchangeReceivedEvent) => void): void;
 
         /**
+         * Fired when a signed exchange was received over the network
+         */
+        signedExchangeReceived(): Promise<Protocol.Network.SignedExchangeReceivedEvent>;
+
+        /**
          * Fired when HTTP response is available.
          */
         on(event: 'responseReceived', listener: (params: Protocol.Network.ResponseReceivedEvent) => void): void;
+
+        /**
+         * Fired when HTTP response is available.
+         */
+        responseReceived(): Promise<Protocol.Network.ResponseReceivedEvent>;
 
         /**
          * Fired when WebSocket is closed.
@@ -2323,9 +2684,19 @@ export namespace ProtocolProxyApi {
         on(event: 'webSocketClosed', listener: (params: Protocol.Network.WebSocketClosedEvent) => void): void;
 
         /**
+         * Fired when WebSocket is closed.
+         */
+        webSocketClosed(): Promise<Protocol.Network.WebSocketClosedEvent>;
+
+        /**
          * Fired upon WebSocket creation.
          */
         on(event: 'webSocketCreated', listener: (params: Protocol.Network.WebSocketCreatedEvent) => void): void;
+
+        /**
+         * Fired upon WebSocket creation.
+         */
+        webSocketCreated(): Promise<Protocol.Network.WebSocketCreatedEvent>;
 
         /**
          * Fired when WebSocket message error occurs.
@@ -2333,9 +2704,19 @@ export namespace ProtocolProxyApi {
         on(event: 'webSocketFrameError', listener: (params: Protocol.Network.WebSocketFrameErrorEvent) => void): void;
 
         /**
+         * Fired when WebSocket message error occurs.
+         */
+        webSocketFrameError(): Promise<Protocol.Network.WebSocketFrameErrorEvent>;
+
+        /**
          * Fired when WebSocket message is received.
          */
         on(event: 'webSocketFrameReceived', listener: (params: Protocol.Network.WebSocketFrameReceivedEvent) => void): void;
+
+        /**
+         * Fired when WebSocket message is received.
+         */
+        webSocketFrameReceived(): Promise<Protocol.Network.WebSocketFrameReceivedEvent>;
 
         /**
          * Fired when WebSocket message is sent.
@@ -2343,9 +2724,19 @@ export namespace ProtocolProxyApi {
         on(event: 'webSocketFrameSent', listener: (params: Protocol.Network.WebSocketFrameSentEvent) => void): void;
 
         /**
+         * Fired when WebSocket message is sent.
+         */
+        webSocketFrameSent(): Promise<Protocol.Network.WebSocketFrameSentEvent>;
+
+        /**
          * Fired when WebSocket handshake response becomes available.
          */
         on(event: 'webSocketHandshakeResponseReceived', listener: (params: Protocol.Network.WebSocketHandshakeResponseReceivedEvent) => void): void;
+
+        /**
+         * Fired when WebSocket handshake response becomes available.
+         */
+        webSocketHandshakeResponseReceived(): Promise<Protocol.Network.WebSocketHandshakeResponseReceivedEvent>;
 
         /**
          * Fired when WebSocket is about to initiate handshake.
@@ -2353,9 +2744,19 @@ export namespace ProtocolProxyApi {
         on(event: 'webSocketWillSendHandshakeRequest', listener: (params: Protocol.Network.WebSocketWillSendHandshakeRequestEvent) => void): void;
 
         /**
+         * Fired when WebSocket is about to initiate handshake.
+         */
+        webSocketWillSendHandshakeRequest(): Promise<Protocol.Network.WebSocketWillSendHandshakeRequestEvent>;
+
+        /**
          * Fired upon WebTransport creation.
          */
         on(event: 'webTransportCreated', listener: (params: Protocol.Network.WebTransportCreatedEvent) => void): void;
+
+        /**
+         * Fired upon WebTransport creation.
+         */
+        webTransportCreated(): Promise<Protocol.Network.WebTransportCreatedEvent>;
 
         /**
          * Fired when WebTransport handshake is finished.
@@ -2363,9 +2764,19 @@ export namespace ProtocolProxyApi {
         on(event: 'webTransportConnectionEstablished', listener: (params: Protocol.Network.WebTransportConnectionEstablishedEvent) => void): void;
 
         /**
+         * Fired when WebTransport handshake is finished.
+         */
+        webTransportConnectionEstablished(): Promise<Protocol.Network.WebTransportConnectionEstablishedEvent>;
+
+        /**
          * Fired when WebTransport is disposed.
          */
         on(event: 'webTransportClosed', listener: (params: Protocol.Network.WebTransportClosedEvent) => void): void;
+
+        /**
+         * Fired when WebTransport is disposed.
+         */
+        webTransportClosed(): Promise<Protocol.Network.WebTransportClosedEvent>;
 
         /**
          * Fired when additional information about a requestWillBeSent event is available from the
@@ -2376,11 +2787,26 @@ export namespace ProtocolProxyApi {
         on(event: 'requestWillBeSentExtraInfo', listener: (params: Protocol.Network.RequestWillBeSentExtraInfoEvent) => void): void;
 
         /**
+         * Fired when additional information about a requestWillBeSent event is available from the
+         * network stack. Not every requestWillBeSent event will have an additional
+         * requestWillBeSentExtraInfo fired for it, and there is no guarantee whether requestWillBeSent
+         * or requestWillBeSentExtraInfo will be fired first for the same request.
+         */
+        requestWillBeSentExtraInfo(): Promise<Protocol.Network.RequestWillBeSentExtraInfoEvent>;
+
+        /**
          * Fired when additional information about a responseReceived event is available from the network
          * stack. Not every responseReceived event will have an additional responseReceivedExtraInfo for
          * it, and responseReceivedExtraInfo may be fired before or after responseReceived.
          */
         on(event: 'responseReceivedExtraInfo', listener: (params: Protocol.Network.ResponseReceivedExtraInfoEvent) => void): void;
+
+        /**
+         * Fired when additional information about a responseReceived event is available from the network
+         * stack. Not every responseReceived event will have an additional responseReceivedExtraInfo for
+         * it, and responseReceivedExtraInfo may be fired before or after responseReceived.
+         */
+        responseReceivedExtraInfo(): Promise<Protocol.Network.ResponseReceivedExtraInfoEvent>;
 
         /**
          * Fired exactly once for each Trust Token operation. Depending on
@@ -2391,15 +2817,34 @@ export namespace ProtocolProxyApi {
         on(event: 'trustTokenOperationDone', listener: (params: Protocol.Network.TrustTokenOperationDoneEvent) => void): void;
 
         /**
+         * Fired exactly once for each Trust Token operation. Depending on
+         * the type of the operation and whether the operation succeeded or
+         * failed, the event is fired before the corresponding request was sent
+         * or after the response was received.
+         */
+        trustTokenOperationDone(): Promise<Protocol.Network.TrustTokenOperationDoneEvent>;
+
+        /**
          * Fired once when parsing the .wbn file has succeeded.
          * The event contains the information about the web bundle contents.
          */
         on(event: 'subresourceWebBundleMetadataReceived', listener: (params: Protocol.Network.SubresourceWebBundleMetadataReceivedEvent) => void): void;
 
         /**
+         * Fired once when parsing the .wbn file has succeeded.
+         * The event contains the information about the web bundle contents.
+         */
+        subresourceWebBundleMetadataReceived(): Promise<Protocol.Network.SubresourceWebBundleMetadataReceivedEvent>;
+
+        /**
          * Fired once when parsing the .wbn file has failed.
          */
         on(event: 'subresourceWebBundleMetadataError', listener: (params: Protocol.Network.SubresourceWebBundleMetadataErrorEvent) => void): void;
+
+        /**
+         * Fired once when parsing the .wbn file has failed.
+         */
+        subresourceWebBundleMetadataError(): Promise<Protocol.Network.SubresourceWebBundleMetadataErrorEvent>;
 
         /**
          * Fired when handling requests for resources within a .wbn file.
@@ -2408,9 +2853,20 @@ export namespace ProtocolProxyApi {
         on(event: 'subresourceWebBundleInnerResponseParsed', listener: (params: Protocol.Network.SubresourceWebBundleInnerResponseParsedEvent) => void): void;
 
         /**
+         * Fired when handling requests for resources within a .wbn file.
+         * Note: this will only be fired for resources that are requested by the webpage.
+         */
+        subresourceWebBundleInnerResponseParsed(): Promise<Protocol.Network.SubresourceWebBundleInnerResponseParsedEvent>;
+
+        /**
          * Fired when request for resources within a .wbn file failed.
          */
         on(event: 'subresourceWebBundleInnerResponseError', listener: (params: Protocol.Network.SubresourceWebBundleInnerResponseErrorEvent) => void): void;
+
+        /**
+         * Fired when request for resources within a .wbn file failed.
+         */
+        subresourceWebBundleInnerResponseError(): Promise<Protocol.Network.SubresourceWebBundleInnerResponseErrorEvent>;
 
     }
 
@@ -2546,9 +3002,20 @@ export namespace ProtocolProxyApi {
         on(event: 'inspectNodeRequested', listener: (params: Protocol.Overlay.InspectNodeRequestedEvent) => void): void;
 
         /**
+         * Fired when the node should be inspected. This happens after call to `setInspectMode` or when
+         * user manually inspects an element.
+         */
+        inspectNodeRequested(): Promise<Protocol.Overlay.InspectNodeRequestedEvent>;
+
+        /**
          * Fired when the node should be highlighted. This happens after call to `setInspectMode`.
          */
         on(event: 'nodeHighlightRequested', listener: (params: Protocol.Overlay.NodeHighlightRequestedEvent) => void): void;
+
+        /**
+         * Fired when the node should be highlighted. This happens after call to `setInspectMode`.
+         */
+        nodeHighlightRequested(): Promise<Protocol.Overlay.NodeHighlightRequestedEvent>;
 
         /**
          * Fired when user asks to capture screenshot of some area on the page.
@@ -2556,9 +3023,19 @@ export namespace ProtocolProxyApi {
         on(event: 'screenshotRequested', listener: (params: Protocol.Overlay.ScreenshotRequestedEvent) => void): void;
 
         /**
+         * Fired when user asks to capture screenshot of some area on the page.
+         */
+        screenshotRequested(): Promise<Protocol.Overlay.ScreenshotRequestedEvent>;
+
+        /**
          * Fired when user cancels the inspect mode.
          */
         on(event: 'inspectModeCanceled', listener: () => void): void;
+
+        /**
+         * Fired when user cancels the inspect mode.
+         */
+        inspectModeCanceled(): Promise<void>;
 
     }
 
@@ -2855,10 +3332,17 @@ export namespace ProtocolProxyApi {
 
         on(event: 'domContentEventFired', listener: (params: Protocol.Page.DomContentEventFiredEvent) => void): void;
 
+        domContentEventFired(): Promise<Protocol.Page.DomContentEventFiredEvent>;
+
         /**
          * Emitted only when `page.interceptFileChooser` is enabled.
          */
         on(event: 'fileChooserOpened', listener: (params: Protocol.Page.FileChooserOpenedEvent) => void): void;
+
+        /**
+         * Emitted only when `page.interceptFileChooser` is enabled.
+         */
+        fileChooserOpened(): Promise<Protocol.Page.FileChooserOpenedEvent>;
 
         /**
          * Fired when frame has been attached to its parent.
@@ -2866,9 +3350,19 @@ export namespace ProtocolProxyApi {
         on(event: 'frameAttached', listener: (params: Protocol.Page.FrameAttachedEvent) => void): void;
 
         /**
+         * Fired when frame has been attached to its parent.
+         */
+        frameAttached(): Promise<Protocol.Page.FrameAttachedEvent>;
+
+        /**
          * Fired when frame no longer has a scheduled navigation.
          */
         on(event: 'frameClearedScheduledNavigation', listener: (params: Protocol.Page.FrameClearedScheduledNavigationEvent) => void): void;
+
+        /**
+         * Fired when frame no longer has a scheduled navigation.
+         */
+        frameClearedScheduledNavigation(): Promise<Protocol.Page.FrameClearedScheduledNavigationEvent>;
 
         /**
          * Fired when frame has been detached from its parent.
@@ -2876,16 +3370,33 @@ export namespace ProtocolProxyApi {
         on(event: 'frameDetached', listener: (params: Protocol.Page.FrameDetachedEvent) => void): void;
 
         /**
+         * Fired when frame has been detached from its parent.
+         */
+        frameDetached(): Promise<Protocol.Page.FrameDetachedEvent>;
+
+        /**
          * Fired once navigation of the frame has completed. Frame is now associated with the new loader.
          */
         on(event: 'frameNavigated', listener: (params: Protocol.Page.FrameNavigatedEvent) => void): void;
+
+        /**
+         * Fired once navigation of the frame has completed. Frame is now associated with the new loader.
+         */
+        frameNavigated(): Promise<Protocol.Page.FrameNavigatedEvent>;
 
         /**
          * Fired when opening document to write to.
          */
         on(event: 'documentOpened', listener: (params: Protocol.Page.DocumentOpenedEvent) => void): void;
 
+        /**
+         * Fired when opening document to write to.
+         */
+        documentOpened(): Promise<Protocol.Page.DocumentOpenedEvent>;
+
         on(event: 'frameResized', listener: () => void): void;
+
+        frameResized(): Promise<void>;
 
         /**
          * Fired when a renderer-initiated navigation is requested.
@@ -2894,9 +3405,20 @@ export namespace ProtocolProxyApi {
         on(event: 'frameRequestedNavigation', listener: (params: Protocol.Page.FrameRequestedNavigationEvent) => void): void;
 
         /**
+         * Fired when a renderer-initiated navigation is requested.
+         * Navigation may still be cancelled after the event is issued.
+         */
+        frameRequestedNavigation(): Promise<Protocol.Page.FrameRequestedNavigationEvent>;
+
+        /**
          * Fired when frame schedules a potential navigation.
          */
         on(event: 'frameScheduledNavigation', listener: (params: Protocol.Page.FrameScheduledNavigationEvent) => void): void;
+
+        /**
+         * Fired when frame schedules a potential navigation.
+         */
+        frameScheduledNavigation(): Promise<Protocol.Page.FrameScheduledNavigationEvent>;
 
         /**
          * Fired when frame has started loading.
@@ -2904,9 +3426,19 @@ export namespace ProtocolProxyApi {
         on(event: 'frameStartedLoading', listener: (params: Protocol.Page.FrameStartedLoadingEvent) => void): void;
 
         /**
+         * Fired when frame has started loading.
+         */
+        frameStartedLoading(): Promise<Protocol.Page.FrameStartedLoadingEvent>;
+
+        /**
          * Fired when frame has stopped loading.
          */
         on(event: 'frameStoppedLoading', listener: (params: Protocol.Page.FrameStoppedLoadingEvent) => void): void;
+
+        /**
+         * Fired when frame has stopped loading.
+         */
+        frameStoppedLoading(): Promise<Protocol.Page.FrameStoppedLoadingEvent>;
 
         /**
          * Fired when page is about to start a download.
@@ -2915,10 +3447,22 @@ export namespace ProtocolProxyApi {
         on(event: 'downloadWillBegin', listener: (params: Protocol.Page.DownloadWillBeginEvent) => void): void;
 
         /**
+         * Fired when page is about to start a download.
+         * Deprecated. Use Browser.downloadWillBegin instead.
+         */
+        downloadWillBegin(): Promise<Protocol.Page.DownloadWillBeginEvent>;
+
+        /**
          * Fired when download makes progress. Last call has |done| == true.
          * Deprecated. Use Browser.downloadProgress instead.
          */
         on(event: 'downloadProgress', listener: (params: Protocol.Page.DownloadProgressEvent) => void): void;
+
+        /**
+         * Fired when download makes progress. Last call has |done| == true.
+         * Deprecated. Use Browser.downloadProgress instead.
+         */
+        downloadProgress(): Promise<Protocol.Page.DownloadProgressEvent>;
 
         /**
          * Fired when interstitial page was hidden
@@ -2926,9 +3470,19 @@ export namespace ProtocolProxyApi {
         on(event: 'interstitialHidden', listener: () => void): void;
 
         /**
+         * Fired when interstitial page was hidden
+         */
+        interstitialHidden(): Promise<void>;
+
+        /**
          * Fired when interstitial page was shown
          */
         on(event: 'interstitialShown', listener: () => void): void;
+
+        /**
+         * Fired when interstitial page was shown
+         */
+        interstitialShown(): Promise<void>;
 
         /**
          * Fired when a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunload) has been
@@ -2937,15 +3491,32 @@ export namespace ProtocolProxyApi {
         on(event: 'javascriptDialogClosed', listener: (params: Protocol.Page.JavascriptDialogClosedEvent) => void): void;
 
         /**
+         * Fired when a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunload) has been
+         * closed.
+         */
+        javascriptDialogClosed(): Promise<Protocol.Page.JavascriptDialogClosedEvent>;
+
+        /**
          * Fired when a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunload) is about to
          * open.
          */
         on(event: 'javascriptDialogOpening', listener: (params: Protocol.Page.JavascriptDialogOpeningEvent) => void): void;
 
         /**
+         * Fired when a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunload) is about to
+         * open.
+         */
+        javascriptDialogOpening(): Promise<Protocol.Page.JavascriptDialogOpeningEvent>;
+
+        /**
          * Fired for top level page lifecycle events such as navigation, load, paint, etc.
          */
         on(event: 'lifecycleEvent', listener: (params: Protocol.Page.LifecycleEventEvent) => void): void;
+
+        /**
+         * Fired for top level page lifecycle events such as navigation, load, paint, etc.
+         */
+        lifecycleEvent(): Promise<Protocol.Page.LifecycleEventEvent>;
 
         /**
          * Fired for failed bfcache history navigations if BackForwardCache feature is enabled. Do
@@ -2955,7 +3526,17 @@ export namespace ProtocolProxyApi {
          */
         on(event: 'backForwardCacheNotUsed', listener: (params: Protocol.Page.BackForwardCacheNotUsedEvent) => void): void;
 
+        /**
+         * Fired for failed bfcache history navigations if BackForwardCache feature is enabled. Do
+         * not assume any ordering with the Page.frameNavigated event. This event is fired only for
+         * main-frame history navigation where the document changes (non-same-document navigations),
+         * when bfcache navigation fails.
+         */
+        backForwardCacheNotUsed(): Promise<Protocol.Page.BackForwardCacheNotUsedEvent>;
+
         on(event: 'loadEventFired', listener: (params: Protocol.Page.LoadEventFiredEvent) => void): void;
+
+        loadEventFired(): Promise<Protocol.Page.LoadEventFiredEvent>;
 
         /**
          * Fired when same-document navigation happens, e.g. due to history API usage or anchor navigation.
@@ -2963,14 +3544,29 @@ export namespace ProtocolProxyApi {
         on(event: 'navigatedWithinDocument', listener: (params: Protocol.Page.NavigatedWithinDocumentEvent) => void): void;
 
         /**
+         * Fired when same-document navigation happens, e.g. due to history API usage or anchor navigation.
+         */
+        navigatedWithinDocument(): Promise<Protocol.Page.NavigatedWithinDocumentEvent>;
+
+        /**
          * Compressed image data requested by the `startScreencast`.
          */
         on(event: 'screencastFrame', listener: (params: Protocol.Page.ScreencastFrameEvent) => void): void;
 
         /**
+         * Compressed image data requested by the `startScreencast`.
+         */
+        screencastFrame(): Promise<Protocol.Page.ScreencastFrameEvent>;
+
+        /**
          * Fired when the page with currently enabled screencast was shown or hidden `.
          */
         on(event: 'screencastVisibilityChanged', listener: (params: Protocol.Page.ScreencastVisibilityChangedEvent) => void): void;
+
+        /**
+         * Fired when the page with currently enabled screencast was shown or hidden `.
+         */
+        screencastVisibilityChanged(): Promise<Protocol.Page.ScreencastVisibilityChangedEvent>;
 
         /**
          * Fired when a new window is going to be opened, via window.open(), link click, form submission,
@@ -2979,10 +3575,22 @@ export namespace ProtocolProxyApi {
         on(event: 'windowOpen', listener: (params: Protocol.Page.WindowOpenEvent) => void): void;
 
         /**
+         * Fired when a new window is going to be opened, via window.open(), link click, form submission,
+         * etc.
+         */
+        windowOpen(): Promise<Protocol.Page.WindowOpenEvent>;
+
+        /**
          * Issued for every compilation cache generated. Is only available
          * if Page.setGenerateCompilationCache is enabled.
          */
         on(event: 'compilationCacheProduced', listener: (params: Protocol.Page.CompilationCacheProducedEvent) => void): void;
+
+        /**
+         * Issued for every compilation cache generated. Is only available
+         * if Page.setGenerateCompilationCache is enabled.
+         */
+        compilationCacheProduced(): Promise<Protocol.Page.CompilationCacheProducedEvent>;
 
     }
 
@@ -3014,6 +3622,11 @@ export namespace ProtocolProxyApi {
          */
         on(event: 'metrics', listener: (params: Protocol.Performance.MetricsEvent) => void): void;
 
+        /**
+         * Current values of the metrics.
+         */
+        metrics(): Promise<Protocol.Performance.MetricsEvent>;
+
     }
 
     export interface PerformanceTimelineApi {
@@ -3027,6 +3640,11 @@ export namespace ProtocolProxyApi {
          * Sent when a performance timeline event is added. See reportPerformanceTimeline method.
          */
         on(event: 'timelineEventAdded', listener: (params: Protocol.PerformanceTimeline.TimelineEventAddedEvent) => void): void;
+
+        /**
+         * Sent when a performance timeline event is added. See reportPerformanceTimeline method.
+         */
+        timelineEventAdded(): Promise<Protocol.PerformanceTimeline.TimelineEventAddedEvent>;
 
     }
 
@@ -3066,6 +3684,14 @@ export namespace ProtocolProxyApi {
         on(event: 'certificateError', listener: (params: Protocol.Security.CertificateErrorEvent) => void): void;
 
         /**
+         * There is a certificate error. If overriding certificate errors is enabled, then it should be
+         * handled with the `handleCertificateError` command. Note: this event does not fire if the
+         * certificate error has been allowed internally. Only one client per target should override
+         * certificate errors at the same time.
+         */
+        certificateError(): Promise<Protocol.Security.CertificateErrorEvent>;
+
+        /**
          * The security state of the page changed.
          */
         on(event: 'visibleSecurityStateChanged', listener: (params: Protocol.Security.VisibleSecurityStateChangedEvent) => void): void;
@@ -3073,7 +3699,17 @@ export namespace ProtocolProxyApi {
         /**
          * The security state of the page changed.
          */
+        visibleSecurityStateChanged(): Promise<Protocol.Security.VisibleSecurityStateChangedEvent>;
+
+        /**
+         * The security state of the page changed.
+         */
         on(event: 'securityStateChanged', listener: (params: Protocol.Security.SecurityStateChangedEvent) => void): void;
+
+        /**
+         * The security state of the page changed.
+         */
+        securityStateChanged(): Promise<Protocol.Security.SecurityStateChangedEvent>;
 
     }
 
@@ -3106,9 +3742,15 @@ export namespace ProtocolProxyApi {
 
         on(event: 'workerErrorReported', listener: (params: Protocol.ServiceWorker.WorkerErrorReportedEvent) => void): void;
 
+        workerErrorReported(): Promise<Protocol.ServiceWorker.WorkerErrorReportedEvent>;
+
         on(event: 'workerRegistrationUpdated', listener: (params: Protocol.ServiceWorker.WorkerRegistrationUpdatedEvent) => void): void;
 
+        workerRegistrationUpdated(): Promise<Protocol.ServiceWorker.WorkerRegistrationUpdatedEvent>;
+
         on(event: 'workerVersionUpdated', listener: (params: Protocol.ServiceWorker.WorkerVersionUpdatedEvent) => void): void;
+
+        workerVersionUpdated(): Promise<Protocol.ServiceWorker.WorkerVersionUpdatedEvent>;
 
     }
 
@@ -3181,9 +3823,19 @@ export namespace ProtocolProxyApi {
         on(event: 'cacheStorageContentUpdated', listener: (params: Protocol.Storage.CacheStorageContentUpdatedEvent) => void): void;
 
         /**
+         * A cache's contents have been modified.
+         */
+        cacheStorageContentUpdated(): Promise<Protocol.Storage.CacheStorageContentUpdatedEvent>;
+
+        /**
          * A cache has been added/deleted.
          */
         on(event: 'cacheStorageListUpdated', listener: (params: Protocol.Storage.CacheStorageListUpdatedEvent) => void): void;
+
+        /**
+         * A cache has been added/deleted.
+         */
+        cacheStorageListUpdated(): Promise<Protocol.Storage.CacheStorageListUpdatedEvent>;
 
         /**
          * The origin's IndexedDB object store has been modified.
@@ -3191,9 +3843,19 @@ export namespace ProtocolProxyApi {
         on(event: 'indexedDBContentUpdated', listener: (params: Protocol.Storage.IndexedDBContentUpdatedEvent) => void): void;
 
         /**
+         * The origin's IndexedDB object store has been modified.
+         */
+        indexedDBContentUpdated(): Promise<Protocol.Storage.IndexedDBContentUpdatedEvent>;
+
+        /**
          * The origin's IndexedDB database list has been modified.
          */
         on(event: 'indexedDBListUpdated', listener: (params: Protocol.Storage.IndexedDBListUpdatedEvent) => void): void;
+
+        /**
+         * The origin's IndexedDB database list has been modified.
+         */
+        indexedDBListUpdated(): Promise<Protocol.Storage.IndexedDBListUpdatedEvent>;
 
     }
 
@@ -3312,10 +3974,21 @@ export namespace ProtocolProxyApi {
         on(event: 'attachedToTarget', listener: (params: Protocol.Target.AttachedToTargetEvent) => void): void;
 
         /**
+         * Issued when attached to target because of auto-attach or `attachToTarget` command.
+         */
+        attachedToTarget(): Promise<Protocol.Target.AttachedToTargetEvent>;
+
+        /**
          * Issued when detached from target for any reason (including `detachFromTarget` command). Can be
          * issued multiple times per target if multiple sessions have been attached to it.
          */
         on(event: 'detachedFromTarget', listener: (params: Protocol.Target.DetachedFromTargetEvent) => void): void;
+
+        /**
+         * Issued when detached from target for any reason (including `detachFromTarget` command). Can be
+         * issued multiple times per target if multiple sessions have been attached to it.
+         */
+        detachedFromTarget(): Promise<Protocol.Target.DetachedFromTargetEvent>;
 
         /**
          * Notifies about a new protocol message received from the session (as reported in
@@ -3324,9 +3997,20 @@ export namespace ProtocolProxyApi {
         on(event: 'receivedMessageFromTarget', listener: (params: Protocol.Target.ReceivedMessageFromTargetEvent) => void): void;
 
         /**
+         * Notifies about a new protocol message received from the session (as reported in
+         * `attachedToTarget` event).
+         */
+        receivedMessageFromTarget(): Promise<Protocol.Target.ReceivedMessageFromTargetEvent>;
+
+        /**
          * Issued when a possible inspection target is created.
          */
         on(event: 'targetCreated', listener: (params: Protocol.Target.TargetCreatedEvent) => void): void;
+
+        /**
+         * Issued when a possible inspection target is created.
+         */
+        targetCreated(): Promise<Protocol.Target.TargetCreatedEvent>;
 
         /**
          * Issued when a target is destroyed.
@@ -3334,15 +4018,31 @@ export namespace ProtocolProxyApi {
         on(event: 'targetDestroyed', listener: (params: Protocol.Target.TargetDestroyedEvent) => void): void;
 
         /**
+         * Issued when a target is destroyed.
+         */
+        targetDestroyed(): Promise<Protocol.Target.TargetDestroyedEvent>;
+
+        /**
          * Issued when a target has crashed.
          */
         on(event: 'targetCrashed', listener: (params: Protocol.Target.TargetCrashedEvent) => void): void;
+
+        /**
+         * Issued when a target has crashed.
+         */
+        targetCrashed(): Promise<Protocol.Target.TargetCrashedEvent>;
 
         /**
          * Issued when some information about a target has changed. This only happens between
          * `targetCreated` and `targetDestroyed`.
          */
         on(event: 'targetInfoChanged', listener: (params: Protocol.Target.TargetInfoChangedEvent) => void): void;
+
+        /**
+         * Issued when some information about a target has changed. This only happens between
+         * `targetCreated` and `targetDestroyed`.
+         */
+        targetInfoChanged(): Promise<Protocol.Target.TargetInfoChangedEvent>;
 
     }
 
@@ -3361,6 +4061,11 @@ export namespace ProtocolProxyApi {
          * Informs that port was successfully bound and got a specified connection id.
          */
         on(event: 'accepted', listener: (params: Protocol.Tethering.AcceptedEvent) => void): void;
+
+        /**
+         * Informs that port was successfully bound and got a specified connection id.
+         */
+        accepted(): Promise<Protocol.Tethering.AcceptedEvent>;
 
     }
 
@@ -3392,6 +4097,8 @@ export namespace ProtocolProxyApi {
 
         on(event: 'bufferUsage', listener: (params: Protocol.Tracing.BufferUsageEvent) => void): void;
 
+        bufferUsage(): Promise<Protocol.Tracing.BufferUsageEvent>;
+
         /**
          * Contains an bucket of collected trace events. When tracing is stopped collected events will be
          * send as a sequence of dataCollected events followed by tracingComplete event.
@@ -3399,10 +4106,22 @@ export namespace ProtocolProxyApi {
         on(event: 'dataCollected', listener: (params: Protocol.Tracing.DataCollectedEvent) => void): void;
 
         /**
+         * Contains an bucket of collected trace events. When tracing is stopped collected events will be
+         * send as a sequence of dataCollected events followed by tracingComplete event.
+         */
+        dataCollected(): Promise<Protocol.Tracing.DataCollectedEvent>;
+
+        /**
          * Signals that tracing is stopped and there is no trace buffers pending flush, all data were
          * delivered via dataCollected events.
          */
         on(event: 'tracingComplete', listener: (params: Protocol.Tracing.TracingCompleteEvent) => void): void;
+
+        /**
+         * Signals that tracing is stopped and there is no trace buffers pending flush, all data were
+         * delivered via dataCollected events.
+         */
+        tracingComplete(): Promise<Protocol.Tracing.TracingCompleteEvent>;
 
     }
 
@@ -3473,10 +4192,26 @@ export namespace ProtocolProxyApi {
         on(event: 'requestPaused', listener: (params: Protocol.Fetch.RequestPausedEvent) => void): void;
 
         /**
+         * Issued when the domain is enabled and the request URL matches the
+         * specified filter. The request is paused until the client responds
+         * with one of continueRequest, failRequest or fulfillRequest.
+         * The stage of the request can be determined by presence of responseErrorReason
+         * and responseStatusCode -- the request is at the response stage if either
+         * of these fields is present and in the request stage otherwise.
+         */
+        requestPaused(): Promise<Protocol.Fetch.RequestPausedEvent>;
+
+        /**
          * Issued when the domain is enabled with handleAuthRequests set to true.
          * The request is paused until client responds with continueWithAuth.
          */
         on(event: 'authRequired', listener: (params: Protocol.Fetch.AuthRequiredEvent) => void): void;
+
+        /**
+         * Issued when the domain is enabled with handleAuthRequests set to true.
+         * The request is paused until client responds with continueWithAuth.
+         */
+        authRequired(): Promise<Protocol.Fetch.AuthRequiredEvent>;
 
     }
 
@@ -3502,9 +4237,19 @@ export namespace ProtocolProxyApi {
         on(event: 'contextCreated', listener: (params: Protocol.WebAudio.ContextCreatedEvent) => void): void;
 
         /**
+         * Notifies that a new BaseAudioContext has been created.
+         */
+        contextCreated(): Promise<Protocol.WebAudio.ContextCreatedEvent>;
+
+        /**
          * Notifies that an existing BaseAudioContext will be destroyed.
          */
         on(event: 'contextWillBeDestroyed', listener: (params: Protocol.WebAudio.ContextWillBeDestroyedEvent) => void): void;
+
+        /**
+         * Notifies that an existing BaseAudioContext will be destroyed.
+         */
+        contextWillBeDestroyed(): Promise<Protocol.WebAudio.ContextWillBeDestroyedEvent>;
 
         /**
          * Notifies that existing BaseAudioContext has changed some properties (id stays the same)..
@@ -3512,9 +4257,19 @@ export namespace ProtocolProxyApi {
         on(event: 'contextChanged', listener: (params: Protocol.WebAudio.ContextChangedEvent) => void): void;
 
         /**
+         * Notifies that existing BaseAudioContext has changed some properties (id stays the same)..
+         */
+        contextChanged(): Promise<Protocol.WebAudio.ContextChangedEvent>;
+
+        /**
          * Notifies that the construction of an AudioListener has finished.
          */
         on(event: 'audioListenerCreated', listener: (params: Protocol.WebAudio.AudioListenerCreatedEvent) => void): void;
+
+        /**
+         * Notifies that the construction of an AudioListener has finished.
+         */
+        audioListenerCreated(): Promise<Protocol.WebAudio.AudioListenerCreatedEvent>;
 
         /**
          * Notifies that a new AudioListener has been created.
@@ -3522,9 +4277,19 @@ export namespace ProtocolProxyApi {
         on(event: 'audioListenerWillBeDestroyed', listener: (params: Protocol.WebAudio.AudioListenerWillBeDestroyedEvent) => void): void;
 
         /**
+         * Notifies that a new AudioListener has been created.
+         */
+        audioListenerWillBeDestroyed(): Promise<Protocol.WebAudio.AudioListenerWillBeDestroyedEvent>;
+
+        /**
          * Notifies that a new AudioNode has been created.
          */
         on(event: 'audioNodeCreated', listener: (params: Protocol.WebAudio.AudioNodeCreatedEvent) => void): void;
+
+        /**
+         * Notifies that a new AudioNode has been created.
+         */
+        audioNodeCreated(): Promise<Protocol.WebAudio.AudioNodeCreatedEvent>;
 
         /**
          * Notifies that an existing AudioNode has been destroyed.
@@ -3532,9 +4297,19 @@ export namespace ProtocolProxyApi {
         on(event: 'audioNodeWillBeDestroyed', listener: (params: Protocol.WebAudio.AudioNodeWillBeDestroyedEvent) => void): void;
 
         /**
+         * Notifies that an existing AudioNode has been destroyed.
+         */
+        audioNodeWillBeDestroyed(): Promise<Protocol.WebAudio.AudioNodeWillBeDestroyedEvent>;
+
+        /**
          * Notifies that a new AudioParam has been created.
          */
         on(event: 'audioParamCreated', listener: (params: Protocol.WebAudio.AudioParamCreatedEvent) => void): void;
+
+        /**
+         * Notifies that a new AudioParam has been created.
+         */
+        audioParamCreated(): Promise<Protocol.WebAudio.AudioParamCreatedEvent>;
 
         /**
          * Notifies that an existing AudioParam has been destroyed.
@@ -3542,9 +4317,19 @@ export namespace ProtocolProxyApi {
         on(event: 'audioParamWillBeDestroyed', listener: (params: Protocol.WebAudio.AudioParamWillBeDestroyedEvent) => void): void;
 
         /**
+         * Notifies that an existing AudioParam has been destroyed.
+         */
+        audioParamWillBeDestroyed(): Promise<Protocol.WebAudio.AudioParamWillBeDestroyedEvent>;
+
+        /**
          * Notifies that two AudioNodes are connected.
          */
         on(event: 'nodesConnected', listener: (params: Protocol.WebAudio.NodesConnectedEvent) => void): void;
+
+        /**
+         * Notifies that two AudioNodes are connected.
+         */
+        nodesConnected(): Promise<Protocol.WebAudio.NodesConnectedEvent>;
 
         /**
          * Notifies that AudioNodes are disconnected. The destination can be null, and it means all the outgoing connections from the source are disconnected.
@@ -3552,14 +4337,29 @@ export namespace ProtocolProxyApi {
         on(event: 'nodesDisconnected', listener: (params: Protocol.WebAudio.NodesDisconnectedEvent) => void): void;
 
         /**
+         * Notifies that AudioNodes are disconnected. The destination can be null, and it means all the outgoing connections from the source are disconnected.
+         */
+        nodesDisconnected(): Promise<Protocol.WebAudio.NodesDisconnectedEvent>;
+
+        /**
          * Notifies that an AudioNode is connected to an AudioParam.
          */
         on(event: 'nodeParamConnected', listener: (params: Protocol.WebAudio.NodeParamConnectedEvent) => void): void;
 
         /**
+         * Notifies that an AudioNode is connected to an AudioParam.
+         */
+        nodeParamConnected(): Promise<Protocol.WebAudio.NodeParamConnectedEvent>;
+
+        /**
          * Notifies that an AudioNode is disconnected to an AudioParam.
          */
         on(event: 'nodeParamDisconnected', listener: (params: Protocol.WebAudio.NodeParamDisconnectedEvent) => void): void;
+
+        /**
+         * Notifies that an AudioNode is disconnected to an AudioParam.
+         */
+        nodeParamDisconnected(): Promise<Protocol.WebAudio.NodeParamDisconnectedEvent>;
 
     }
 
@@ -3643,10 +4443,22 @@ export namespace ProtocolProxyApi {
         on(event: 'playerPropertiesChanged', listener: (params: Protocol.Media.PlayerPropertiesChangedEvent) => void): void;
 
         /**
+         * This can be called multiple times, and can be used to set / override /
+         * remove player properties. A null propValue indicates removal.
+         */
+        playerPropertiesChanged(): Promise<Protocol.Media.PlayerPropertiesChangedEvent>;
+
+        /**
          * Send events as a list, allowing them to be batched on the browser for less
          * congestion. If batched, events must ALWAYS be in chronological order.
          */
         on(event: 'playerEventsAdded', listener: (params: Protocol.Media.PlayerEventsAddedEvent) => void): void;
+
+        /**
+         * Send events as a list, allowing them to be batched on the browser for less
+         * congestion. If batched, events must ALWAYS be in chronological order.
+         */
+        playerEventsAdded(): Promise<Protocol.Media.PlayerEventsAddedEvent>;
 
         /**
          * Send a list of any messages that need to be delivered.
@@ -3654,9 +4466,19 @@ export namespace ProtocolProxyApi {
         on(event: 'playerMessagesLogged', listener: (params: Protocol.Media.PlayerMessagesLoggedEvent) => void): void;
 
         /**
+         * Send a list of any messages that need to be delivered.
+         */
+        playerMessagesLogged(): Promise<Protocol.Media.PlayerMessagesLoggedEvent>;
+
+        /**
          * Send a list of any errors that need to be delivered.
          */
         on(event: 'playerErrorsRaised', listener: (params: Protocol.Media.PlayerErrorsRaisedEvent) => void): void;
+
+        /**
+         * Send a list of any errors that need to be delivered.
+         */
+        playerErrorsRaised(): Promise<Protocol.Media.PlayerErrorsRaisedEvent>;
 
         /**
          * Called whenever a player is created, or when a new agent joins and receives
@@ -3664,6 +4486,13 @@ export namespace ProtocolProxyApi {
          * list of player ids and all events again.
          */
         on(event: 'playersCreated', listener: (params: Protocol.Media.PlayersCreatedEvent) => void): void;
+
+        /**
+         * Called whenever a player is created, or when a new agent joins and receives
+         * a list of active players. If an agent is restored, it will receive the full
+         * list of player ids and all events again.
+         */
+        playersCreated(): Promise<Protocol.Media.PlayersCreatedEvent>;
 
     }
 }
