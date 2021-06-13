@@ -85,7 +85,6 @@ const emitModule = (moduleName: string, domains: P.Domain[]) => {
 }
 
 const emitGlobalTypeDefs = () => {
-    emitLine()
     emitLine(`export type integer = number;`)
 }
 
@@ -351,7 +350,6 @@ const emitApi = (moduleName: string, protocolModuleName: string, domains: P.Doma
     emitDescription('API generated from Protocol commands and events.')
     emitOpenBlock(`export namespace ${moduleName}`)
 
-    emitLine()
     emitOpenBlock(`export interface ProtocolApi`)
     domains.forEach(d => {
         emitLine(`${d.domain}: ${d.domain}Api;`)

@@ -8,7 +8,6 @@ import Protocol from './protocol';
  * API generated from Protocol commands and events.
  */
 export namespace ProtocolProxyApi {
-
     export interface ProtocolApi {
         Console: ConsoleApi;
 

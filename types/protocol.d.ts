@@ -6,7 +6,6 @@
  * The Chrome DevTools Protocol.
  */
 export namespace Protocol {
-
     export type integer = number;
 
     /**
