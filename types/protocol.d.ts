@@ -7,7 +7,7 @@
  */
 export namespace Protocol {
 
-    export type integer = number
+    export type integer = number;
 
     /**
      * This domain is deprecated - use Runtime or Log instead.

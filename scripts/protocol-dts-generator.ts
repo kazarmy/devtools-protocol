@@ -86,7 +86,7 @@ const emitModule = (moduleName: string, domains: P.Domain[]) => {
 
 const emitGlobalTypeDefs = () => {
     emitLine()
-    emitLine(`export type integer = number`)
+    emitLine(`export type integer = number;`)
 }
 
 const emitDomain = (domain: P.Domain) => {
