@@ -69,7 +69,6 @@ const emitEnum = (enumName: string, enumValues: string[]) => {
 const emitPublicDocDeclaration = () => {
     emitLine('/**');
     emitLine(' * The Chrome DevTools Protocol.');
-    emitLine(' * @public')
     emitLine(' */')
 }
 

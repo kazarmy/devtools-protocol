@@ -4,7 +4,6 @@
 
 /**
  * The Chrome DevTools Protocol.
- * @public
  */
 export namespace Protocol {
 
