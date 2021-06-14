@@ -319,7 +319,6 @@ const emitApiCommand = (command: P.Command, domainName: string, modulePrefix: st
     const params = command.parameters ? `params: ${prefix}${toCmdRequestName(command.name)}` : ''
     const response = command.returns ? `${prefix}${toCmdResponseName(command.name)}` : 'void'
     emitLine(`${command.name}(${params}): Promise<${response}>;`)
-    emitLine()
 }
 
 const emitApiEvent = (event: P.Event, domainName: string, modulePrefix: string) => {
@@ -330,7 +329,6 @@ const emitApiEvent = (event: P.Event, domainName: string, modulePrefix: string) 
     emitLine()
     emitDescription(event.description)
     emitLine(`${event.name}(): Promise<${params ? params.slice(8) : 'void'}>;`)
-    emitLine()
 }
 
 const emitDomainApi = (domain: P.Domain, modulePrefix: string) => {
@@ -353,7 +351,6 @@ const emitApi = (moduleName: string, protocolModuleName: string, domains: P.Doma
     emitOpenBlock(`interface ProtocolApi`)
     domains.forEach(d => {
         emitLine(`${d.domain}: ${d.domain}Api;`)
-        emitLine()
     });
     emitCloseBlock()
     emitLine()
