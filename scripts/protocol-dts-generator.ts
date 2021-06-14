@@ -60,11 +60,13 @@ const fixCamelCase = (name: string): string => {
 
 
 const emitEnum = (enumName: string, enumValues: string[]) => {
+    emitLine('/*');
     emitOpenBlock(`const enum ${enumName}`);
     enumValues.forEach(value => {
       emitLine(`${fixCamelCase(value)} = '${value}',`);
     });
     emitCloseBlock();
+    emitLine('*/');
 };
 
 const emitPublicDocDeclaration = () => {
