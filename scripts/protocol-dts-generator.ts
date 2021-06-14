@@ -349,7 +349,6 @@ const emitApi = (moduleName: string, protocolModuleName: string, domains: P.Doma
         emitLine(`${d.domain}: ${d.domain}Api;`)
     });
     emitCloseBlock()
-    emitLine()
 
     const protocolModulePrefix = toTitleCase(protocolModuleName)
     domains.forEach(d => emitDomainApi(d, protocolModulePrefix))

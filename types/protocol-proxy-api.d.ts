@@ -58,7 +58,6 @@ export namespace ProtocolProxyApi {
         Media: MediaApi;
     }
 
-
     interface ConsoleApi {
         /**
          * Does nothing.
