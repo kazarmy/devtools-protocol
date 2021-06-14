@@ -11520,7 +11520,7 @@ export namespace Protocol {
              * - `url`: document location
              * - `pageNumber`: current page number
              * - `totalPages`: total pages in the document
-             * 
+             *
              * For example, `<span class=title></span>` would generate span containing the title.
              */
             headerTemplate?: string;

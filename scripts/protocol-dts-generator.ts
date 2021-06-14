@@ -108,7 +108,7 @@ const getCommentLines = (description: string) => {
 }
 
 const emitDescription = (description?: string) => {
-    if (description) getCommentLines(description).map(l => emitLine(l))
+    if (description) getCommentLines(description).map(l => emitLine(l.trimRight()))
 }
 
 const isPropertyInlineEnum = (prop: P.ProtocolType): boolean => {
