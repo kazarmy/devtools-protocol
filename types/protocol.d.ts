@@ -12,7 +12,6 @@ export namespace Protocol {
      * This domain is deprecated - use Runtime or Log instead.
      */
     namespace Console {
-
         const enum ConsoleMessageSource {
             XML = 'xml',
             Javascript = 'javascript',
@@ -26,7 +25,6 @@ export namespace Protocol {
             Deprecation = 'deprecation',
             Worker = 'worker',
         }
-
         const enum ConsoleMessageLevel {
             Log = 'log',
             Warning = 'warning',
@@ -34,7 +32,6 @@ export namespace Protocol {
             Debug = 'debug',
             Info = 'info',
         }
-
         /**
          * Console message.
          */
@@ -64,7 +61,6 @@ export namespace Protocol {
              */
             column?: integer;
         }
-
         /**
          * Issued when new console message is added.
          */
@@ -81,17 +77,14 @@ export namespace Protocol {
      * breakpoints, stepping through execution, exploring stack traces, etc.
      */
     namespace Debugger {
-
         /**
          * Breakpoint identifier.
          */
         type BreakpointId = string;
-
         /**
          * Call frame identifier.
          */
         type CallFrameId = string;
-
         /**
          * Location in the source code.
          */
@@ -109,7 +102,6 @@ export namespace Protocol {
              */
             columnNumber?: integer;
         }
-
         /**
          * Location in the source code.
          */
@@ -117,7 +109,6 @@ export namespace Protocol {
             lineNumber: integer;
             columnNumber: integer;
         }
-
         /**
          * Location range within one script.
          */
@@ -126,7 +117,6 @@ export namespace Protocol {
             start: ScriptPosition;
             end: ScriptPosition;
         }
-
         /**
          * JavaScript call frame. Array of call frames form the call stack.
          */
@@ -164,7 +154,6 @@ export namespace Protocol {
              */
             returnValue?: Runtime.RemoteObject;
         }
-
         const enum ScopeType {
             Global = 'global',
             Local = 'local',
@@ -177,7 +166,6 @@ export namespace Protocol {
             Module = 'module',
             WasmExpressionStack = 'wasm-expression-stack',
         }
-
         /**
          * Scope description.
          */
@@ -202,7 +190,6 @@ export namespace Protocol {
              */
             endLocation?: Location;
         }
-
         /**
          * Search match for resource.
          */
@@ -216,13 +203,11 @@ export namespace Protocol {
              */
             lineContent: string;
         }
-
         const enum BreakLocationType {
             DebuggerStatement = 'debuggerStatement',
             Call = 'call',
             Return = 'return',
         }
-
         interface BreakLocation {
             /**
              * Script identifier as reported in the `Debugger.scriptParsed`.
@@ -241,19 +226,16 @@ export namespace Protocol {
              */
             type?: ('debuggerStatement' | 'call' | 'return');
         }
-
         /**
          * Enum of possible script languages.
          */
         type ScriptLanguage = ('JavaScript' | 'WebAssembly');
-
         const enum DebugSymbolsType {
             None = 'None',
             SourceMap = 'SourceMap',
             EmbeddedDWARF = 'EmbeddedDWARF',
             ExternalDWARF = 'ExternalDWARF',
         }
-
         /**
          * Debug symbols available for a wasm script.
          */
@@ -267,12 +249,10 @@ export namespace Protocol {
              */
             externalURL?: string;
         }
-
         const enum ContinueToLocationRequestTargetCallFrames {
             Any = 'any',
             Current = 'current',
         }
-
         interface ContinueToLocationRequest {
             /**
              * Location to continue to.
@@ -283,7 +263,6 @@ export namespace Protocol {
              */
             targetCallFrames?: ('any' | 'current');
         }
-
         interface EnableRequest {
             /**
              * The maximum size in bytes of collected scripts (not referenced by other heap objects)
@@ -291,14 +270,12 @@ export namespace Protocol {
              */
             maxScriptsCacheSize?: number;
         }
-
         interface EnableResponse {
             /**
              * Unique identifier of the debugger.
              */
             debuggerId: Runtime.UniqueDebuggerId;
         }
-
         interface EvaluateOnCallFrameRequest {
             /**
              * Call frame identifier to evaluate on.
@@ -340,7 +317,6 @@ export namespace Protocol {
              */
             timeout?: Runtime.TimeDelta;
         }
-
         interface EvaluateOnCallFrameResponse {
             /**
              * Object wrapper for the evaluation result.
@@ -351,7 +327,6 @@ export namespace Protocol {
              */
             exceptionDetails?: Runtime.ExceptionDetails;
         }
-
         interface GetPossibleBreakpointsRequest {
             /**
              * Start of range to search possible breakpoint locations in.
@@ -367,21 +342,18 @@ export namespace Protocol {
              */
             restrictToFunction?: boolean;
         }
-
         interface GetPossibleBreakpointsResponse {
             /**
              * List of the possible breakpoint locations.
              */
             locations: BreakLocation[];
         }
-
         interface GetScriptSourceRequest {
             /**
              * Id of the script to get source for.
              */
             scriptId: Runtime.ScriptId;
         }
-
         interface GetScriptSourceResponse {
             /**
              * Script source (empty in case of Wasm bytecode).
@@ -392,47 +364,39 @@ export namespace Protocol {
              */
             bytecode?: string;
         }
-
         interface GetWasmBytecodeRequest {
             /**
              * Id of the Wasm script to get source for.
              */
             scriptId: Runtime.ScriptId;
         }
-
         interface GetWasmBytecodeResponse {
             /**
              * Script source. (Encoded as a base64 string when passed over JSON)
              */
             bytecode: string;
         }
-
         interface GetStackTraceRequest {
             stackTraceId: Runtime.StackTraceId;
         }
-
         interface GetStackTraceResponse {
             stackTrace: Runtime.StackTrace;
         }
-
         interface PauseOnAsyncCallRequest {
             /**
              * Debugger will pause when async call with given stack trace is started.
              */
             parentStackTraceId: Runtime.StackTraceId;
         }
-
         interface RemoveBreakpointRequest {
             breakpointId: BreakpointId;
         }
-
         interface RestartFrameRequest {
             /**
              * Call frame identifier to evaluate on.
              */
             callFrameId: CallFrameId;
         }
-
         interface RestartFrameResponse {
             /**
              * New stack trace.
@@ -447,7 +411,6 @@ export namespace Protocol {
              */
             asyncStackTraceId?: Runtime.StackTraceId;
         }
-
         interface ResumeRequest {
             /**
              * Set to true to terminate execution upon resuming execution. In contrast
@@ -458,7 +421,6 @@ export namespace Protocol {
              */
             terminateOnResume?: boolean;
         }
-
         interface SearchInContentRequest {
             /**
              * Id of the script to search in.
@@ -477,14 +439,12 @@ export namespace Protocol {
              */
             isRegex?: boolean;
         }
-
         interface SearchInContentResponse {
             /**
              * List of search matches.
              */
             result: SearchMatch[];
         }
-
         interface SetAsyncCallStackDepthRequest {
             /**
              * Maximum depth of async call stacks. Setting to `0` will effectively disable collecting async
@@ -492,14 +452,12 @@ export namespace Protocol {
              */
             maxDepth: integer;
         }
-
         interface SetBlackboxPatternsRequest {
             /**
              * Array of regexps that will be used to check script url for blackbox state.
              */
             patterns: string[];
         }
-
         interface SetBlackboxedRangesRequest {
             /**
              * Id of the script.
@@ -507,7 +465,6 @@ export namespace Protocol {
             scriptId: Runtime.ScriptId;
             positions: ScriptPosition[];
         }
-
         interface SetBreakpointRequest {
             /**
              * Location to set breakpoint in.
@@ -519,7 +476,6 @@ export namespace Protocol {
              */
             condition?: string;
         }
-
         interface SetBreakpointResponse {
             /**
              * Id of the created breakpoint for further reference.
@@ -530,26 +486,22 @@ export namespace Protocol {
              */
             actualLocation: Location;
         }
-
         const enum SetInstrumentationBreakpointRequestInstrumentation {
             BeforeScriptExecution = 'beforeScriptExecution',
             BeforeScriptWithSourceMapExecution = 'beforeScriptWithSourceMapExecution',
         }
-
         interface SetInstrumentationBreakpointRequest {
             /**
              * Instrumentation name. (SetInstrumentationBreakpointRequestInstrumentation enum)
              */
             instrumentation: ('beforeScriptExecution' | 'beforeScriptWithSourceMapExecution');
         }
-
         interface SetInstrumentationBreakpointResponse {
             /**
              * Id of the created breakpoint for further reference.
              */
             breakpointId: BreakpointId;
         }
-
         interface SetBreakpointByUrlRequest {
             /**
              * Line number to set breakpoint at.
@@ -578,7 +530,6 @@ export namespace Protocol {
              */
             condition?: string;
         }
-
         interface SetBreakpointByUrlResponse {
             /**
              * Id of the created breakpoint for further reference.
@@ -589,7 +540,6 @@ export namespace Protocol {
              */
             locations: Location[];
         }
-
         interface SetBreakpointOnFunctionCallRequest {
             /**
              * Function object id.
@@ -601,41 +551,35 @@ export namespace Protocol {
              */
             condition?: string;
         }
-
         interface SetBreakpointOnFunctionCallResponse {
             /**
              * Id of the created breakpoint for further reference.
              */
             breakpointId: BreakpointId;
         }
-
         interface SetBreakpointsActiveRequest {
             /**
              * New value for breakpoints active state.
              */
             active: boolean;
         }
-
         const enum SetPauseOnExceptionsRequestState {
             None = 'none',
             Uncaught = 'uncaught',
             All = 'all',
         }
-
         interface SetPauseOnExceptionsRequest {
             /**
              * Pause on exceptions mode. (SetPauseOnExceptionsRequestState enum)
              */
             state: ('none' | 'uncaught' | 'all');
         }
-
         interface SetReturnValueRequest {
             /**
              * New return value.
              */
             newValue: Runtime.CallArgument;
         }
-
         interface SetScriptSourceRequest {
             /**
              * Id of the script to edit.
@@ -651,7 +595,6 @@ export namespace Protocol {
              */
             dryRun?: boolean;
         }
-
         interface SetScriptSourceResponse {
             /**
              * New stack trace in case editing has happened while VM was stopped.
@@ -674,14 +617,12 @@ export namespace Protocol {
              */
             exceptionDetails?: Runtime.ExceptionDetails;
         }
-
         interface SetSkipAllPausesRequest {
             /**
              * New value for skip pauses state.
              */
             skip: boolean;
         }
-
         interface SetVariableValueRequest {
             /**
              * 0-based number of scope as was listed in scope chain. Only 'local', 'closure' and 'catch'
@@ -701,7 +642,6 @@ export namespace Protocol {
              */
             callFrameId: CallFrameId;
         }
-
         interface StepIntoRequest {
             /**
              * Debugger will pause on the execution of the first async task which was scheduled
@@ -713,14 +653,12 @@ export namespace Protocol {
              */
             skipList?: LocationRange[];
         }
-
         interface StepOverRequest {
             /**
              * The skipList specifies location ranges that should be skipped on step over.
              */
             skipList?: LocationRange[];
         }
-
         /**
          * Fired when breakpoint is resolved to an actual script and location.
          */
@@ -734,7 +672,6 @@ export namespace Protocol {
              */
             location: Location;
         }
-
         const enum PausedEventReason {
             Ambiguous = 'ambiguous',
             Assert = 'assert',
@@ -749,7 +686,6 @@ export namespace Protocol {
             PromiseRejection = 'promiseRejection',
             XHR = 'XHR',
         }
-
         /**
          * Fired when the virtual machine stopped on breakpoint or exception or any other stop criteria.
          */
@@ -783,7 +719,6 @@ export namespace Protocol {
              */
             asyncCallStackTraceId?: Runtime.StackTraceId;
         }
-
         /**
          * Fired when virtual machine fails to parse the script.
          */
@@ -857,7 +792,6 @@ export namespace Protocol {
              */
             embedderName?: string;
         }
-
         /**
          * Fired when virtual machine parses script. This event is also fired for all known and uncollected
          * scripts upon enabling debugger.
@@ -943,12 +877,10 @@ export namespace Protocol {
     }
 
     namespace HeapProfiler {
-
         /**
          * Heap snapshot object id.
          */
         type HeapSnapshotObjectId = string;
-
         /**
          * Sampling Heap Profile node. Holds callsite information, allocation statistics and child nodes.
          */
@@ -970,7 +902,6 @@ export namespace Protocol {
              */
             children: SamplingHeapProfileNode[];
         }
-
         /**
          * A single sample from a sampling profile.
          */
@@ -989,7 +920,6 @@ export namespace Protocol {
              */
             ordinal: number;
         }
-
         /**
          * Sampling profile.
          */
@@ -997,28 +927,24 @@ export namespace Protocol {
             head: SamplingHeapProfileNode;
             samples: SamplingHeapProfileSample[];
         }
-
         interface AddInspectedHeapObjectRequest {
             /**
              * Heap snapshot object id to be accessible by means of $x command line API.
              */
             heapObjectId: HeapSnapshotObjectId;
         }
-
         interface GetHeapObjectIdRequest {
             /**
              * Identifier of the object to get heap object id for.
              */
             objectId: Runtime.RemoteObjectId;
         }
-
         interface GetHeapObjectIdResponse {
             /**
              * Id of the heap snapshot object corresponding to the passed remote object id.
              */
             heapSnapshotObjectId: HeapSnapshotObjectId;
         }
-
         interface GetObjectByHeapObjectIdRequest {
             objectId: HeapSnapshotObjectId;
             /**
@@ -1026,21 +952,18 @@ export namespace Protocol {
              */
             objectGroup?: string;
         }
-
         interface GetObjectByHeapObjectIdResponse {
             /**
              * Evaluation result.
              */
             result: Runtime.RemoteObject;
         }
-
         interface GetSamplingProfileResponse {
             /**
              * Return the sampling profile being collected.
              */
             profile: SamplingHeapProfile;
         }
-
         interface StartSamplingRequest {
             /**
              * Average sample interval in bytes. Poisson distribution is used for the intervals. The
@@ -1048,18 +971,15 @@ export namespace Protocol {
              */
             samplingInterval?: number;
         }
-
         interface StartTrackingHeapObjectsRequest {
             trackAllocations?: boolean;
         }
-
         interface StopSamplingResponse {
             /**
              * Recorded sampling heap profile.
              */
             profile: SamplingHeapProfile;
         }
-
         interface StopTrackingHeapObjectsRequest {
             /**
              * If true 'reportHeapSnapshotProgress' events will be generated while snapshot is being taken
@@ -1068,7 +988,6 @@ export namespace Protocol {
             reportProgress?: boolean;
             treatGlobalObjectsAsRoots?: boolean;
         }
-
         interface TakeHeapSnapshotRequest {
             /**
              * If true 'reportHeapSnapshotProgress' events will be generated while snapshot is being taken.
@@ -1079,11 +998,9 @@ export namespace Protocol {
              */
             treatGlobalObjectsAsRoots?: boolean;
         }
-
         interface AddHeapSnapshotChunkEvent {
             chunk: string;
         }
-
         /**
          * If heap objects tracking has been started then backend may send update for one or more fragments
          */
@@ -1095,7 +1012,6 @@ export namespace Protocol {
              */
             statsUpdate: integer[];
         }
-
         /**
          * If heap objects tracking has been started then backend regularly sends a current value for last
          * seen object id and corresponding timestamp. If the were changes in the heap since last event
@@ -1105,7 +1021,6 @@ export namespace Protocol {
             lastSeenObjectId: integer;
             timestamp: number;
         }
-
         interface ReportHeapSnapshotProgressEvent {
             done: integer;
             total: integer;
@@ -1114,7 +1029,6 @@ export namespace Protocol {
     }
 
     namespace Profiler {
-
         /**
          * Profile node. Holds callsite information, execution statistics and child nodes.
          */
@@ -1145,7 +1059,6 @@ export namespace Protocol {
              */
             positionTicks?: PositionTickInfo[];
         }
-
         /**
          * Profile.
          */
@@ -1172,7 +1085,6 @@ export namespace Protocol {
              */
             timeDeltas?: integer[];
         }
-
         /**
          * Specifies a number of samples attributed to a certain source position.
          */
@@ -1186,7 +1098,6 @@ export namespace Protocol {
              */
             ticks: integer;
         }
-
         /**
          * Coverage data for a source range.
          */
@@ -1204,7 +1115,6 @@ export namespace Protocol {
              */
             count: integer;
         }
-
         /**
          * Coverage data for a JavaScript function.
          */
@@ -1222,7 +1132,6 @@ export namespace Protocol {
              */
             isBlockCoverage: boolean;
         }
-
         /**
          * Coverage data for a JavaScript script.
          */
@@ -1240,7 +1149,6 @@ export namespace Protocol {
              */
             functions: FunctionCoverage[];
         }
-
         /**
          * Describes a type collected during runtime.
          */
@@ -1250,7 +1158,6 @@ export namespace Protocol {
              */
             name: string;
         }
-
         /**
          * Source offset and types for a parameter or return value.
          */
@@ -1264,7 +1171,6 @@ export namespace Protocol {
              */
             types: TypeObject[];
         }
-
         /**
          * Type profile data collected during runtime for a JavaScript script.
          */
@@ -1282,7 +1188,6 @@ export namespace Protocol {
              */
             entries: TypeProfileEntry[];
         }
-
         /**
          * Collected counter information.
          */
@@ -1296,7 +1201,6 @@ export namespace Protocol {
              */
             value: integer;
         }
-
         /**
          * Runtime call counter information.
          */
@@ -1314,21 +1218,18 @@ export namespace Protocol {
              */
             time: number;
         }
-
         interface GetBestEffortCoverageResponse {
             /**
              * Coverage data for the current isolate.
              */
             result: ScriptCoverage[];
         }
-
         interface SetSamplingIntervalRequest {
             /**
              * New sampling interval in microseconds.
              */
             interval: integer;
         }
-
         interface StartPreciseCoverageRequest {
             /**
              * Collect accurate call counts beyond simple 'covered' or 'not covered'.
@@ -1343,21 +1244,18 @@ export namespace Protocol {
              */
             allowTriggeredUpdates?: boolean;
         }
-
         interface StartPreciseCoverageResponse {
             /**
              * Monotonically increasing time (in seconds) when the coverage update was taken in the backend.
              */
             timestamp: number;
         }
-
         interface StopResponse {
             /**
              * Recorded profile.
              */
             profile: Profile;
         }
-
         interface TakePreciseCoverageResponse {
             /**
              * Coverage data for the current isolate.
@@ -1368,28 +1266,24 @@ export namespace Protocol {
              */
             timestamp: number;
         }
-
         interface TakeTypeProfileResponse {
             /**
              * Type profile for all scripts since startTypeProfile() was turned on.
              */
             result: ScriptTypeProfile[];
         }
-
         interface GetCountersResponse {
             /**
              * Collected counters information.
              */
             result: CounterInfo[];
         }
-
         interface GetRuntimeCallStatsResponse {
             /**
              * Collected runtime call counter information.
              */
             result: RuntimeCallCounterInfo[];
         }
-
         interface ConsoleProfileFinishedEvent {
             id: string;
             /**
@@ -1402,7 +1296,6 @@ export namespace Protocol {
              */
             title?: string;
         }
-
         /**
          * Sent when new profile recording is started using console.profile() call.
          */
@@ -1417,7 +1310,6 @@ export namespace Protocol {
              */
             title?: string;
         }
-
         /**
          * Reports coverage delta since the last poll (either from an event like this, or from
          * `takePreciseCoverage` for the current isolate. May only be sent if precise code
@@ -1448,23 +1340,19 @@ export namespace Protocol {
      * other objects in their object group.
      */
     namespace Runtime {
-
         /**
          * Unique script identifier.
          */
         type ScriptId = string;
-
         /**
          * Unique object identifier.
          */
         type RemoteObjectId = string;
-
         /**
          * Primitive value which cannot be JSON-stringified. Includes values `-0`, `NaN`, `Infinity`,
          * `-Infinity`, and bigint literals.
          */
         type UnserializableValue = string;
-
         const enum RemoteObjectType {
             Object = 'object',
             Function = 'function',
@@ -1475,7 +1363,6 @@ export namespace Protocol {
             Symbol = 'symbol',
             Bigint = 'bigint',
         }
-
         const enum RemoteObjectSubtype {
             Array = 'array',
             Null = 'null',
@@ -1497,7 +1384,6 @@ export namespace Protocol {
             Webassemblymemory = 'webassemblymemory',
             Wasmvalue = 'wasmvalue',
         }
-
         /**
          * Mirror object referencing original JavaScript object.
          */
@@ -1539,7 +1425,6 @@ export namespace Protocol {
             preview?: ObjectPreview;
             customPreview?: CustomPreview;
         }
-
         interface CustomPreview {
             /**
              * The JSON-stringified result of formatter.header(object, config) call.
@@ -1553,7 +1438,6 @@ export namespace Protocol {
              */
             bodyGetterId?: RemoteObjectId;
         }
-
         const enum ObjectPreviewType {
             Object = 'object',
             Function = 'function',
@@ -1564,7 +1448,6 @@ export namespace Protocol {
             Symbol = 'symbol',
             Bigint = 'bigint',
         }
-
         const enum ObjectPreviewSubtype {
             Array = 'array',
             Null = 'null',
@@ -1586,7 +1469,6 @@ export namespace Protocol {
             Webassemblymemory = 'webassemblymemory',
             Wasmvalue = 'wasmvalue',
         }
-
         /**
          * Object containing abbreviated remote object value.
          */
@@ -1616,7 +1498,6 @@ export namespace Protocol {
              */
             entries?: EntryPreview[];
         }
-
         const enum PropertyPreviewType {
             Object = 'object',
             Function = 'function',
@@ -1628,7 +1509,6 @@ export namespace Protocol {
             Accessor = 'accessor',
             Bigint = 'bigint',
         }
-
         const enum PropertyPreviewSubtype {
             Array = 'array',
             Null = 'null',
@@ -1650,7 +1530,6 @@ export namespace Protocol {
             Webassemblymemory = 'webassemblymemory',
             Wasmvalue = 'wasmvalue',
         }
-
         interface PropertyPreview {
             /**
              * Property name.
@@ -1673,7 +1552,6 @@ export namespace Protocol {
              */
             subtype?: ('array' | 'null' | 'node' | 'regexp' | 'date' | 'map' | 'set' | 'weakmap' | 'weakset' | 'iterator' | 'generator' | 'error' | 'proxy' | 'promise' | 'typedarray' | 'arraybuffer' | 'dataview' | 'webassemblymemory' | 'wasmvalue');
         }
-
         interface EntryPreview {
             /**
              * Preview of the key. Specified for map-like collection entries.
@@ -1684,7 +1562,6 @@ export namespace Protocol {
              */
             value: ObjectPreview;
         }
-
         /**
          * Object property descriptor.
          */
@@ -1734,7 +1611,6 @@ export namespace Protocol {
              */
             symbol?: RemoteObject;
         }
-
         /**
          * Object internal property descriptor. This property isn't normally visible in JavaScript code.
          */
@@ -1748,7 +1624,6 @@ export namespace Protocol {
              */
             value?: RemoteObject;
         }
-
         /**
          * Object private field descriptor.
          */
@@ -1772,7 +1647,6 @@ export namespace Protocol {
              */
             set?: RemoteObject;
         }
-
         /**
          * Represents function call argument. Either remote object id `objectId`, primitive `value`,
          * unserializable primitive value or neither of (for undefined) them should be specified.
@@ -1791,12 +1665,10 @@ export namespace Protocol {
              */
             objectId?: RemoteObjectId;
         }
-
         /**
          * Id of an execution context.
          */
         type ExecutionContextId = integer;
-
         /**
          * Description of an isolated world.
          */
@@ -1825,7 +1697,6 @@ export namespace Protocol {
              */
             auxData?: any;
         }
-
         /**
          * Detailed information about exception (or error) that was thrown during script compilation or
          * execution.
@@ -1868,17 +1739,14 @@ export namespace Protocol {
              */
             executionContextId?: ExecutionContextId;
         }
-
         /**
          * Number of milliseconds since epoch.
          */
         type Timestamp = number;
-
         /**
          * Number of milliseconds.
          */
         type TimeDelta = number;
-
         /**
          * Stack entry for runtime errors and assertions.
          */
@@ -1904,7 +1772,6 @@ export namespace Protocol {
              */
             columnNumber: integer;
         }
-
         /**
          * Call frames for assertions or error messages.
          */
@@ -1927,12 +1794,10 @@ export namespace Protocol {
              */
             parentId?: StackTraceId;
         }
-
         /**
          * Unique identifier of current debugger.
          */
         type UniqueDebuggerId = string;
-
         /**
          * If `debuggerId` is set stack trace comes from another debugger and can be resolved there. This
          * allows to track cross-debugger calls. See `Runtime.StackTrace` and `Debugger.paused` for usages.
@@ -1941,7 +1806,6 @@ export namespace Protocol {
             id: string;
             debuggerId?: UniqueDebuggerId;
         }
-
         interface AwaitPromiseRequest {
             /**
              * Identifier of the promise.
@@ -1956,7 +1820,6 @@ export namespace Protocol {
              */
             generatePreview?: boolean;
         }
-
         interface AwaitPromiseResponse {
             /**
              * Promise result. Will contain rejected value if promise was rejected.
@@ -1967,7 +1830,6 @@ export namespace Protocol {
              */
             exceptionDetails?: ExceptionDetails;
         }
-
         interface CallFunctionOnRequest {
             /**
              * Declaration of the function to call.
@@ -2016,7 +1878,6 @@ export namespace Protocol {
              */
             objectGroup?: string;
         }
-
         interface CallFunctionOnResponse {
             /**
              * Call result.
@@ -2027,7 +1888,6 @@ export namespace Protocol {
              */
             exceptionDetails?: ExceptionDetails;
         }
-
         interface CompileScriptRequest {
             /**
              * Expression to compile.
@@ -2047,7 +1907,6 @@ export namespace Protocol {
              */
             executionContextId?: ExecutionContextId;
         }
-
         interface CompileScriptResponse {
             /**
              * Id of the script.
@@ -2058,7 +1917,6 @@ export namespace Protocol {
              */
             exceptionDetails?: ExceptionDetails;
         }
-
         interface EvaluateRequest {
             /**
              * Expression to evaluate.
@@ -2138,7 +1996,6 @@ export namespace Protocol {
              */
             uniqueContextId?: string;
         }
-
         interface EvaluateResponse {
             /**
              * Evaluation result.
@@ -2149,14 +2006,12 @@ export namespace Protocol {
              */
             exceptionDetails?: ExceptionDetails;
         }
-
         interface GetIsolateIdResponse {
             /**
              * The isolate id.
              */
             id: string;
         }
-
         interface GetHeapUsageResponse {
             /**
              * Used heap size in bytes.
@@ -2167,7 +2022,6 @@ export namespace Protocol {
              */
             totalSize: number;
         }
-
         interface GetPropertiesRequest {
             /**
              * Identifier of the object to return properties for.
@@ -2188,7 +2042,6 @@ export namespace Protocol {
              */
             generatePreview?: boolean;
         }
-
         interface GetPropertiesResponse {
             /**
              * Object properties.
@@ -2207,18 +2060,15 @@ export namespace Protocol {
              */
             exceptionDetails?: ExceptionDetails;
         }
-
         interface GlobalLexicalScopeNamesRequest {
             /**
              * Specifies in which execution context to lookup global scope variables.
              */
             executionContextId?: ExecutionContextId;
         }
-
         interface GlobalLexicalScopeNamesResponse {
             names: string[];
         }
-
         interface QueryObjectsRequest {
             /**
              * Identifier of the prototype to return objects for.
@@ -2229,28 +2079,24 @@ export namespace Protocol {
              */
             objectGroup?: string;
         }
-
         interface QueryObjectsResponse {
             /**
              * Array with objects.
              */
             objects: RemoteObject;
         }
-
         interface ReleaseObjectRequest {
             /**
              * Identifier of the object to release.
              */
             objectId: RemoteObjectId;
         }
-
         interface ReleaseObjectGroupRequest {
             /**
              * Symbolic object group name.
              */
             objectGroup: string;
         }
-
         interface RunScriptRequest {
             /**
              * Id of the script to run.
@@ -2288,7 +2134,6 @@ export namespace Protocol {
              */
             awaitPromise?: boolean;
         }
-
         interface RunScriptResponse {
             /**
              * Run result.
@@ -2299,7 +2144,6 @@ export namespace Protocol {
              */
             exceptionDetails?: ExceptionDetails;
         }
-
         interface SetAsyncCallStackDepthRequest {
             /**
              * Maximum depth of async call stacks. Setting to `0` will effectively disable collecting async
@@ -2307,15 +2151,12 @@ export namespace Protocol {
              */
             maxDepth: integer;
         }
-
         interface SetCustomObjectFormatterEnabledRequest {
             enabled: boolean;
         }
-
         interface SetMaxCallStackSizeToCaptureRequest {
             size: integer;
         }
-
         interface AddBindingRequest {
             name: string;
             /**
@@ -2334,11 +2175,9 @@ export namespace Protocol {
              */
             executionContextName?: string;
         }
-
         interface RemoveBindingRequest {
             name: string;
         }
-
         /**
          * Notification is issued every time when binding is called.
          */
@@ -2350,7 +2189,6 @@ export namespace Protocol {
              */
             executionContextId: ExecutionContextId;
         }
-
         const enum ConsoleAPICalledEventType {
             Log = 'log',
             Debug = 'debug',
@@ -2371,7 +2209,6 @@ export namespace Protocol {
             Count = 'count',
             TimeEnd = 'timeEnd',
         }
-
         /**
          * Issued when console API was called.
          */
@@ -2405,7 +2242,6 @@ export namespace Protocol {
              */
             context?: string;
         }
-
         /**
          * Issued when unhandled exception was revoked.
          */
@@ -2419,7 +2255,6 @@ export namespace Protocol {
              */
             exceptionId: integer;
         }
-
         /**
          * Issued when exception was thrown and unhandled.
          */
@@ -2430,7 +2265,6 @@ export namespace Protocol {
             timestamp: Timestamp;
             exceptionDetails: ExceptionDetails;
         }
-
         /**
          * Issued when new execution context is created.
          */
@@ -2440,7 +2274,6 @@ export namespace Protocol {
              */
             context: ExecutionContextDescription;
         }
-
         /**
          * Issued when execution context is destroyed.
          */
@@ -2450,7 +2283,6 @@ export namespace Protocol {
              */
             executionContextId: ExecutionContextId;
         }
-
         /**
          * Issued when object should be inspected (for example, as a result of inspect() command line API
          * call).
@@ -2465,7 +2297,6 @@ export namespace Protocol {
      * This domain is deprecated.
      */
     namespace Schema {
-
         /**
          * Description of the protocol domain.
          */
@@ -2479,7 +2310,6 @@ export namespace Protocol {
              */
             version: string;
         }
-
         interface GetDomainsResponse {
             /**
              * List of supported domains.
@@ -2489,27 +2319,22 @@ export namespace Protocol {
     }
 
     namespace Accessibility {
-
         /**
          * Unique accessibility node identifier.
          */
         type AXNodeId = string;
-
         /**
          * Enum of possible property types.
          */
         type AXValueType = ('boolean' | 'tristate' | 'booleanOrUndefined' | 'idref' | 'idrefList' | 'integer' | 'node' | 'nodeList' | 'number' | 'string' | 'computedString' | 'token' | 'tokenList' | 'domRelation' | 'role' | 'internalRole' | 'valueUndefined');
-
         /**
          * Enum of possible property sources.
          */
         type AXValueSourceType = ('attribute' | 'implicit' | 'style' | 'contents' | 'placeholder' | 'relatedElement');
-
         /**
          * Enum of possible native property sources (as a subtype of a particular AXValueSourceType).
          */
         type AXValueNativeSourceType = ('figcaption' | 'label' | 'labelfor' | 'labelwrapped' | 'legend' | 'rubyannotation' | 'tablecaption' | 'title' | 'other');
-
         /**
          * A single source for a computed AX property.
          */
@@ -2551,7 +2376,6 @@ export namespace Protocol {
              */
             invalidReason?: string;
         }
-
         interface AXRelatedNode {
             /**
              * The BackendNodeId of the related DOM node.
@@ -2566,7 +2390,6 @@ export namespace Protocol {
              */
             text?: string;
         }
-
         interface AXProperty {
             /**
              * The name of this property.
@@ -2577,7 +2400,6 @@ export namespace Protocol {
              */
             value: AXValue;
         }
-
         /**
          * A single computed AX property.
          */
@@ -2599,7 +2421,6 @@ export namespace Protocol {
              */
             sources?: AXValueSource[];
         }
-
         /**
          * Values of AXProperty name:
          * - from 'busy' to 'roledescription': states which apply to every AX node
@@ -2609,7 +2430,6 @@ export namespace Protocol {
          * - from 'activedescendant' to 'owns' - relationships between elements other than parent/child/sibling.
          */
         type AXPropertyName = ('busy' | 'disabled' | 'editable' | 'focusable' | 'focused' | 'hidden' | 'hiddenRoot' | 'invalid' | 'keyshortcuts' | 'settable' | 'roledescription' | 'live' | 'atomic' | 'relevant' | 'root' | 'autocomplete' | 'hasPopup' | 'level' | 'multiselectable' | 'orientation' | 'multiline' | 'readonly' | 'required' | 'valuemin' | 'valuemax' | 'valuetext' | 'checked' | 'expanded' | 'modal' | 'pressed' | 'selected' | 'activedescendant' | 'controls' | 'describedby' | 'details' | 'errormessage' | 'flowto' | 'labelledby' | 'owns');
-
         /**
          * A node in the accessibility tree.
          */
@@ -2655,7 +2475,6 @@ export namespace Protocol {
              */
             backendDOMNodeId?: DOM.BackendNodeId;
         }
-
         interface GetPartialAXTreeRequest {
             /**
              * Identifier of the node to get the partial accessibility tree for.
@@ -2674,7 +2493,6 @@ export namespace Protocol {
              */
             fetchRelatives?: boolean;
         }
-
         interface GetPartialAXTreeResponse {
             /**
              * The `Accessibility.AXNode` for this DOM node, if it exists, plus its ancestors, siblings and
@@ -2682,7 +2500,6 @@ export namespace Protocol {
              */
             nodes: AXNode[];
         }
-
         interface GetFullAXTreeRequest {
             /**
              * The maximum depth at which descendants of the root node should be retrieved.
@@ -2690,19 +2507,15 @@ export namespace Protocol {
              */
             max_depth?: integer;
         }
-
         interface GetFullAXTreeResponse {
             nodes: AXNode[];
         }
-
         interface GetChildAXNodesRequest {
             id: AXNodeId;
         }
-
         interface GetChildAXNodesResponse {
             nodes: AXNode[];
         }
-
         interface QueryAXTreeRequest {
             /**
              * Identifier of the node for the root to query.
@@ -2725,7 +2538,6 @@ export namespace Protocol {
              */
             role?: string;
         }
-
         interface QueryAXTreeResponse {
             /**
              * A list of `Accessibility.AXNode` matching the specified attributes,
@@ -2736,13 +2548,11 @@ export namespace Protocol {
     }
 
     namespace Animation {
-
         const enum AnimationType {
             CSSTransition = 'CSSTransition',
             CSSAnimation = 'CSSAnimation',
             WebAnimation = 'WebAnimation',
         }
-
         /**
          * Animation instance.
          */
@@ -2789,7 +2599,6 @@ export namespace Protocol {
              */
             cssId?: string;
         }
-
         /**
          * AnimationEffect instance
          */
@@ -2835,7 +2644,6 @@ export namespace Protocol {
              */
             easing: string;
         }
-
         /**
          * Keyframes Rule
          */
@@ -2849,7 +2657,6 @@ export namespace Protocol {
              */
             keyframes: KeyframeStyle[];
         }
-
         /**
          * Keyframe Style
          */
@@ -2863,49 +2670,42 @@ export namespace Protocol {
              */
             easing: string;
         }
-
         interface GetCurrentTimeRequest {
             /**
              * Id of animation.
              */
             id: string;
         }
-
         interface GetCurrentTimeResponse {
             /**
              * Current time of the page.
              */
             currentTime: number;
         }
-
         interface GetPlaybackRateResponse {
             /**
              * Playback rate for animations on page.
              */
             playbackRate: number;
         }
-
         interface ReleaseAnimationsRequest {
             /**
              * List of animation ids to seek.
              */
             animations: string[];
         }
-
         interface ResolveAnimationRequest {
             /**
              * Animation id.
              */
             animationId: string;
         }
-
         interface ResolveAnimationResponse {
             /**
              * Corresponding remote object.
              */
             remoteObject: Runtime.RemoteObject;
         }
-
         interface SeekAnimationsRequest {
             /**
              * List of animation ids to seek.
@@ -2916,7 +2716,6 @@ export namespace Protocol {
              */
             currentTime: number;
         }
-
         interface SetPausedRequest {
             /**
              * Animations to set the pause state of.
@@ -2927,14 +2726,12 @@ export namespace Protocol {
              */
             paused: boolean;
         }
-
         interface SetPlaybackRateRequest {
             /**
              * Playback rate for animations on page
              */
             playbackRate: number;
         }
-
         interface SetTimingRequest {
             /**
              * Animation id.
@@ -2949,7 +2746,6 @@ export namespace Protocol {
              */
             delay: number;
         }
-
         /**
          * Event for when an animation has been cancelled.
          */
@@ -2959,7 +2755,6 @@ export namespace Protocol {
              */
             id: string;
         }
-
         /**
          * Event for each animation that has been created.
          */
@@ -2969,7 +2764,6 @@ export namespace Protocol {
              */
             id: string;
         }
-
         /**
          * Event for animation that has been started.
          */
@@ -2982,7 +2776,6 @@ export namespace Protocol {
     }
 
     namespace ApplicationCache {
-
         /**
          * Detailed application cache resource information.
          */
@@ -3000,7 +2793,6 @@ export namespace Protocol {
              */
             type: string;
         }
-
         /**
          * Detailed application cache information.
          */
@@ -3026,7 +2818,6 @@ export namespace Protocol {
              */
             resources: ApplicationCacheResource[];
         }
-
         /**
          * Frame identifier - manifest URL pair.
          */
@@ -3044,21 +2835,18 @@ export namespace Protocol {
              */
             status: integer;
         }
-
         interface GetApplicationCacheForFrameRequest {
             /**
              * Identifier of the frame containing document whose application cache is retrieved.
              */
             frameId: Page.FrameId;
         }
-
         interface GetApplicationCacheForFrameResponse {
             /**
              * Relevant application cache data for the document in given frame.
              */
             applicationCache: ApplicationCache;
         }
-
         interface GetFramesWithManifestsResponse {
             /**
              * Array of frame identifiers with manifest urls for each frame containing a document
@@ -3066,21 +2854,18 @@ export namespace Protocol {
              */
             frameIds: FrameWithManifest[];
         }
-
         interface GetManifestForFrameRequest {
             /**
              * Identifier of the frame containing document whose manifest is retrieved.
              */
             frameId: Page.FrameId;
         }
-
         interface GetManifestForFrameResponse {
             /**
              * Manifest URL for document in the given frame.
              */
             manifestURL: string;
         }
-
         interface ApplicationCacheStatusUpdatedEvent {
             /**
              * Identifier of the frame containing document whose application cache updated status.
@@ -3095,7 +2880,6 @@ export namespace Protocol {
              */
             status: integer;
         }
-
         interface NetworkStateUpdatedEvent {
             isNowOnline: boolean;
         }
@@ -3105,7 +2889,6 @@ export namespace Protocol {
      * Audits domain allows investigation of page violations and possible improvements.
      */
     namespace Audits {
-
         /**
          * Information about a cookie that is affected by an inspector issue.
          */
@@ -3117,7 +2900,6 @@ export namespace Protocol {
             path: string;
             domain: string;
         }
-
         /**
          * Information about a request that is affected by an inspector issue.
          */
@@ -3128,20 +2910,15 @@ export namespace Protocol {
             requestId: Network.RequestId;
             url?: string;
         }
-
         /**
          * Information about the frame affected by an inspector issue.
          */
         interface AffectedFrame {
             frameId: Page.FrameId;
         }
-
         type SameSiteCookieExclusionReason = ('ExcludeSameSiteUnspecifiedTreatedAsLax' | 'ExcludeSameSiteNoneInsecure' | 'ExcludeSameSiteLax' | 'ExcludeSameSiteStrict' | 'ExcludeInvalidSameParty');
-
         type SameSiteCookieWarningReason = ('WarnSameSiteUnspecifiedCrossSiteContext' | 'WarnSameSiteNoneInsecure' | 'WarnSameSiteUnspecifiedLaxAllowUnsafe' | 'WarnSameSiteStrictLaxDowngradeStrict' | 'WarnSameSiteStrictCrossDowngradeStrict' | 'WarnSameSiteStrictCrossDowngradeLax' | 'WarnSameSiteLaxCrossDowngradeStrict' | 'WarnSameSiteLaxCrossDowngradeLax');
-
         type SameSiteCookieOperation = ('SetCookie' | 'ReadCookie');
-
         /**
          * This information is currently necessary, as the front-end has a difficult
          * time finding a specific cookie. With this, we can convey specific error
@@ -3167,11 +2944,8 @@ export namespace Protocol {
             cookieUrl?: string;
             request?: AffectedRequest;
         }
-
         type MixedContentResolutionStatus = ('MixedContentBlocked' | 'MixedContentAutomaticallyUpgraded' | 'MixedContentWarning');
-
         type MixedContentResourceType = ('Audio' | 'Beacon' | 'CSPReport' | 'Download' | 'EventSource' | 'Favicon' | 'Font' | 'Form' | 'Frame' | 'Image' | 'Import' | 'Manifest' | 'Ping' | 'PluginData' | 'PluginResource' | 'Prefetch' | 'Resource' | 'Script' | 'ServiceWorker' | 'SharedWorker' | 'Stylesheet' | 'Track' | 'Video' | 'Worker' | 'XMLHttpRequest' | 'XSLT');
-
         interface MixedContentIssueDetails {
             /**
              * The type of resource causing the mixed content issue (css, js, iframe,
@@ -3202,13 +2976,11 @@ export namespace Protocol {
              */
             frame?: AffectedFrame;
         }
-
         /**
          * Enum indicating the reason a response has been blocked. These reasons are
          * refinements of the net error BLOCKED_BY_RESPONSE.
          */
         type BlockedByResponseReason = ('CoepFrameResourceNeedsCoepHeader' | 'CoopSandboxedIFrameCannotNavigateToCoopPage' | 'CorpNotSameOrigin' | 'CorpNotSameOriginAfterDefaultedToSameOriginByCoep' | 'CorpNotSameSite');
-
         /**
          * Details for a request that has been blocked with the BLOCKED_BY_RESPONSE
          * code. Currently only used for COEP/COOP, but may be extended to include
@@ -3220,11 +2992,8 @@ export namespace Protocol {
             blockedFrame?: AffectedFrame;
             reason: BlockedByResponseReason;
         }
-
         type HeavyAdResolutionStatus = ('HeavyAdBlocked' | 'HeavyAdWarning');
-
         type HeavyAdReason = ('NetworkTotalLimit' | 'CpuTotalLimit' | 'CpuPeakLimit');
-
         interface HeavyAdIssueDetails {
             /**
              * The resolution status, either blocking the content or warning.
@@ -3239,16 +3008,13 @@ export namespace Protocol {
              */
             frame: AffectedFrame;
         }
-
         type ContentSecurityPolicyViolationType = ('kInlineViolation' | 'kEvalViolation' | 'kURLViolation' | 'kTrustedTypesSinkViolation' | 'kTrustedTypesPolicyViolation');
-
         interface SourceCodeLocation {
             scriptId?: Runtime.ScriptId;
             url: string;
             lineNumber: integer;
             columnNumber: integer;
         }
-
         interface ContentSecurityPolicyIssueDetails {
             /**
              * The url not included in allowed sources.
@@ -3264,9 +3030,7 @@ export namespace Protocol {
             sourceCodeLocation?: SourceCodeLocation;
             violatingNodeId?: DOM.BackendNodeId;
         }
-
         type SharedArrayBufferIssueType = ('TransferIssue' | 'CreationIssue');
-
         /**
          * Details for a issue arising from an SAB being instantiated in, or
          * transferred to a context that is not cross-origin isolated.
@@ -3276,9 +3040,7 @@ export namespace Protocol {
             isWarning: boolean;
             type: SharedArrayBufferIssueType;
         }
-
         type TwaQualityEnforcementViolationType = ('kHttpError' | 'kUnavailableOffline' | 'kDigitalAssetLinks');
-
         interface TrustedWebActivityIssueDetails {
             /**
              * The url that triggers the violation.
@@ -3297,7 +3059,6 @@ export namespace Protocol {
              */
             signature?: string;
         }
-
         interface LowTextContrastIssueDetails {
             violatingNodeId: DOM.BackendNodeId;
             violatingNodeSelector: string;
@@ -3307,7 +3068,6 @@ export namespace Protocol {
             fontSize: string;
             fontWeight: string;
         }
-
         /**
          * Details for a CORS related issue, e.g. a warning or error related to
          * CORS RFC1918 enforcement.
@@ -3321,9 +3081,7 @@ export namespace Protocol {
             resourceIPAddressSpace?: Network.IPAddressSpace;
             clientSecurityState?: Network.ClientSecurityState;
         }
-
         type AttributionReportingIssueType = ('PermissionPolicyDisabled' | 'InvalidAttributionSourceEventId' | 'InvalidAttributionData' | 'AttributionSourceUntrustworthyOrigin' | 'AttributionUntrustworthyOrigin');
-
         /**
          * Details for issues around "Attribution Reporting API" usage.
          * Explainer: https://github.com/WICG/conversion-measurement-api
@@ -3335,7 +3093,6 @@ export namespace Protocol {
             violatingNodeId?: DOM.BackendNodeId;
             invalidParameter?: string;
         }
-
         /**
          * Details for issues about documents in Quirks Mode
          * or Limited Quirks Mode that affects page layouting.
@@ -3351,19 +3108,16 @@ export namespace Protocol {
             frameId: Page.FrameId;
             loaderId: Network.LoaderId;
         }
-
         interface NavigatorUserAgentIssueDetails {
             url: string;
             location?: SourceCodeLocation;
         }
-
         /**
          * A unique identifier for the type of issue. Each type may use one of the
          * optional fields in InspectorIssueDetails to convey more specific
          * information about the kind of issue.
          */
         type InspectorIssueCode = ('SameSiteCookieIssue' | 'MixedContentIssue' | 'BlockedByResponseIssue' | 'HeavyAdIssue' | 'ContentSecurityPolicyIssue' | 'SharedArrayBufferIssue' | 'TrustedWebActivityIssue' | 'LowTextContrastIssue' | 'CorsIssue' | 'AttributionReportingIssue' | 'QuirksModeIssue' | 'NavigatorUserAgentIssue');
-
         /**
          * This struct holds a list of optional fields with additional information
          * specific to the kind of issue. When adding a new issue code, please also
@@ -3383,7 +3137,6 @@ export namespace Protocol {
             quirksModeIssueDetails?: QuirksModeIssueDetails;
             navigatorUserAgentIssueDetails?: NavigatorUserAgentIssueDetails;
         }
-
         /**
          * An inspector issue reported from the back-end.
          */
@@ -3396,13 +3149,11 @@ export namespace Protocol {
              */
             issueId?: string;
         }
-
         const enum GetEncodedResponseRequestEncoding {
             Webp = 'webp',
             Jpeg = 'jpeg',
             Png = 'png',
         }
-
         interface GetEncodedResponseRequest {
             /**
              * Identifier of the network request to get content for.
@@ -3421,7 +3172,6 @@ export namespace Protocol {
              */
             sizeOnly?: boolean;
         }
-
         interface GetEncodedResponseResponse {
             /**
              * The encoded body as a base64 string. Omitted if sizeOnly is true. (Encoded as a base64 string when passed over JSON)
@@ -3436,14 +3186,12 @@ export namespace Protocol {
              */
             encodedSize: integer;
         }
-
         interface CheckContrastRequest {
             /**
              * Whether to report WCAG AAA level issues. Default is false.
              */
             reportAAA?: boolean;
         }
-
         interface IssueAddedEvent {
             issue: InspectorIssue;
         }
@@ -3453,14 +3201,12 @@ export namespace Protocol {
      * Defines events for background web platform features.
      */
     namespace BackgroundService {
-
         /**
          * The Background Service that will be associated with the commands/events.
          * Every Background Service operates independently, but they share the same
          * API.
          */
         type ServiceName = ('backgroundFetch' | 'backgroundSync' | 'pushMessaging' | 'notifications' | 'paymentHandler' | 'periodicBackgroundSync');
-
         /**
          * A key-value pair for additional event information to pass along.
          */
@@ -3468,7 +3214,6 @@ export namespace Protocol {
             key: string;
             value: string;
         }
-
         interface BackgroundServiceEvent {
             /**
              * Timestamp of the event (in seconds).
@@ -3499,24 +3244,19 @@ export namespace Protocol {
              */
             eventMetadata: EventMetadata[];
         }
-
         interface StartObservingRequest {
             service: ServiceName;
         }
-
         interface StopObservingRequest {
             service: ServiceName;
         }
-
         interface SetRecordingRequest {
             shouldRecord: boolean;
             service: ServiceName;
         }
-
         interface ClearEventsRequest {
             service: ServiceName;
         }
-
         /**
          * Called when the recording state for the service has been updated.
          */
@@ -3524,7 +3264,6 @@ export namespace Protocol {
             isRecording: boolean;
             service: ServiceName;
         }
-
         /**
          * Called with all existing backgroundServiceEvents when enabled, and all new
          * events afterwards if enabled and recording.
@@ -3538,16 +3277,12 @@ export namespace Protocol {
      * The Browser domain defines methods and events for browser managing.
      */
     namespace Browser {
-
         type BrowserContextID = string;
-
         type WindowID = integer;
-
         /**
          * The state of the browser window.
          */
         type WindowState = ('normal' | 'minimized' | 'maximized' | 'fullscreen');
-
         /**
          * Browser window bounds information
          */
@@ -3573,11 +3308,8 @@ export namespace Protocol {
              */
             windowState?: WindowState;
         }
-
         type PermissionType = ('accessibilityEvents' | 'audioCapture' | 'backgroundSync' | 'backgroundFetch' | 'clipboardReadWrite' | 'clipboardSanitizedWrite' | 'displayCapture' | 'durableStorage' | 'flash' | 'geolocation' | 'midi' | 'midiSysex' | 'nfc' | 'notifications' | 'paymentHandler' | 'periodicBackgroundSync' | 'protectedMediaIdentifier' | 'sensors' | 'videoCapture' | 'videoCapturePanTiltZoom' | 'idleDetection' | 'wakeLockScreen' | 'wakeLockSystem');
-
         type PermissionSetting = ('granted' | 'denied' | 'prompt');
-
         /**
          * Definition of PermissionDescriptor defined in the Permissions API:
          * https://w3c.github.io/permissions/#dictdef-permissiondescriptor.
@@ -3606,12 +3338,10 @@ export namespace Protocol {
              */
             panTiltZoom?: boolean;
         }
-
         /**
          * Browser command ids used by executeBrowserCommand.
          */
         type BrowserCommandId = ('openTabSearch' | 'closeTabSearch');
-
         /**
          * Chrome histogram bucket.
          */
@@ -3629,7 +3359,6 @@ export namespace Protocol {
              */
             count: integer;
         }
-
         /**
          * Chrome histogram.
          */
@@ -3651,7 +3380,6 @@ export namespace Protocol {
              */
             buckets: Bucket[];
         }
-
         interface SetPermissionRequest {
             /**
              * Descriptor of permission to override.
@@ -3670,7 +3398,6 @@ export namespace Protocol {
              */
             browserContextId?: BrowserContextID;
         }
-
         interface GrantPermissionsRequest {
             permissions: PermissionType[];
             /**
@@ -3682,21 +3409,18 @@ export namespace Protocol {
              */
             browserContextId?: BrowserContextID;
         }
-
         interface ResetPermissionsRequest {
             /**
              * BrowserContext to reset permissions. When omitted, default browser context is used.
              */
             browserContextId?: BrowserContextID;
         }
-
         const enum SetDownloadBehaviorRequestBehavior {
             Deny = 'deny',
             Allow = 'allow',
             AllowAndName = 'allowAndName',
             Default = 'default',
         }
-
         interface SetDownloadBehaviorRequest {
             /**
              * Whether to allow all or deny all download requests, or use default Chrome behavior if
@@ -3718,7 +3442,6 @@ export namespace Protocol {
              */
             eventsEnabled?: boolean;
         }
-
         interface CancelDownloadRequest {
             /**
              * Global unique identifier of the download.
@@ -3729,7 +3452,6 @@ export namespace Protocol {
              */
             browserContextId?: BrowserContextID;
         }
-
         interface GetVersionResponse {
             /**
              * Protocol version.
@@ -3752,14 +3474,12 @@ export namespace Protocol {
              */
             jsVersion: string;
         }
-
         interface GetBrowserCommandLineResponse {
             /**
              * Commandline parameters
              */
             arguments: string[];
         }
-
         interface GetHistogramsRequest {
             /**
              * Requested substring in name. Only histograms which have query as a
@@ -3772,14 +3492,12 @@ export namespace Protocol {
              */
             delta?: boolean;
         }
-
         interface GetHistogramsResponse {
             /**
              * Histograms.
              */
             histograms: Histogram[];
         }
-
         interface GetHistogramRequest {
             /**
              * Requested histogram name.
@@ -3790,21 +3508,18 @@ export namespace Protocol {
              */
             delta?: boolean;
         }
-
         interface GetHistogramResponse {
             /**
              * Histogram.
              */
             histogram: Histogram;
         }
-
         interface GetWindowBoundsRequest {
             /**
              * Browser window id.
              */
             windowId: WindowID;
         }
-
         interface GetWindowBoundsResponse {
             /**
              * Bounds information of the window. When window state is 'minimized', the restored window
@@ -3812,14 +3527,12 @@ export namespace Protocol {
              */
             bounds: Bounds;
         }
-
         interface GetWindowForTargetRequest {
             /**
              * Devtools agent host id. If called as a part of the session, associated targetId is used.
              */
             targetId?: Target.TargetID;
         }
-
         interface GetWindowForTargetResponse {
             /**
              * Browser window id.
@@ -3831,7 +3544,6 @@ export namespace Protocol {
              */
             bounds: Bounds;
         }
-
         interface SetWindowBoundsRequest {
             /**
              * Browser window id.
@@ -3843,7 +3555,6 @@ export namespace Protocol {
              */
             bounds: Bounds;
         }
-
         interface SetDockTileRequest {
             badgeLabel?: string;
             /**
@@ -3851,11 +3562,9 @@ export namespace Protocol {
              */
             image?: string;
         }
-
         interface ExecuteBrowserCommandRequest {
             commandId: BrowserCommandId;
         }
-
         /**
          * Fired when page is about to start a download.
          */
@@ -3877,13 +3586,11 @@ export namespace Protocol {
              */
             suggestedFilename: string;
         }
-
         const enum DownloadProgressEventState {
             InProgress = 'inProgress',
             Completed = 'completed',
             Canceled = 'canceled',
         }
-
         /**
          * Fired when download makes progress. Last call has |done| == true.
          */
@@ -3916,16 +3623,13 @@ export namespace Protocol {
      * subsequently load the required stylesheet contents using the `getStyleSheet[Text]()` methods.
      */
     namespace CSS {
-
         type StyleSheetId = string;
-
         /**
          * Stylesheet type: "injected" for stylesheets injected via extension, "user-agent" for user-agent
          * stylesheets, "inspector" for stylesheets created by the inspector (i.e. those holding the "via
          * inspector" rules), "regular" for regular stylesheets.
          */
         type StyleSheetOrigin = ('injected' | 'user-agent' | 'inspector' | 'regular');
-
         /**
          * CSS rule collection for a single pseudo style.
          */
@@ -3939,7 +3643,6 @@ export namespace Protocol {
              */
             matches: RuleMatch[];
         }
-
         /**
          * Inherited CSS rule collection from ancestor node.
          */
@@ -3953,7 +3656,6 @@ export namespace Protocol {
              */
             matchedCSSRules: RuleMatch[];
         }
-
         /**
          * Match data for a CSS rule.
          */
@@ -3967,7 +3669,6 @@ export namespace Protocol {
              */
             matchingSelectors: integer[];
         }
-
         /**
          * Data for a simple selector (these are delimited by commas in a selector list).
          */
@@ -3981,7 +3682,6 @@ export namespace Protocol {
              */
             range?: SourceRange;
         }
-
         /**
          * Selector list data.
          */
@@ -3995,7 +3695,6 @@ export namespace Protocol {
              */
             text: string;
         }
-
         /**
          * CSS stylesheet metainformation.
          */
@@ -4073,7 +3772,6 @@ export namespace Protocol {
              */
             endColumn: number;
         }
-
         /**
          * CSS rule representation.
          */
@@ -4106,7 +3804,6 @@ export namespace Protocol {
              */
             containerQueries?: CSSContainerQuery[];
         }
-
         /**
          * CSS coverage information.
          */
@@ -4129,7 +3826,6 @@ export namespace Protocol {
              */
             used: boolean;
         }
-
         /**
          * Text range within a resource. All numbers are zero-based.
          */
@@ -4151,7 +3847,6 @@ export namespace Protocol {
              */
             endColumn: integer;
         }
-
         interface ShorthandEntry {
             /**
              * Shorthand name.
@@ -4166,7 +3861,6 @@ export namespace Protocol {
              */
             important?: boolean;
         }
-
         interface CSSComputedStyleProperty {
             /**
              * Computed style property name.
@@ -4177,7 +3871,6 @@ export namespace Protocol {
              */
             value: string;
         }
-
         /**
          * CSS style representation.
          */
@@ -4204,7 +3897,6 @@ export namespace Protocol {
              */
             range?: SourceRange;
         }
-
         /**
          * CSS property declaration data.
          */
@@ -4242,14 +3934,12 @@ export namespace Protocol {
              */
             range?: SourceRange;
         }
-
         const enum CSSMediaSource {
             MediaRule = 'mediaRule',
             ImportRule = 'importRule',
             LinkedSheet = 'linkedSheet',
             InlineSheet = 'inlineSheet',
         }
-
         /**
          * CSS media rule descriptor.
          */
@@ -4283,7 +3973,6 @@ export namespace Protocol {
              */
             mediaList?: MediaQuery[];
         }
-
         /**
          * Media query descriptor.
          */
@@ -4297,7 +3986,6 @@ export namespace Protocol {
              */
             active: boolean;
         }
-
         /**
          * Media query expression descriptor.
          */
@@ -4323,7 +4011,6 @@ export namespace Protocol {
              */
             computedLength?: number;
         }
-
         /**
          * CSS container query rule descriptor.
          */
@@ -4342,7 +4029,6 @@ export namespace Protocol {
              */
             styleSheetId?: StyleSheetId;
         }
-
         /**
          * Information about amount of glyphs that were rendered with given font.
          */
@@ -4360,7 +4046,6 @@ export namespace Protocol {
              */
             glyphCount: number;
         }
-
         /**
          * Information about font variation axes for variable fonts
          */
@@ -4386,7 +4071,6 @@ export namespace Protocol {
              */
             defaultValue: number;
         }
-
         /**
          * Properties of a web font: https://www.w3.org/TR/2008/REC-CSS2-20080411/fonts.html#font-descriptions
          * and additional information such as platformFontFamily and fontVariationAxes.
@@ -4429,7 +4113,6 @@ export namespace Protocol {
              */
             fontVariationAxes?: FontVariationAxis[];
         }
-
         /**
          * CSS keyframes rule representation.
          */
@@ -4443,7 +4126,6 @@ export namespace Protocol {
              */
             keyframes: CSSKeyframeRule[];
         }
-
         /**
          * CSS keyframe rule representation.
          */
@@ -4466,7 +4148,6 @@ export namespace Protocol {
              */
             style: CSSStyle;
         }
-
         /**
          * A descriptor of operation to mutate style declaration text.
          */
@@ -4484,7 +4165,6 @@ export namespace Protocol {
              */
             text: string;
         }
-
         interface AddRuleRequest {
             /**
              * The css style sheet identifier where a new rule should be inserted.
@@ -4499,39 +4179,33 @@ export namespace Protocol {
              */
             location: SourceRange;
         }
-
         interface AddRuleResponse {
             /**
              * The newly created rule.
              */
             rule: CSSRule;
         }
-
         interface CollectClassNamesRequest {
             styleSheetId: StyleSheetId;
         }
-
         interface CollectClassNamesResponse {
             /**
              * Class name list.
              */
             classNames: string[];
         }
-
         interface CreateStyleSheetRequest {
             /**
              * Identifier of the frame where "via-inspector" stylesheet should be created.
              */
             frameId: Page.FrameId;
         }
-
         interface CreateStyleSheetResponse {
             /**
              * Identifier of the created "via-inspector" stylesheet.
              */
             styleSheetId: StyleSheetId;
         }
-
         interface ForcePseudoStateRequest {
             /**
              * The element id for which to force the pseudo state.
@@ -4542,14 +4216,12 @@ export namespace Protocol {
              */
             forcedPseudoClasses: string[];
         }
-
         interface GetBackgroundColorsRequest {
             /**
              * Id of the node to get background colors for.
              */
             nodeId: DOM.NodeId;
         }
-
         interface GetBackgroundColorsResponse {
             /**
              * The range of background colors behind this element, if it contains any visible text. If no
@@ -4569,22 +4241,18 @@ export namespace Protocol {
              */
             computedFontWeight?: string;
         }
-
         interface GetComputedStyleForNodeRequest {
             nodeId: DOM.NodeId;
         }
-
         interface GetComputedStyleForNodeResponse {
             /**
              * Computed style for the specified DOM node.
              */
             computedStyle: CSSComputedStyleProperty[];
         }
-
         interface GetInlineStylesForNodeRequest {
             nodeId: DOM.NodeId;
         }
-
         interface GetInlineStylesForNodeResponse {
             /**
              * Inline style for the specified DOM node.
@@ -4595,11 +4263,9 @@ export namespace Protocol {
              */
             attributesStyle?: CSSStyle;
         }
-
         interface GetMatchedStylesForNodeRequest {
             nodeId: DOM.NodeId;
         }
-
         interface GetMatchedStylesForNodeResponse {
             /**
              * Inline style for the specified DOM node.
@@ -4626,44 +4292,36 @@ export namespace Protocol {
              */
             cssKeyframesRules?: CSSKeyframesRule[];
         }
-
         interface GetMediaQueriesResponse {
             medias: CSSMedia[];
         }
-
         interface GetPlatformFontsForNodeRequest {
             nodeId: DOM.NodeId;
         }
-
         interface GetPlatformFontsForNodeResponse {
             /**
              * Usage statistics for every employed platform font.
              */
             fonts: PlatformFontUsage[];
         }
-
         interface GetStyleSheetTextRequest {
             styleSheetId: StyleSheetId;
         }
-
         interface GetStyleSheetTextResponse {
             /**
              * The stylesheet text.
              */
             text: string;
         }
-
         interface TrackComputedStyleUpdatesRequest {
             propertiesToTrack: CSSComputedStyleProperty[];
         }
-
         interface TakeComputedStyleUpdatesResponse {
             /**
              * The list of node Ids that have their tracked computed styles updated
              */
             nodeIds: DOM.NodeId[];
         }
-
         interface SetEffectivePropertyValueForNodeRequest {
             /**
              * The element id for which to set property.
@@ -4672,86 +4330,72 @@ export namespace Protocol {
             propertyName: string;
             value: string;
         }
-
         interface SetKeyframeKeyRequest {
             styleSheetId: StyleSheetId;
             range: SourceRange;
             keyText: string;
         }
-
         interface SetKeyframeKeyResponse {
             /**
              * The resulting key text after modification.
              */
             keyText: Value;
         }
-
         interface SetMediaTextRequest {
             styleSheetId: StyleSheetId;
             range: SourceRange;
             text: string;
         }
-
         interface SetMediaTextResponse {
             /**
              * The resulting CSS media rule after modification.
              */
             media: CSSMedia;
         }
-
         interface SetContainerQueryTextRequest {
             styleSheetId: StyleSheetId;
             range: SourceRange;
             text: string;
         }
-
         interface SetContainerQueryTextResponse {
             /**
              * The resulting CSS container query rule after modification.
              */
             containerQuery: CSSContainerQuery;
         }
-
         interface SetRuleSelectorRequest {
             styleSheetId: StyleSheetId;
             range: SourceRange;
             selector: string;
         }
-
         interface SetRuleSelectorResponse {
             /**
              * The resulting selector list after modification.
              */
             selectorList: SelectorList;
         }
-
         interface SetStyleSheetTextRequest {
             styleSheetId: StyleSheetId;
             text: string;
         }
-
         interface SetStyleSheetTextResponse {
             /**
              * URL of source map associated with script (if any).
              */
             sourceMapURL?: string;
         }
-
         interface SetStyleTextsRequest {
             edits: StyleDeclarationEdit[];
         }
-
         interface SetStyleTextsResponse {
             /**
              * The resulting styles after modification.
              */
             styles: CSSStyle[];
         }
-
         interface StopRuleUsageTrackingResponse {
             ruleUsage: RuleUsage[];
         }
-
         interface TakeCoverageDeltaResponse {
             coverage: RuleUsage[];
             /**
@@ -4759,14 +4403,12 @@ export namespace Protocol {
              */
             timestamp: number;
         }
-
         interface SetLocalFontsEnabledRequest {
             /**
              * Whether rendering of local fonts is enabled.
              */
             enabled: boolean;
         }
-
         /**
          * Fires whenever a web font is updated.  A non-empty font parameter indicates a successfully loaded
          * web font
@@ -4777,7 +4419,6 @@ export namespace Protocol {
              */
             font?: FontFace;
         }
-
         /**
          * Fired whenever an active document stylesheet is added.
          */
@@ -4787,14 +4428,12 @@ export namespace Protocol {
              */
             header: CSSStyleSheetHeader;
         }
-
         /**
          * Fired whenever a stylesheet is changed as a result of the client operation.
          */
         interface StyleSheetChangedEvent {
             styleSheetId: StyleSheetId;
         }
-
         /**
          * Fired whenever an active document stylesheet is removed.
          */
@@ -4807,17 +4446,14 @@ export namespace Protocol {
     }
 
     namespace CacheStorage {
-
         /**
          * Unique identifier of the Cache object.
          */
         type CacheId = string;
-
         /**
          * type of HTTP response cached
          */
         type CachedResponseType = ('basic' | 'cors' | 'default' | 'error' | 'opaqueResponse' | 'opaqueRedirect');
-
         /**
          * Data entry.
          */
@@ -4855,7 +4491,6 @@ export namespace Protocol {
              */
             responseHeaders: Header[];
         }
-
         /**
          * Cache identifier.
          */
@@ -4873,12 +4508,10 @@ export namespace Protocol {
              */
             cacheName: string;
         }
-
         interface Header {
             name: string;
             value: string;
         }
-
         /**
          * Cached response
          */
@@ -4888,14 +4521,12 @@ export namespace Protocol {
              */
             body: string;
         }
-
         interface DeleteCacheRequest {
             /**
              * Id of cache for deletion.
              */
             cacheId: CacheId;
         }
-
         interface DeleteEntryRequest {
             /**
              * Id of cache where the entry will be deleted.
@@ -4906,21 +4537,18 @@ export namespace Protocol {
              */
             request: string;
         }
-
         interface RequestCacheNamesRequest {
             /**
              * Security origin.
              */
             securityOrigin: string;
         }
-
         interface RequestCacheNamesResponse {
             /**
              * Caches for the security origin.
              */
             caches: Cache[];
         }
-
         interface RequestCachedResponseRequest {
             /**
              * Id of cache that contains the entry.
@@ -4935,14 +4563,12 @@ export namespace Protocol {
              */
             requestHeaders: Header[];
         }
-
         interface RequestCachedResponseResponse {
             /**
              * Response read from the cache.
              */
             response: CachedResponse;
         }
-
         interface RequestEntriesRequest {
             /**
              * ID of cache to get entries from.
@@ -4961,7 +4587,6 @@ export namespace Protocol {
              */
             pathFilter?: string;
         }
-
         interface RequestEntriesResponse {
             /**
              * Array of object store data entries.
@@ -4980,7 +4605,6 @@ export namespace Protocol {
      * functionalities.
      */
     namespace Cast {
-
         interface Sink {
             name: string;
             id: string;
@@ -4990,23 +4614,18 @@ export namespace Protocol {
              */
             session?: string;
         }
-
         interface EnableRequest {
             presentationUrl?: string;
         }
-
         interface SetSinkToUseRequest {
             sinkName: string;
         }
-
         interface StartTabMirroringRequest {
             sinkName: string;
         }
-
         interface StopCastingRequest {
             sinkName: string;
         }
-
         /**
          * This is fired whenever the list of available sinks changes. A sink is a
          * device or a software surface that you can cast to.
@@ -5014,7 +4633,6 @@ export namespace Protocol {
         interface SinksUpdatedEvent {
             sinks: Sink[];
         }
-
         /**
          * This is fired whenever the outstanding issue/error message changes.
          * |issueMessage| is empty if there is no issue.
@@ -5034,18 +4652,15 @@ export namespace Protocol {
      * corresponding document elements as their child nodes.</p>
      */
     namespace DOM {
-
         /**
          * Unique DOM node identifier.
          */
         type NodeId = integer;
-
         /**
          * Unique DOM node identifier used to reference a node that may not have been pushed to the
          * front-end.
          */
         type BackendNodeId = integer;
-
         /**
          * Backend node with a friendly name.
          */
@@ -5060,22 +4675,18 @@ export namespace Protocol {
             nodeName: string;
             backendNodeId: BackendNodeId;
         }
-
         /**
          * Pseudo element type.
          */
         type PseudoType = ('first-line' | 'first-letter' | 'before' | 'after' | 'marker' | 'backdrop' | 'selection' | 'target-text' | 'spelling-error' | 'grammar-error' | 'first-line-inherited' | 'scrollbar' | 'scrollbar-thumb' | 'scrollbar-button' | 'scrollbar-track' | 'scrollbar-track-piece' | 'scrollbar-corner' | 'resizer' | 'input-list-button');
-
         /**
          * Shadow root type.
          */
         type ShadowRootType = ('user-agent' | 'open' | 'closed');
-
         /**
          * Document compatibility mode.
          */
         type CompatibilityMode = ('QuirksMode' | 'LimitedQuirksMode' | 'NoQuirksMode');
-
         /**
          * DOM interaction is implemented in terms of mirror objects that represent the actual DOM nodes.
          * DOMNode is a base node mirror type.
@@ -5199,7 +4810,6 @@ export namespace Protocol {
             isSVG?: boolean;
             compatibilityMode?: CompatibilityMode;
         }
-
         /**
          * A structure holding an RGBA color.
          */
@@ -5221,12 +4831,10 @@ export namespace Protocol {
              */
             a?: number;
         }
-
         /**
          * An array of quad vertices, x immediately followed by y for each point, points clock-wise.
          */
         type Quad = number[];
-
         /**
          * Box model.
          */
@@ -5260,7 +4868,6 @@ export namespace Protocol {
              */
             shapeOutside?: ShapeOutsideInfo;
         }
-
         /**
          * CSS Shape Outside details.
          */
@@ -5278,7 +4885,6 @@ export namespace Protocol {
              */
             marginShape: any[];
         }
-
         /**
          * Rectangle.
          */
@@ -5300,7 +4906,6 @@ export namespace Protocol {
              */
             height: number;
         }
-
         interface CSSComputedStyleProperty {
             /**
              * Computed style property name.
@@ -5311,21 +4916,18 @@ export namespace Protocol {
              */
             value: string;
         }
-
         interface CollectClassNamesFromSubtreeRequest {
             /**
              * Id of the node to collect class names.
              */
             nodeId: NodeId;
         }
-
         interface CollectClassNamesFromSubtreeResponse {
             /**
              * Class name list.
              */
             classNames: string[];
         }
-
         interface CopyToRequest {
             /**
              * Id of the node to copy.
@@ -5341,14 +4943,12 @@ export namespace Protocol {
              */
             insertBeforeNodeId?: NodeId;
         }
-
         interface CopyToResponse {
             /**
              * Id of the node clone.
              */
             nodeId: NodeId;
         }
-
         interface DescribeNodeRequest {
             /**
              * Identifier of the node.
@@ -5373,14 +4973,12 @@ export namespace Protocol {
              */
             pierce?: boolean;
         }
-
         interface DescribeNodeResponse {
             /**
              * Node description.
              */
             node: Node;
         }
-
         interface ScrollIntoViewIfNeededRequest {
             /**
              * Identifier of the node.
@@ -5400,14 +4998,12 @@ export namespace Protocol {
              */
             rect?: Rect;
         }
-
         interface DiscardSearchResultsRequest {
             /**
              * Unique search session identifier.
              */
             searchId: string;
         }
-
         interface FocusRequest {
             /**
              * Identifier of the node.
@@ -5422,21 +5018,18 @@ export namespace Protocol {
              */
             objectId?: Runtime.RemoteObjectId;
         }
-
         interface GetAttributesRequest {
             /**
              * Id of the node to retrieve attibutes for.
              */
             nodeId: NodeId;
         }
-
         interface GetAttributesResponse {
             /**
              * An interleaved array of node attribute names and values.
              */
             attributes: string[];
         }
-
         interface GetBoxModelRequest {
             /**
              * Identifier of the node.
@@ -5451,14 +5044,12 @@ export namespace Protocol {
              */
             objectId?: Runtime.RemoteObjectId;
         }
-
         interface GetBoxModelResponse {
             /**
              * Box model for the node.
              */
             model: BoxModel;
         }
-
         interface GetContentQuadsRequest {
             /**
              * Identifier of the node.
@@ -5473,14 +5064,12 @@ export namespace Protocol {
              */
             objectId?: Runtime.RemoteObjectId;
         }
-
         interface GetContentQuadsResponse {
             /**
              * Quads that describe node layout relative to viewport.
              */
             quads: Quad[];
         }
-
         interface GetDocumentRequest {
             /**
              * The maximum depth at which children should be retrieved, defaults to 1. Use -1 for the
@@ -5493,14 +5082,12 @@ export namespace Protocol {
              */
             pierce?: boolean;
         }
-
         interface GetDocumentResponse {
             /**
              * Resulting node.
              */
             root: Node;
         }
-
         interface GetFlattenedDocumentRequest {
             /**
              * The maximum depth at which children should be retrieved, defaults to 1. Use -1 for the
@@ -5513,14 +5100,12 @@ export namespace Protocol {
              */
             pierce?: boolean;
         }
-
         interface GetFlattenedDocumentResponse {
             /**
              * Resulting node.
              */
             nodes: Node[];
         }
-
         interface GetNodesForSubtreeByStyleRequest {
             /**
              * Node ID pointing to the root of a subtree.
@@ -5536,14 +5121,12 @@ export namespace Protocol {
              */
             pierce?: boolean;
         }
-
         interface GetNodesForSubtreeByStyleResponse {
             /**
              * Resulting nodes.
              */
             nodeIds: NodeId[];
         }
-
         interface GetNodeForLocationRequest {
             /**
              * X coordinate.
@@ -5562,7 +5145,6 @@ export namespace Protocol {
              */
             ignorePointerEventsNone?: boolean;
         }
-
         interface GetNodeForLocationResponse {
             /**
              * Resulting node.
@@ -5577,7 +5159,6 @@ export namespace Protocol {
              */
             nodeId?: NodeId;
         }
-
         interface GetOuterHTMLRequest {
             /**
              * Identifier of the node.
@@ -5592,28 +5173,24 @@ export namespace Protocol {
              */
             objectId?: Runtime.RemoteObjectId;
         }
-
         interface GetOuterHTMLResponse {
             /**
              * Outer HTML markup.
              */
             outerHTML: string;
         }
-
         interface GetRelayoutBoundaryRequest {
             /**
              * Id of the node.
              */
             nodeId: NodeId;
         }
-
         interface GetRelayoutBoundaryResponse {
             /**
              * Relayout boundary node id for the given node.
              */
             nodeId: NodeId;
         }
-
         interface GetSearchResultsRequest {
             /**
              * Unique search session identifier.
@@ -5628,14 +5205,12 @@ export namespace Protocol {
              */
             toIndex: integer;
         }
-
         interface GetSearchResultsResponse {
             /**
              * Ids of the search result nodes.
              */
             nodeIds: NodeId[];
         }
-
         interface MoveToRequest {
             /**
              * Id of the node to move.
@@ -5651,14 +5226,12 @@ export namespace Protocol {
              */
             insertBeforeNodeId?: NodeId;
         }
-
         interface MoveToResponse {
             /**
              * New id of the moved node.
              */
             nodeId: NodeId;
         }
-
         interface PerformSearchRequest {
             /**
              * Plain text or query selector or XPath search query.
@@ -5669,7 +5242,6 @@ export namespace Protocol {
              */
             includeUserAgentShadowDOM?: boolean;
         }
-
         interface PerformSearchResponse {
             /**
              * Unique search session identifier.
@@ -5680,28 +5252,24 @@ export namespace Protocol {
              */
             resultCount: integer;
         }
-
         interface PushNodeByPathToFrontendRequest {
             /**
              * Path to node in the proprietary format.
              */
             path: string;
         }
-
         interface PushNodeByPathToFrontendResponse {
             /**
              * Id of the node for given path.
              */
             nodeId: NodeId;
         }
-
         interface PushNodesByBackendIdsToFrontendRequest {
             /**
              * The array of backend node ids.
              */
             backendNodeIds: BackendNodeId[];
         }
-
         interface PushNodesByBackendIdsToFrontendResponse {
             /**
              * The array of ids of pushed nodes that correspond to the backend ids specified in
@@ -5709,7 +5277,6 @@ export namespace Protocol {
              */
             nodeIds: NodeId[];
         }
-
         interface QuerySelectorRequest {
             /**
              * Id of the node to query upon.
@@ -5720,14 +5287,12 @@ export namespace Protocol {
              */
             selector: string;
         }
-
         interface QuerySelectorResponse {
             /**
              * Query selector result.
              */
             nodeId: NodeId;
         }
-
         interface QuerySelectorAllRequest {
             /**
              * Id of the node to query upon.
@@ -5738,14 +5303,12 @@ export namespace Protocol {
              */
             selector: string;
         }
-
         interface QuerySelectorAllResponse {
             /**
              * Query selector result.
              */
             nodeIds: NodeId[];
         }
-
         interface RemoveAttributeRequest {
             /**
              * Id of the element to remove attribute from.
@@ -5756,14 +5319,12 @@ export namespace Protocol {
              */
             name: string;
         }
-
         interface RemoveNodeRequest {
             /**
              * Id of the node to remove.
              */
             nodeId: NodeId;
         }
-
         interface RequestChildNodesRequest {
             /**
              * Id of the node to get children for.
@@ -5780,21 +5341,18 @@ export namespace Protocol {
              */
             pierce?: boolean;
         }
-
         interface RequestNodeRequest {
             /**
              * JavaScript object id to convert into node.
              */
             objectId: Runtime.RemoteObjectId;
         }
-
         interface RequestNodeResponse {
             /**
              * Node id for given object.
              */
             nodeId: NodeId;
         }
-
         interface ResolveNodeRequest {
             /**
              * Id of the node to resolve.
@@ -5813,14 +5371,12 @@ export namespace Protocol {
              */
             executionContextId?: Runtime.ExecutionContextId;
         }
-
         interface ResolveNodeResponse {
             /**
              * JavaScript object wrapper for given node.
              */
             object: Runtime.RemoteObject;
         }
-
         interface SetAttributeValueRequest {
             /**
              * Id of the element to set attribute for.
@@ -5835,7 +5391,6 @@ export namespace Protocol {
              */
             value: string;
         }
-
         interface SetAttributesAsTextRequest {
             /**
              * Id of the element to set attributes for.
@@ -5851,7 +5406,6 @@ export namespace Protocol {
              */
             name?: string;
         }
-
         interface SetFileInputFilesRequest {
             /**
              * Array of file paths to set.
@@ -5870,46 +5424,39 @@ export namespace Protocol {
              */
             objectId?: Runtime.RemoteObjectId;
         }
-
         interface SetNodeStackTracesEnabledRequest {
             /**
              * Enable or disable.
              */
             enable: boolean;
         }
-
         interface GetNodeStackTracesRequest {
             /**
              * Id of the node to get stack traces for.
              */
             nodeId: NodeId;
         }
-
         interface GetNodeStackTracesResponse {
             /**
              * Creation stack trace, if available.
              */
             creation?: Runtime.StackTrace;
         }
-
         interface GetFileInfoRequest {
             /**
              * JavaScript object id of the node wrapper.
              */
             objectId: Runtime.RemoteObjectId;
         }
-
         interface GetFileInfoResponse {
             path: string;
         }
-
         interface SetInspectedNodeRequest {
             /**
              * DOM node id to be accessible by means of $x command line API.
              */
             nodeId: NodeId;
         }
-
         interface SetNodeNameRequest {
             /**
              * Id of the node to set name for.
@@ -5920,14 +5467,12 @@ export namespace Protocol {
              */
             name: string;
         }
-
         interface SetNodeNameResponse {
             /**
              * New node's id.
              */
             nodeId: NodeId;
         }
-
         interface SetNodeValueRequest {
             /**
              * Id of the node to set value for.
@@ -5938,7 +5483,6 @@ export namespace Protocol {
              */
             value: string;
         }
-
         interface SetOuterHTMLRequest {
             /**
              * Id of the node to set markup for.
@@ -5949,11 +5493,9 @@ export namespace Protocol {
              */
             outerHTML: string;
         }
-
         interface GetFrameOwnerRequest {
             frameId: Page.FrameId;
         }
-
         interface GetFrameOwnerResponse {
             /**
              * Resulting node.
@@ -5964,7 +5506,6 @@ export namespace Protocol {
              */
             nodeId?: NodeId;
         }
-
         /**
          * Fired when `Element`'s attribute is modified.
          */
@@ -5982,7 +5523,6 @@ export namespace Protocol {
              */
             value: string;
         }
-
         /**
          * Fired when `Element`'s attribute is removed.
          */
@@ -5996,7 +5536,6 @@ export namespace Protocol {
              */
             name: string;
         }
-
         /**
          * Mirrors `DOMCharacterDataModified` event.
          */
@@ -6010,7 +5549,6 @@ export namespace Protocol {
              */
             characterData: string;
         }
-
         /**
          * Fired when `Container`'s child node count has changed.
          */
@@ -6024,7 +5562,6 @@ export namespace Protocol {
              */
             childNodeCount: integer;
         }
-
         /**
          * Mirrors `DOMNodeInserted` event.
          */
@@ -6042,7 +5579,6 @@ export namespace Protocol {
              */
             node: Node;
         }
-
         /**
          * Mirrors `DOMNodeRemoved` event.
          */
@@ -6056,7 +5592,6 @@ export namespace Protocol {
              */
             nodeId: NodeId;
         }
-
         /**
          * Called when distribution is changed.
          */
@@ -6070,7 +5605,6 @@ export namespace Protocol {
              */
             distributedNodes: BackendNode[];
         }
-
         /**
          * Fired when `Element`'s inline style is modified via a CSS property modification.
          */
@@ -6080,7 +5614,6 @@ export namespace Protocol {
              */
             nodeIds: NodeId[];
         }
-
         /**
          * Called when a pseudo element is added to an element.
          */
@@ -6094,7 +5627,6 @@ export namespace Protocol {
              */
             pseudoElement: Node;
         }
-
         /**
          * Called when a pseudo element is removed from an element.
          */
@@ -6108,7 +5640,6 @@ export namespace Protocol {
              */
             pseudoElementId: NodeId;
         }
-
         /**
          * Fired when backend wants to provide client with the missing DOM structure. This happens upon
          * most of the calls requesting node ids.
@@ -6123,7 +5654,6 @@ export namespace Protocol {
              */
             nodes: Node[];
         }
-
         /**
          * Called when shadow root is popped from the element.
          */
@@ -6137,7 +5667,6 @@ export namespace Protocol {
              */
             rootId: NodeId;
         }
-
         /**
          * Called when shadow root is pushed into the element.
          */
@@ -6158,17 +5687,14 @@ export namespace Protocol {
      * execution will stop on these operations as if there was a regular breakpoint set.
      */
     namespace DOMDebugger {
-
         /**
          * DOM breakpoint type.
          */
         type DOMBreakpointType = ('subtree-modified' | 'attribute-modified' | 'node-removed');
-
         /**
          * CSP Violation type.
          */
         type CSPViolationType = ('trustedtype-sink-violation' | 'trustedtype-policy-violation');
-
         /**
          * Object event listener.
          */
@@ -6214,7 +5740,6 @@ export namespace Protocol {
              */
             backendNodeId?: DOM.BackendNodeId;
         }
-
         interface GetEventListenersRequest {
             /**
              * Identifier of the object to return listeners for.
@@ -6231,14 +5756,12 @@ export namespace Protocol {
              */
             pierce?: boolean;
         }
-
         interface GetEventListenersResponse {
             /**
              * Array of relevant listeners.
              */
             listeners: EventListener[];
         }
-
         interface RemoveDOMBreakpointRequest {
             /**
              * Identifier of the node to remove breakpoint from.
@@ -6249,7 +5772,6 @@ export namespace Protocol {
              */
             type: DOMBreakpointType;
         }
-
         interface RemoveEventListenerBreakpointRequest {
             /**
              * Event name.
@@ -6260,28 +5782,24 @@ export namespace Protocol {
              */
             targetName?: string;
         }
-
         interface RemoveInstrumentationBreakpointRequest {
             /**
              * Instrumentation name to stop on.
              */
             eventName: string;
         }
-
         interface RemoveXHRBreakpointRequest {
             /**
              * Resource URL substring.
              */
             url: string;
         }
-
         interface SetBreakOnCSPViolationRequest {
             /**
              * CSP Violations to stop upon.
              */
             violationTypes: CSPViolationType[];
         }
-
         interface SetDOMBreakpointRequest {
             /**
              * Identifier of the node to set breakpoint on.
@@ -6292,7 +5810,6 @@ export namespace Protocol {
              */
             type: DOMBreakpointType;
         }
-
         interface SetEventListenerBreakpointRequest {
             /**
              * DOM Event name to stop on (any DOM event will do).
@@ -6304,14 +5821,12 @@ export namespace Protocol {
              */
             targetName?: string;
         }
-
         interface SetInstrumentationBreakpointRequest {
             /**
              * Instrumentation name to stop on.
              */
             eventName: string;
         }
-
         interface SetXHRBreakpointRequest {
             /**
              * Resource URL substring. All XHRs having this substring in the URL will get stopped upon.
@@ -6324,7 +5839,6 @@ export namespace Protocol {
      * This domain facilitates obtaining document snapshots with DOM, layout, and style information.
      */
     namespace DOMSnapshot {
-
         /**
          * A Node in the DOM tree.
          */
@@ -6445,7 +5959,6 @@ export namespace Protocol {
             scrollOffsetX?: number;
             scrollOffsetY?: number;
         }
-
         /**
          * Details of post layout rendered text positions. The exact layout should not be regarded as
          * stable and may change between versions.
@@ -6466,7 +5979,6 @@ export namespace Protocol {
              */
             numCharacters: integer;
         }
-
         /**
          * Details of an element in the DOM tree with a LayoutObject.
          */
@@ -6502,7 +6014,6 @@ export namespace Protocol {
              */
             isStackingContext?: boolean;
         }
-
         /**
          * A subset of the full ComputedStyle as defined by the request whitelist.
          */
@@ -6512,7 +6023,6 @@ export namespace Protocol {
              */
             properties: NameValue[];
         }
-
         /**
          * A name/value pair.
          */
@@ -6526,17 +6036,14 @@ export namespace Protocol {
              */
             value: string;
         }
-
         /**
          * Index of the string in the strings table.
          */
         type StringIndex = integer;
-
         /**
          * Index of the string in the strings table.
          */
         type ArrayOfStrings = StringIndex[];
-
         /**
          * Data that is only present on rare nodes.
          */
@@ -6544,18 +6051,14 @@ export namespace Protocol {
             index: integer[];
             value: StringIndex[];
         }
-
         interface RareBooleanData {
             index: integer[];
         }
-
         interface RareIntegerData {
             index: integer[];
             value: integer[];
         }
-
         type Rectangle = number[];
-
         /**
          * Document snapshot.
          */
@@ -6621,7 +6124,6 @@ export namespace Protocol {
              */
             contentHeight?: number;
         }
-
         /**
          * Table containing nodes.
          */
@@ -6689,7 +6191,6 @@ export namespace Protocol {
              */
             originURL?: RareStringData;
         }
-
         /**
          * Table of details of an element in the DOM tree with a LayoutObject.
          */
@@ -6741,7 +6242,6 @@ export namespace Protocol {
              */
             textColorOpacities?: number[];
         }
-
         /**
          * Table of details of the post layout rendered text positions. The exact layout should not be regarded as
          * stable and may change between versions.
@@ -6766,7 +6266,6 @@ export namespace Protocol {
              */
             length: integer[];
         }
-
         interface GetSnapshotRequest {
             /**
              * Whitelist of computed styles to return.
@@ -6785,7 +6284,6 @@ export namespace Protocol {
              */
             includeUserAgentShadowTree?: boolean;
         }
-
         interface GetSnapshotResponse {
             /**
              * The nodes in the DOM tree. The DOMNode at index 0 corresponds to the root document.
@@ -6800,7 +6298,6 @@ export namespace Protocol {
              */
             computedStyles: ComputedStyle[];
         }
-
         interface CaptureSnapshotRequest {
             /**
              * Whitelist of computed styles to return.
@@ -6827,7 +6324,6 @@ export namespace Protocol {
              */
             includeTextColorOpacities?: boolean;
         }
-
         interface CaptureSnapshotResponse {
             /**
              * The nodes in the DOM tree. The DOMNode at index 0 corresponds to the root document.
@@ -6844,7 +6340,6 @@ export namespace Protocol {
      * Query and modify DOM storage.
      */
     namespace DOMStorage {
-
         /**
          * DOM Storage identifier.
          */
@@ -6858,65 +6353,53 @@ export namespace Protocol {
              */
             isLocalStorage: boolean;
         }
-
         /**
          * DOM Storage item.
          */
         type Item = string[];
-
         interface ClearRequest {
             storageId: StorageId;
         }
-
         interface GetDOMStorageItemsRequest {
             storageId: StorageId;
         }
-
         interface GetDOMStorageItemsResponse {
             entries: Item[];
         }
-
         interface RemoveDOMStorageItemRequest {
             storageId: StorageId;
             key: string;
         }
-
         interface SetDOMStorageItemRequest {
             storageId: StorageId;
             key: string;
             value: string;
         }
-
         interface DomStorageItemAddedEvent {
             storageId: StorageId;
             key: string;
             newValue: string;
         }
-
         interface DomStorageItemRemovedEvent {
             storageId: StorageId;
             key: string;
         }
-
         interface DomStorageItemUpdatedEvent {
             storageId: StorageId;
             key: string;
             oldValue: string;
             newValue: string;
         }
-
         interface DomStorageItemsClearedEvent {
             storageId: StorageId;
         }
     }
 
     namespace Database {
-
         /**
          * Unique identifier of Database object.
          */
         type DatabaseId = string;
-
         /**
          * Database object.
          */
@@ -6938,7 +6421,6 @@ export namespace Protocol {
              */
             version: string;
         }
-
         /**
          * Database error.
          */
@@ -6952,33 +6434,27 @@ export namespace Protocol {
              */
             code: integer;
         }
-
         interface ExecuteSQLRequest {
             databaseId: DatabaseId;
             query: string;
         }
-
         interface ExecuteSQLResponse {
             columnNames?: string[];
             values?: any[];
             sqlError?: Error;
         }
-
         interface GetDatabaseTableNamesRequest {
             databaseId: DatabaseId;
         }
-
         interface GetDatabaseTableNamesResponse {
             tableNames: string[];
         }
-
         interface AddDatabaseEvent {
             database: Database;
         }
     }
 
     namespace DeviceOrientation {
-
         interface SetDeviceOrientationOverrideRequest {
             /**
              * Mock alpha
@@ -6999,14 +6475,12 @@ export namespace Protocol {
      * This domain emulates different environments for the page.
      */
     namespace Emulation {
-
         const enum ScreenOrientationType {
             PortraitPrimary = 'portraitPrimary',
             PortraitSecondary = 'portraitSecondary',
             LandscapePrimary = 'landscapePrimary',
             LandscapeSecondary = 'landscapeSecondary',
         }
-
         /**
          * Screen orientation.
          */
@@ -7020,12 +6494,10 @@ export namespace Protocol {
              */
             angle: integer;
         }
-
         const enum DisplayFeatureOrientation {
             Vertical = 'vertical',
             Horizontal = 'horizontal',
         }
-
         interface DisplayFeature {
             /**
              * Orientation of a display feature in relation to screen (DisplayFeatureOrientation enum)
@@ -7043,12 +6515,10 @@ export namespace Protocol {
              */
             maskLength: integer;
         }
-
         interface MediaFeature {
             name: string;
             value: string;
         }
-
         /**
          * advance: If the scheduler runs out of immediate work, the virtual time base may fast forward to
          * allow the next delayed task (if any) to run; pause: The virtual time base may not advance;
@@ -7056,7 +6526,6 @@ export namespace Protocol {
          * resource fetches.
          */
         type VirtualTimePolicy = ('advance' | 'pause' | 'pauseIfNetworkFetchesPending');
-
         /**
          * Used to specify User Agent Cient Hints to emulate. See https://wicg.github.io/ua-client-hints
          */
@@ -7064,7 +6533,6 @@ export namespace Protocol {
             brand: string;
             version: string;
         }
-
         /**
          * Used to specify User Agent Cient Hints to emulate. See https://wicg.github.io/ua-client-hints
          * Missing optional values will be filled in by the target with what it would normally use.
@@ -7078,33 +6546,28 @@ export namespace Protocol {
             model: string;
             mobile: boolean;
         }
-
         /**
          * Enum of image types that can be disabled.
          */
         type DisabledImageType = ('avif' | 'jxl' | 'webp');
-
         interface CanEmulateResponse {
             /**
              * True if emulation is supported.
              */
             result: boolean;
         }
-
         interface SetFocusEmulationEnabledRequest {
             /**
              * Whether to enable to disable focus emulation.
              */
             enabled: boolean;
         }
-
         interface SetCPUThrottlingRateRequest {
             /**
              * Throttling rate as a slowdown factor (1 is no throttle, 2 is 2x slowdown, etc).
              */
             rate: number;
         }
-
         interface SetDefaultBackgroundColorOverrideRequest {
             /**
              * RGBA of the default background color. If not specified, any existing override will be
@@ -7112,7 +6575,6 @@ export namespace Protocol {
              */
             color?: DOM.RGBA;
         }
-
         interface SetDeviceMetricsOverrideRequest {
             /**
              * Overriding width value in pixels (minimum 0, maximum 10000000). 0 disables the override.
@@ -7170,26 +6632,22 @@ export namespace Protocol {
              */
             displayFeature?: DisplayFeature;
         }
-
         interface SetScrollbarsHiddenRequest {
             /**
              * Whether scrollbars should be always hidden.
              */
             hidden: boolean;
         }
-
         interface SetDocumentCookieDisabledRequest {
             /**
              * Whether document.coookie API should be disabled.
              */
             disabled: boolean;
         }
-
         const enum SetEmitTouchEventsForMouseRequestConfiguration {
             Mobile = 'mobile',
             Desktop = 'desktop',
         }
-
         interface SetEmitTouchEventsForMouseRequest {
             /**
              * Whether touch emulation based on mouse input should be enabled.
@@ -7200,7 +6658,6 @@ export namespace Protocol {
              */
             configuration?: ('mobile' | 'desktop');
         }
-
         interface SetEmulatedMediaRequest {
             /**
              * Media type to emulate. Empty string disables the override.
@@ -7211,7 +6668,6 @@ export namespace Protocol {
              */
             features?: MediaFeature[];
         }
-
         const enum SetEmulatedVisionDeficiencyRequestType {
             None = 'none',
             Achromatopsia = 'achromatopsia',
@@ -7220,14 +6676,12 @@ export namespace Protocol {
             Protanopia = 'protanopia',
             Tritanopia = 'tritanopia',
         }
-
         interface SetEmulatedVisionDeficiencyRequest {
             /**
              * Vision deficiency to emulate. (SetEmulatedVisionDeficiencyRequestType enum)
              */
             type: ('none' | 'achromatopsia' | 'blurredVision' | 'deuteranopia' | 'protanopia' | 'tritanopia');
         }
-
         interface SetGeolocationOverrideRequest {
             /**
              * Mock latitude
@@ -7242,7 +6696,6 @@ export namespace Protocol {
              */
             accuracy?: number;
         }
-
         interface SetIdleOverrideRequest {
             /**
              * Mock isUserActive
@@ -7253,28 +6706,24 @@ export namespace Protocol {
              */
             isScreenUnlocked: boolean;
         }
-
         interface SetNavigatorOverridesRequest {
             /**
              * The platform navigator.platform should return.
              */
             platform: string;
         }
-
         interface SetPageScaleFactorRequest {
             /**
              * Page scale factor.
              */
             pageScaleFactor: number;
         }
-
         interface SetScriptExecutionDisabledRequest {
             /**
              * Whether script execution should be disabled in the page.
              */
             value: boolean;
         }
-
         interface SetTouchEmulationEnabledRequest {
             /**
              * Whether the touch event emulation should be enabled.
@@ -7285,7 +6734,6 @@ export namespace Protocol {
              */
             maxTouchPoints?: integer;
         }
-
         interface SetVirtualTimePolicyRequest {
             policy: VirtualTimePolicy;
             /**
@@ -7308,14 +6756,12 @@ export namespace Protocol {
              */
             initialVirtualTime?: Network.TimeSinceEpoch;
         }
-
         interface SetVirtualTimePolicyResponse {
             /**
              * Absolute timestamp at which virtual time was first enabled (up time in milliseconds).
              */
             virtualTimeTicksBase: number;
         }
-
         interface SetLocaleOverrideRequest {
             /**
              * ICU style C locale (e.g. "en_US"). If not specified or empty, disables the override and
@@ -7323,7 +6769,6 @@ export namespace Protocol {
              */
             locale?: string;
         }
-
         interface SetTimezoneOverrideRequest {
             /**
              * The timezone identifier. If empty, disables the override and
@@ -7331,7 +6776,6 @@ export namespace Protocol {
              */
             timezoneId: string;
         }
-
         interface SetVisibleSizeRequest {
             /**
              * Frame width (DIP).
@@ -7342,14 +6786,12 @@ export namespace Protocol {
              */
             height: integer;
         }
-
         interface SetDisabledImageTypesRequest {
             /**
              * Image types to disable.
              */
             imageTypes: DisabledImageType[];
         }
-
         interface SetUserAgentOverrideRequest {
             /**
              * User agent to use.
@@ -7374,12 +6816,10 @@ export namespace Protocol {
      * This domain provides experimental commands only supported in headless mode.
      */
     namespace HeadlessExperimental {
-
         const enum ScreenshotParamsFormat {
             Jpeg = 'jpeg',
             Png = 'png',
         }
-
         /**
          * Encoding options for a screenshot.
          */
@@ -7393,7 +6833,6 @@ export namespace Protocol {
              */
             quality?: integer;
         }
-
         interface BeginFrameRequest {
             /**
              * Timestamp of this BeginFrame in Renderer TimeTicks (milliseconds of uptime). If not set,
@@ -7418,7 +6857,6 @@ export namespace Protocol {
              */
             screenshot?: ScreenshotParams;
         }
-
         interface BeginFrameResponse {
             /**
              * Whether the BeginFrame resulted in damage and, thus, a new frame was committed to the
@@ -7430,7 +6868,6 @@ export namespace Protocol {
              */
             screenshotData?: string;
         }
-
         /**
          * Issued when the target starts or stops needing BeginFrames.
          * Deprecated. Issue beginFrame unconditionally instead and use result from
@@ -7448,20 +6885,17 @@ export namespace Protocol {
      * Input/Output operations for streams produced by DevTools.
      */
     namespace IO {
-
         /**
          * This is either obtained from another method or specified as `blob:&lt;uuid&gt;` where
          * `&lt;uuid&gt` is an UUID of a Blob.
          */
         type StreamHandle = string;
-
         interface CloseRequest {
             /**
              * Handle of the stream to close.
              */
             handle: StreamHandle;
         }
-
         interface ReadRequest {
             /**
              * Handle of the stream to read.
@@ -7477,7 +6911,6 @@ export namespace Protocol {
              */
             size?: integer;
         }
-
         interface ReadResponse {
             /**
              * Set if the data is base64-encoded
@@ -7492,14 +6925,12 @@ export namespace Protocol {
              */
             eof: boolean;
         }
-
         interface ResolveBlobRequest {
             /**
              * Object id of a Blob object wrapper.
              */
             objectId: Runtime.RemoteObjectId;
         }
-
         interface ResolveBlobResponse {
             /**
              * UUID of the specified Blob.
@@ -7509,7 +6940,6 @@ export namespace Protocol {
     }
 
     namespace IndexedDB {
-
         /**
          * Database with an array of object stores.
          */
@@ -7528,7 +6958,6 @@ export namespace Protocol {
              */
             objectStores: ObjectStore[];
         }
-
         /**
          * Object store.
          */
@@ -7550,7 +6979,6 @@ export namespace Protocol {
              */
             indexes: ObjectStoreIndex[];
         }
-
         /**
          * Object store index.
          */
@@ -7572,14 +7000,12 @@ export namespace Protocol {
              */
             multiEntry: boolean;
         }
-
         const enum KeyType {
             Number = 'number',
             String = 'string',
             Date = 'date',
             Array = 'array',
         }
-
         /**
          * Key.
          */
@@ -7605,7 +7031,6 @@ export namespace Protocol {
              */
             array?: Key[];
         }
-
         /**
          * Key range.
          */
@@ -7627,7 +7052,6 @@ export namespace Protocol {
              */
             upperOpen: boolean;
         }
-
         /**
          * Data entry.
          */
@@ -7645,13 +7069,11 @@ export namespace Protocol {
              */
             value: Runtime.RemoteObject;
         }
-
         const enum KeyPathType {
             Null = 'null',
             String = 'string',
             Array = 'array',
         }
-
         /**
          * Key path.
          */
@@ -7669,7 +7091,6 @@ export namespace Protocol {
              */
             array?: string[];
         }
-
         interface ClearObjectStoreRequest {
             /**
              * Security origin.
@@ -7684,7 +7105,6 @@ export namespace Protocol {
              */
             objectStoreName: string;
         }
-
         interface DeleteDatabaseRequest {
             /**
              * Security origin.
@@ -7695,7 +7115,6 @@ export namespace Protocol {
              */
             databaseName: string;
         }
-
         interface DeleteObjectStoreEntriesRequest {
             securityOrigin: string;
             databaseName: string;
@@ -7705,7 +7124,6 @@ export namespace Protocol {
              */
             keyRange: KeyRange;
         }
-
         interface RequestDataRequest {
             /**
              * Security origin.
@@ -7736,7 +7154,6 @@ export namespace Protocol {
              */
             keyRange?: KeyRange;
         }
-
         interface RequestDataResponse {
             /**
              * Array of object store data entries.
@@ -7747,7 +7164,6 @@ export namespace Protocol {
              */
             hasMore: boolean;
         }
-
         interface GetMetadataRequest {
             /**
              * Security origin.
@@ -7762,7 +7178,6 @@ export namespace Protocol {
              */
             objectStoreName: string;
         }
-
         interface GetMetadataResponse {
             /**
              * the entries count
@@ -7775,7 +7190,6 @@ export namespace Protocol {
              */
             keyGeneratorValue: number;
         }
-
         interface RequestDatabaseRequest {
             /**
              * Security origin.
@@ -7786,21 +7200,18 @@ export namespace Protocol {
              */
             databaseName: string;
         }
-
         interface RequestDatabaseResponse {
             /**
              * Database with an array of object stores.
              */
             databaseWithObjectStores: DatabaseWithObjectStores;
         }
-
         interface RequestDatabaseNamesRequest {
             /**
              * Security origin.
              */
             securityOrigin: string;
         }
-
         interface RequestDatabaseNamesResponse {
             /**
              * Database names for origin.
@@ -7810,7 +7221,6 @@ export namespace Protocol {
     }
 
     namespace Input {
-
         interface TouchPoint {
             /**
              * X coordinate of the event relative to the main frame's viewport in CSS pixels.
@@ -7858,16 +7268,12 @@ export namespace Protocol {
              */
             id?: number;
         }
-
         type GestureSourceType = ('default' | 'touch' | 'mouse');
-
         type MouseButton = ('none' | 'left' | 'middle' | 'right' | 'back' | 'forward');
-
         /**
          * UTC time in seconds, counted from January 1, 1970.
          */
         type TimeSinceEpoch = number;
-
         interface DragDataItem {
             /**
              * Mime type of the dragged data.
@@ -7888,7 +7294,6 @@ export namespace Protocol {
              */
             baseURL?: string;
         }
-
         interface DragData {
             items: DragDataItem[];
             /**
@@ -7896,14 +7301,12 @@ export namespace Protocol {
              */
             dragOperationsMask: integer;
         }
-
         const enum DispatchDragEventRequestType {
             DragEnter = 'dragEnter',
             DragOver = 'dragOver',
             Drop = 'drop',
             DragCancel = 'dragCancel',
         }
-
         interface DispatchDragEventRequest {
             /**
              * Type of the drag event. (DispatchDragEventRequestType enum)
@@ -7925,14 +7328,12 @@ export namespace Protocol {
              */
             modifiers?: integer;
         }
-
         const enum DispatchKeyEventRequestType {
             KeyDown = 'keyDown',
             KeyUp = 'keyUp',
             RawKeyDown = 'rawKeyDown',
             Char = 'char',
         }
-
         interface DispatchKeyEventRequest {
             /**
              * Type of the key event. (DispatchKeyEventRequestType enum)
@@ -8002,26 +7403,22 @@ export namespace Protocol {
              */
             commands?: string[];
         }
-
         interface InsertTextRequest {
             /**
              * The text to insert.
              */
             text: string;
         }
-
         const enum DispatchMouseEventRequestType {
             MousePressed = 'mousePressed',
             MouseReleased = 'mouseReleased',
             MouseMoved = 'mouseMoved',
             MouseWheel = 'mouseWheel',
         }
-
         const enum DispatchMouseEventRequestPointerType {
             Mouse = 'mouse',
             Pen = 'pen',
         }
-
         interface DispatchMouseEventRequest {
             /**
              * Type of the mouse event. (DispatchMouseEventRequestType enum)
@@ -8091,14 +7488,12 @@ export namespace Protocol {
              */
             pointerType?: ('mouse' | 'pen');
         }
-
         const enum DispatchTouchEventRequestType {
             TouchStart = 'touchStart',
             TouchEnd = 'touchEnd',
             TouchMove = 'touchMove',
             TouchCancel = 'touchCancel',
         }
-
         interface DispatchTouchEventRequest {
             /**
              * Type of the touch event. TouchEnd and TouchCancel must not contain any touch points, while
@@ -8121,14 +7516,12 @@ export namespace Protocol {
              */
             timestamp?: TimeSinceEpoch;
         }
-
         const enum EmulateTouchFromMouseEventRequestType {
             MousePressed = 'mousePressed',
             MouseReleased = 'mouseReleased',
             MouseMoved = 'mouseMoved',
             MouseWheel = 'mouseWheel',
         }
-
         interface EmulateTouchFromMouseEventRequest {
             /**
              * Type of the mouse event. (EmulateTouchFromMouseEventRequestType enum)
@@ -8168,18 +7561,15 @@ export namespace Protocol {
              */
             clickCount?: integer;
         }
-
         interface SetIgnoreInputEventsRequest {
             /**
              * Ignores input events processing when set to true.
              */
             ignore: boolean;
         }
-
         interface SetInterceptDragsRequest {
             enabled: boolean;
         }
-
         interface SynthesizePinchGestureRequest {
             /**
              * X coordinate of the start of the gesture in CSS pixels.
@@ -8203,7 +7593,6 @@ export namespace Protocol {
              */
             gestureSourceType?: GestureSourceType;
         }
-
         interface SynthesizeScrollGestureRequest {
             /**
              * X coordinate of the start of the gesture in CSS pixels.
@@ -8257,7 +7646,6 @@ export namespace Protocol {
              */
             interactionMarkerName?: string;
         }
-
         interface SynthesizeTapGestureRequest {
             /**
              * X coordinate of the start of the gesture in CSS pixels.
@@ -8281,7 +7669,6 @@ export namespace Protocol {
              */
             gestureSourceType?: GestureSourceType;
         }
-
         /**
          * Emitted only when `Input.setInterceptDrags` is enabled. Use this data with `Input.dispatchDragEvent` to
          * restore normal drag and drop behavior.
@@ -8292,7 +7679,6 @@ export namespace Protocol {
     }
 
     namespace Inspector {
-
         /**
          * Fired when remote debugging connection is about to be terminated. Contains detach reason.
          */
@@ -8305,23 +7691,19 @@ export namespace Protocol {
     }
 
     namespace LayerTree {
-
         /**
          * Unique Layer identifier.
          */
         type LayerId = string;
-
         /**
          * Unique snapshot identifier.
          */
         type SnapshotId = string;
-
         const enum ScrollRectType {
             RepaintsOnScroll = 'RepaintsOnScroll',
             TouchEventHandler = 'TouchEventHandler',
             WheelEventHandler = 'WheelEventHandler',
         }
-
         /**
          * Rectangle where scrolling happens on the main thread.
          */
@@ -8335,7 +7717,6 @@ export namespace Protocol {
              */
             type: ('RepaintsOnScroll' | 'TouchEventHandler' | 'WheelEventHandler');
         }
-
         /**
          * Sticky position constraints.
          */
@@ -8357,7 +7738,6 @@ export namespace Protocol {
              */
             nearestLayerShiftingContainingBlock?: LayerId;
         }
-
         /**
          * Serialized fragment of layer picture along with its offset within the layer.
          */
@@ -8375,7 +7755,6 @@ export namespace Protocol {
              */
             picture: string;
         }
-
         /**
          * Information about a compositing layer.
          */
@@ -8446,19 +7825,16 @@ export namespace Protocol {
              */
             stickyPositionConstraint?: StickyPositionConstraint;
         }
-
         /**
          * Array of timings, one per paint step.
          */
         type PaintProfile = number[];
-
         interface CompositingReasonsRequest {
             /**
              * The id of the layer for which we want to get the reasons it was composited.
              */
             layerId: LayerId;
         }
-
         interface CompositingReasonsResponse {
             /**
              * A list of strings specifying reasons for the given layer to become composited.
@@ -8469,35 +7845,30 @@ export namespace Protocol {
              */
             compositingReasonIds: string[];
         }
-
         interface LoadSnapshotRequest {
             /**
              * An array of tiles composing the snapshot.
              */
             tiles: PictureTile[];
         }
-
         interface LoadSnapshotResponse {
             /**
              * The id of the snapshot.
              */
             snapshotId: SnapshotId;
         }
-
         interface MakeSnapshotRequest {
             /**
              * The id of the layer.
              */
             layerId: LayerId;
         }
-
         interface MakeSnapshotResponse {
             /**
              * The id of the layer snapshot.
              */
             snapshotId: SnapshotId;
         }
-
         interface ProfileSnapshotRequest {
             /**
              * The id of the layer snapshot.
@@ -8516,21 +7887,18 @@ export namespace Protocol {
              */
             clipRect?: DOM.Rect;
         }
-
         interface ProfileSnapshotResponse {
             /**
              * The array of paint profiles, one per run.
              */
             timings: PaintProfile[];
         }
-
         interface ReleaseSnapshotRequest {
             /**
              * The id of the layer snapshot.
              */
             snapshotId: SnapshotId;
         }
-
         interface ReplaySnapshotRequest {
             /**
              * The id of the layer snapshot.
@@ -8549,28 +7917,24 @@ export namespace Protocol {
              */
             scale?: number;
         }
-
         interface ReplaySnapshotResponse {
             /**
              * A data: URL for resulting image.
              */
             dataURL: string;
         }
-
         interface SnapshotCommandLogRequest {
             /**
              * The id of the layer snapshot.
              */
             snapshotId: SnapshotId;
         }
-
         interface SnapshotCommandLogResponse {
             /**
              * The array of canvas function calls.
              */
             commandLog: any[];
         }
-
         interface LayerPaintedEvent {
             /**
              * The id of the painted layer.
@@ -8581,7 +7945,6 @@ export namespace Protocol {
              */
             clip: DOM.Rect;
         }
-
         interface LayerTreeDidChangeEvent {
             /**
              * Layer tree, absent if not in the comspositing mode.
@@ -8594,7 +7957,6 @@ export namespace Protocol {
      * Provides access to log entries.
      */
     namespace Log {
-
         const enum LogEntrySource {
             XML = 'xml',
             Javascript = 'javascript',
@@ -8610,14 +7972,12 @@ export namespace Protocol {
             Recommendation = 'recommendation',
             Other = 'other',
         }
-
         const enum LogEntryLevel {
             Verbose = 'verbose',
             Info = 'info',
             Warning = 'warning',
             Error = 'error',
         }
-
         /**
          * Log entry.
          */
@@ -8663,7 +8023,6 @@ export namespace Protocol {
              */
             args?: Runtime.RemoteObject[];
         }
-
         const enum ViolationSettingName {
             LongTask = 'longTask',
             LongLayout = 'longLayout',
@@ -8673,7 +8032,6 @@ export namespace Protocol {
             Handler = 'handler',
             RecurringHandler = 'recurringHandler',
         }
-
         /**
          * Violation configuration setting.
          */
@@ -8687,14 +8045,12 @@ export namespace Protocol {
              */
             threshold: number;
         }
-
         interface StartViolationsReportRequest {
             /**
              * Configuration for violations.
              */
             config: ViolationSetting[];
         }
-
         /**
          * Issued when new message was logged.
          */
@@ -8707,12 +8063,10 @@ export namespace Protocol {
     }
 
     namespace Memory {
-
         /**
          * Memory pressure level.
          */
         type PressureLevel = ('moderate' | 'critical');
-
         /**
          * Heap profile sample.
          */
@@ -8730,7 +8084,6 @@ export namespace Protocol {
              */
             stack: string[];
         }
-
         /**
          * Array of heap profile samples.
          */
@@ -8738,7 +8091,6 @@ export namespace Protocol {
             samples: SamplingProfileNode[];
             modules: Module[];
         }
-
         /**
          * Executable module information
          */
@@ -8761,27 +8113,23 @@ export namespace Protocol {
              */
             size: number;
         }
-
         interface GetDOMCountersResponse {
             documents: integer;
             nodes: integer;
             jsEventListeners: integer;
         }
-
         interface SetPressureNotificationsSuppressedRequest {
             /**
              * If true, memory pressure notifications will be suppressed.
              */
             suppressed: boolean;
         }
-
         interface SimulatePressureNotificationRequest {
             /**
              * Memory pressure level of the notification.
              */
             level: PressureLevel;
         }
-
         interface StartSamplingRequest {
             /**
              * Average number of bytes between samples.
@@ -8792,15 +8140,12 @@ export namespace Protocol {
              */
             suppressRandomness?: boolean;
         }
-
         interface GetAllTimeSamplingProfileResponse {
             profile: SamplingProfile;
         }
-
         interface GetBrowserSamplingProfileResponse {
             profile: SamplingProfile;
         }
-
         interface GetSamplingProfileResponse {
             profile: SamplingProfile;
         }
@@ -8811,73 +8156,60 @@ export namespace Protocol {
      * file, data and other requests and responses, their headers, bodies, timing, etc.
      */
     namespace Network {
-
         /**
          * Resource type as it was perceived by the rendering engine.
          */
         type ResourceType = ('Document' | 'Stylesheet' | 'Image' | 'Media' | 'Font' | 'Script' | 'TextTrack' | 'XHR' | 'Fetch' | 'EventSource' | 'WebSocket' | 'Manifest' | 'SignedExchange' | 'Ping' | 'CSPViolationReport' | 'Preflight' | 'Other');
-
         /**
          * Unique loader identifier.
          */
         type LoaderId = string;
-
         /**
          * Unique request identifier.
          */
         type RequestId = string;
-
         /**
          * Unique intercepted request identifier.
          */
         type InterceptionId = string;
-
         /**
          * Network level fetch failure reason.
          */
         type ErrorReason = ('Failed' | 'Aborted' | 'TimedOut' | 'AccessDenied' | 'ConnectionClosed' | 'ConnectionReset' | 'ConnectionRefused' | 'ConnectionAborted' | 'ConnectionFailed' | 'NameNotResolved' | 'InternetDisconnected' | 'AddressUnreachable' | 'BlockedByClient' | 'BlockedByResponse');
-
         /**
          * UTC time in seconds, counted from January 1, 1970.
          */
         type TimeSinceEpoch = number;
-
         /**
          * Monotonically increasing time in seconds since an arbitrary point in the past.
          */
         type MonotonicTime = number;
-
         /**
          * Request / response headers as keys / values of JSON object.
          */
         interface Headers {
             [key: string]: string;
         }
-
         /**
          * The underlying connection technology that the browser is supposedly using.
          */
         type ConnectionType = ('none' | 'cellular2g' | 'cellular3g' | 'cellular4g' | 'bluetooth' | 'ethernet' | 'wifi' | 'wimax' | 'other');
-
         /**
          * Represents the cookie's 'SameSite' status:
          * https://tools.ietf.org/html/draft-west-first-party-cookies
          */
         type CookieSameSite = ('Strict' | 'Lax' | 'None');
-
         /**
          * Represents the cookie's 'Priority' status:
          * https://tools.ietf.org/html/draft-west-cookie-priority-00
          */
         type CookiePriority = ('Low' | 'Medium' | 'High');
-
         /**
          * Represents the source scheme of the origin that originally set the cookie.
          * A value of "Unset" allows protocol clients to emulate legacy cookie scope for the scheme.
          * This is a temporary ability and it will be removed in the future.
          */
         type CookieSourceScheme = ('Unset' | 'NonSecure' | 'Secure');
-
         /**
          * Timing information for the request.
          */
@@ -8956,19 +8288,16 @@ export namespace Protocol {
              */
             receiveHeadersEnd: number;
         }
-
         /**
          * Loading priority of a resource request.
          */
         type ResourcePriority = ('VeryLow' | 'Low' | 'Medium' | 'High' | 'VeryHigh');
-
         /**
          * Post data entry for HTTP request
          */
         interface PostDataEntry {
             bytes?: string;
         }
-
         const enum RequestReferrerPolicy {
             UnsafeUrl = 'unsafe-url',
             NoReferrerWhenDowngrade = 'no-referrer-when-downgrade',
@@ -8979,7 +8308,6 @@ export namespace Protocol {
             StrictOrigin = 'strict-origin',
             StrictOriginWhenCrossOrigin = 'strict-origin-when-cross-origin',
         }
-
         /**
          * HTTP request data.
          */
@@ -9034,7 +8362,6 @@ export namespace Protocol {
              */
             trustTokenParams?: TrustTokenParams;
         }
-
         /**
          * Details of a signed certificate timestamp (SCT).
          */
@@ -9072,7 +8399,6 @@ export namespace Protocol {
              */
             signatureData: string;
         }
-
         /**
          * Security details about a request.
          */
@@ -9130,37 +8456,30 @@ export namespace Protocol {
              */
             certificateTransparencyCompliance: CertificateTransparencyCompliance;
         }
-
         /**
          * Whether the request complied with Certificate Transparency policy.
          */
         type CertificateTransparencyCompliance = ('unknown' | 'not-compliant' | 'compliant');
-
         /**
          * The reason why request was blocked.
          */
         type BlockedReason = ('other' | 'csp' | 'mixed-content' | 'origin' | 'inspector' | 'subresource-filter' | 'content-type' | 'coep-frame-resource-needs-coep-header' | 'coop-sandboxed-iframe-cannot-navigate-to-coop-page' | 'corp-not-same-origin' | 'corp-not-same-origin-after-defaulted-to-same-origin-by-coep' | 'corp-not-same-site');
-
         /**
          * The reason why request was blocked.
          */
         type CorsError = ('DisallowedByMode' | 'InvalidResponse' | 'WildcardOriginNotAllowed' | 'MissingAllowOriginHeader' | 'MultipleAllowOriginValues' | 'InvalidAllowOriginValue' | 'AllowOriginMismatch' | 'InvalidAllowCredentials' | 'CorsDisabledScheme' | 'PreflightInvalidStatus' | 'PreflightDisallowedRedirect' | 'PreflightWildcardOriginNotAllowed' | 'PreflightMissingAllowOriginHeader' | 'PreflightMultipleAllowOriginValues' | 'PreflightInvalidAllowOriginValue' | 'PreflightAllowOriginMismatch' | 'PreflightInvalidAllowCredentials' | 'PreflightMissingAllowExternal' | 'PreflightInvalidAllowExternal' | 'InvalidAllowMethodsPreflightResponse' | 'InvalidAllowHeadersPreflightResponse' | 'MethodDisallowedByPreflightResponse' | 'HeaderDisallowedByPreflightResponse' | 'RedirectContainsCredentials' | 'InsecurePrivateNetwork' | 'NoCorsRedirectModeNotFollow');
-
         interface CorsErrorStatus {
             corsError: CorsError;
             failedParameter: string;
         }
-
         /**
          * Source of serviceworker response.
          */
         type ServiceWorkerResponseSource = ('cache-storage' | 'http-cache' | 'fallback-code' | 'network');
-
         const enum TrustTokenParamsRefreshPolicy {
             UseCached = 'UseCached',
             Refresh = 'Refresh',
         }
-
         /**
          * Determines what type of Trust Token operation is executed and
          * depending on the type, some additional parameters. The values
@@ -9179,9 +8498,7 @@ export namespace Protocol {
              */
             issuers?: string[];
         }
-
         type TrustTokenOperationType = ('Issuance' | 'Redemption' | 'Signing');
-
         /**
          * HTTP response data.
          */
@@ -9279,7 +8596,6 @@ export namespace Protocol {
              */
             securityDetails?: SecurityDetails;
         }
-
         /**
          * WebSocket request data.
          */
@@ -9289,7 +8605,6 @@ export namespace Protocol {
              */
             headers: Headers;
         }
-
         /**
          * WebSocket response data.
          */
@@ -9319,7 +8634,6 @@ export namespace Protocol {
              */
             requestHeadersText?: string;
         }
-
         /**
          * WebSocket message data. This represents an entire WebSocket message, not just a fragmented frame as the name suggests.
          */
@@ -9339,7 +8653,6 @@ export namespace Protocol {
              */
             payloadData: string;
         }
-
         /**
          * Information about the cached resource.
          */
@@ -9361,7 +8674,6 @@ export namespace Protocol {
              */
             bodySize: number;
         }
-
         const enum InitiatorType {
             Parser = 'parser',
             Script = 'script',
@@ -9370,7 +8682,6 @@ export namespace Protocol {
             Preflight = 'preflight',
             Other = 'other',
         }
-
         /**
          * Information about the request initiator.
          */
@@ -9402,7 +8713,6 @@ export namespace Protocol {
              */
             requestId?: RequestId;
         }
-
         /**
          * Cookie object
          */
@@ -9466,17 +8776,14 @@ export namespace Protocol {
              */
             sourcePort: integer;
         }
-
         /**
          * Types of reasons why a cookie may not be stored from a response.
          */
         type SetCookieBlockedReason = ('SecureOnly' | 'SameSiteStrict' | 'SameSiteLax' | 'SameSiteUnspecifiedTreatedAsLax' | 'SameSiteNoneInsecure' | 'UserPreferences' | 'SyntaxError' | 'SchemeNotSupported' | 'OverwriteSecure' | 'InvalidDomain' | 'InvalidPrefix' | 'UnknownError' | 'SchemefulSameSiteStrict' | 'SchemefulSameSiteLax' | 'SchemefulSameSiteUnspecifiedTreatedAsLax' | 'SamePartyFromCrossPartyContext' | 'SamePartyConflictsWithOtherAttributes');
-
         /**
          * Types of reasons why a cookie may not be sent with a request.
          */
         type CookieBlockedReason = ('SecureOnly' | 'NotOnPath' | 'DomainMismatch' | 'SameSiteStrict' | 'SameSiteLax' | 'SameSiteUnspecifiedTreatedAsLax' | 'SameSiteNoneInsecure' | 'UserPreferences' | 'UnknownError' | 'SchemefulSameSiteStrict' | 'SchemefulSameSiteLax' | 'SchemefulSameSiteUnspecifiedTreatedAsLax' | 'SamePartyFromCrossPartyContext');
-
         /**
          * A cookie which was not stored from a response with the corresponding reason.
          */
@@ -9497,7 +8804,6 @@ export namespace Protocol {
              */
             cookie?: Cookie;
         }
-
         /**
          * A cookie with was not sent with a request with the corresponding reason.
          */
@@ -9511,7 +8817,6 @@ export namespace Protocol {
              */
             cookie: Cookie;
         }
-
         /**
          * Cookie parameter object
          */
@@ -9572,12 +8877,10 @@ export namespace Protocol {
              */
             sourcePort?: integer;
         }
-
         const enum AuthChallengeSource {
             Server = 'Server',
             Proxy = 'Proxy',
         }
-
         /**
          * Authorization challenge for HTTP status code 401 or 407.
          */
@@ -9599,13 +8902,11 @@ export namespace Protocol {
              */
             realm: string;
         }
-
         const enum AuthChallengeResponseResponse {
             Default = 'Default',
             CancelAuth = 'CancelAuth',
             ProvideCredentials = 'ProvideCredentials',
         }
-
         /**
          * Response to an AuthChallenge.
          */
@@ -9627,13 +8928,11 @@ export namespace Protocol {
              */
             password?: string;
         }
-
         /**
          * Stages of the interception to begin intercepting. Request will intercept before the request is
          * sent. Response will intercept after the response is received.
          */
         type InterceptionStage = ('Request' | 'HeadersReceived');
-
         /**
          * Request pattern for interception.
          */
@@ -9652,7 +8951,6 @@ export namespace Protocol {
              */
             interceptionStage?: InterceptionStage;
         }
-
         /**
          * Information about a signed exchange signature.
          * https://wicg.github.io/webpackage/draft-yasskin-httpbis-origin-signed-exchanges-impl.html#rfc.section.3.1
@@ -9695,7 +8993,6 @@ export namespace Protocol {
              */
             certificates?: string[];
         }
-
         /**
          * Information about a signed exchange header.
          * https://wicg.github.io/webpackage/draft-yasskin-httpbis-origin-signed-exchanges-impl.html#cbor-representation
@@ -9722,12 +9019,10 @@ export namespace Protocol {
              */
             headerIntegrity: string;
         }
-
         /**
          * Field type for a signed exchange related error.
          */
         type SignedExchangeErrorField = ('signatureSig' | 'signatureIntegrity' | 'signatureCertUrl' | 'signatureCertSha256' | 'signatureValidityUrl' | 'signatureTimestamps');
-
         /**
          * Information about a signed exchange response.
          */
@@ -9745,7 +9040,6 @@ export namespace Protocol {
              */
             errorField?: SignedExchangeErrorField;
         }
-
         /**
          * Information about a signed exchange response.
          */
@@ -9767,45 +9061,35 @@ export namespace Protocol {
              */
             errors?: SignedExchangeError[];
         }
-
         /**
          * List of content encodings supported by the backend.
          */
         type ContentEncoding = ('deflate' | 'gzip' | 'br');
-
         type PrivateNetworkRequestPolicy = ('Allow' | 'BlockFromInsecureToMorePrivate' | 'WarnFromInsecureToMorePrivate');
-
         type IPAddressSpace = ('Local' | 'Private' | 'Public' | 'Unknown');
-
         interface ClientSecurityState {
             initiatorIsSecureContext: boolean;
             initiatorIPAddressSpace: IPAddressSpace;
             privateNetworkRequestPolicy: PrivateNetworkRequestPolicy;
         }
-
         type CrossOriginOpenerPolicyValue = ('SameOrigin' | 'SameOriginAllowPopups' | 'UnsafeNone' | 'SameOriginPlusCoep');
-
         interface CrossOriginOpenerPolicyStatus {
             value: CrossOriginOpenerPolicyValue;
             reportOnlyValue: CrossOriginOpenerPolicyValue;
             reportingEndpoint?: string;
             reportOnlyReportingEndpoint?: string;
         }
-
         type CrossOriginEmbedderPolicyValue = ('None' | 'Credentialless' | 'RequireCorp');
-
         interface CrossOriginEmbedderPolicyStatus {
             value: CrossOriginEmbedderPolicyValue;
             reportOnlyValue: CrossOriginEmbedderPolicyValue;
             reportingEndpoint?: string;
             reportOnlyReportingEndpoint?: string;
         }
-
         interface SecurityIsolationStatus {
             coop?: CrossOriginOpenerPolicyStatus;
             coep?: CrossOriginEmbedderPolicyStatus;
         }
-
         /**
          * An object providing the result of a network resource load.
          */
@@ -9826,7 +9110,6 @@ export namespace Protocol {
              */
             headers?: Network.Headers;
         }
-
         /**
          * An options object that may be extended later to better support CORS,
          * CORB and streaming.
@@ -9835,35 +9118,30 @@ export namespace Protocol {
             disableCache: boolean;
             includeCredentials: boolean;
         }
-
         interface SetAcceptedEncodingsRequest {
             /**
              * List of accepted content encodings.
              */
             encodings: ContentEncoding[];
         }
-
         interface CanClearBrowserCacheResponse {
             /**
              * True if browser cache can be cleared.
              */
             result: boolean;
         }
-
         interface CanClearBrowserCookiesResponse {
             /**
              * True if browser cookies can be cleared.
              */
             result: boolean;
         }
-
         interface CanEmulateNetworkConditionsResponse {
             /**
              * True if emulation of network conditions is supported.
              */
             result: boolean;
         }
-
         interface ContinueInterceptedRequestRequest {
             interceptionId: InterceptionId;
             /**
@@ -9901,7 +9179,6 @@ export namespace Protocol {
              */
             authChallengeResponse?: AuthChallengeResponse;
         }
-
         interface DeleteCookiesRequest {
             /**
              * Name of the cookies to remove.
@@ -9921,7 +9198,6 @@ export namespace Protocol {
              */
             path?: string;
         }
-
         interface EmulateNetworkConditionsRequest {
             /**
              * True to emulate internet disconnection.
@@ -9944,7 +9220,6 @@ export namespace Protocol {
              */
             connectionType?: ConnectionType;
         }
-
         interface EnableRequest {
             /**
              * Buffer size in bytes to use when preserving network payloads (XHRs, etc).
@@ -9959,25 +9234,21 @@ export namespace Protocol {
              */
             maxPostDataSize?: integer;
         }
-
         interface GetAllCookiesResponse {
             /**
              * Array of cookie objects.
              */
             cookies: Cookie[];
         }
-
         interface GetCertificateRequest {
             /**
              * Origin to get certificate for.
              */
             origin: string;
         }
-
         interface GetCertificateResponse {
             tableNames: string[];
         }
-
         interface GetCookiesRequest {
             /**
              * The list of URLs for which applicable cookies will be fetched.
@@ -9986,21 +9257,18 @@ export namespace Protocol {
              */
             urls?: string[];
         }
-
         interface GetCookiesResponse {
             /**
              * Array of cookie objects.
              */
             cookies: Cookie[];
         }
-
         interface GetResponseBodyRequest {
             /**
              * Identifier of the network request to get content for.
              */
             requestId: RequestId;
         }
-
         interface GetResponseBodyResponse {
             /**
              * Response body.
@@ -10011,28 +9279,24 @@ export namespace Protocol {
              */
             base64Encoded: boolean;
         }
-
         interface GetRequestPostDataRequest {
             /**
              * Identifier of the network request to get content for.
              */
             requestId: RequestId;
         }
-
         interface GetRequestPostDataResponse {
             /**
              * Request body string, omitting files from multipart requests
              */
             postData: string;
         }
-
         interface GetResponseBodyForInterceptionRequest {
             /**
              * Identifier for the intercepted request to get body for.
              */
             interceptionId: InterceptionId;
         }
-
         interface GetResponseBodyForInterceptionResponse {
             /**
              * Response body.
@@ -10043,22 +9307,18 @@ export namespace Protocol {
              */
             base64Encoded: boolean;
         }
-
         interface TakeResponseBodyForInterceptionAsStreamRequest {
             interceptionId: InterceptionId;
         }
-
         interface TakeResponseBodyForInterceptionAsStreamResponse {
             stream: IO.StreamHandle;
         }
-
         interface ReplayXHRRequest {
             /**
              * Identifier of XHR to replay.
              */
             requestId: RequestId;
         }
-
         interface SearchInResponseBodyRequest {
             /**
              * Identifier of the network response to search.
@@ -10077,35 +9337,30 @@ export namespace Protocol {
              */
             isRegex?: boolean;
         }
-
         interface SearchInResponseBodyResponse {
             /**
              * List of search matches.
              */
             result: Debugger.SearchMatch[];
         }
-
         interface SetBlockedURLsRequest {
             /**
              * URL patterns to block. Wildcards ('*') are allowed.
              */
             urls: string[];
         }
-
         interface SetBypassServiceWorkerRequest {
             /**
              * Bypass service worker and load from network.
              */
             bypass: boolean;
         }
-
         interface SetCacheDisabledRequest {
             /**
              * Cache disabled state.
              */
             cacheDisabled: boolean;
         }
-
         interface SetCookieRequest {
             /**
              * Cookie name.
@@ -10163,35 +9418,30 @@ export namespace Protocol {
              */
             sourcePort?: integer;
         }
-
         interface SetCookieResponse {
             /**
              * Always set to true. If an error occurs, the response indicates protocol error.
              */
             success: boolean;
         }
-
         interface SetCookiesRequest {
             /**
              * Cookies to be set.
              */
             cookies: CookieParam[];
         }
-
         interface SetExtraHTTPHeadersRequest {
             /**
              * Map with extra HTTP headers.
              */
             headers: Headers;
         }
-
         interface SetAttachDebugStackRequest {
             /**
              * Whether to attach a page script stack for debugging purpose.
              */
             enabled: boolean;
         }
-
         interface SetRequestInterceptionRequest {
             /**
              * Requests matching any of these patterns will be forwarded and wait for the corresponding
@@ -10199,7 +9449,6 @@ export namespace Protocol {
              */
             patterns: RequestPattern[];
         }
-
         interface SetUserAgentOverrideRequest {
             /**
              * User agent to use.
@@ -10218,18 +9467,15 @@ export namespace Protocol {
              */
             userAgentMetadata?: Emulation.UserAgentMetadata;
         }
-
         interface GetSecurityIsolationStatusRequest {
             /**
              * If no frameId is provided, the status of the target is provided.
              */
             frameId?: Page.FrameId;
         }
-
         interface GetSecurityIsolationStatusResponse {
             status: SecurityIsolationStatus;
         }
-
         interface LoadNetworkResourceRequest {
             /**
              * Frame id to get the resource for.
@@ -10244,11 +9490,9 @@ export namespace Protocol {
              */
             options: LoadNetworkResourceOptions;
         }
-
         interface LoadNetworkResourceResponse {
             resource: LoadNetworkResourcePageResult;
         }
-
         /**
          * Fired when data chunk was received over the network.
          */
@@ -10270,7 +9514,6 @@ export namespace Protocol {
              */
             encodedDataLength: integer;
         }
-
         /**
          * Fired when EventSource message is received.
          */
@@ -10296,7 +9539,6 @@ export namespace Protocol {
              */
             data: string;
         }
-
         /**
          * Fired when HTTP request has failed to load.
          */
@@ -10330,7 +9572,6 @@ export namespace Protocol {
              */
             corsErrorStatus?: CorsErrorStatus;
         }
-
         /**
          * Fired when HTTP request has finished loading.
          */
@@ -10353,7 +9594,6 @@ export namespace Protocol {
              */
             shouldReportCorbBlocking?: boolean;
         }
-
         /**
          * Details of an intercepted HTTP request, which must be either allowed, blocked, modified or
          * mocked.
@@ -10414,7 +9654,6 @@ export namespace Protocol {
              */
             requestId?: RequestId;
         }
-
         /**
          * Fired if request ended up loading from cache.
          */
@@ -10424,7 +9663,6 @@ export namespace Protocol {
              */
             requestId: RequestId;
         }
-
         /**
          * Fired when page is about to send HTTP request.
          */
@@ -10474,7 +9712,6 @@ export namespace Protocol {
              */
             hasUserGesture?: boolean;
         }
-
         /**
          * Fired when resource loading priority is changed
          */
@@ -10492,7 +9729,6 @@ export namespace Protocol {
              */
             timestamp: MonotonicTime;
         }
-
         /**
          * Fired when a signed exchange was received over the network
          */
@@ -10506,7 +9742,6 @@ export namespace Protocol {
              */
             info: SignedExchangeInfo;
         }
-
         /**
          * Fired when HTTP response is available.
          */
@@ -10536,7 +9771,6 @@ export namespace Protocol {
              */
             frameId?: Page.FrameId;
         }
-
         /**
          * Fired when WebSocket is closed.
          */
@@ -10550,7 +9784,6 @@ export namespace Protocol {
              */
             timestamp: MonotonicTime;
         }
-
         /**
          * Fired upon WebSocket creation.
          */
@@ -10568,7 +9801,6 @@ export namespace Protocol {
              */
             initiator?: Initiator;
         }
-
         /**
          * Fired when WebSocket message error occurs.
          */
@@ -10586,7 +9818,6 @@ export namespace Protocol {
              */
             errorMessage: string;
         }
-
         /**
          * Fired when WebSocket message is received.
          */
@@ -10604,7 +9835,6 @@ export namespace Protocol {
              */
             response: WebSocketFrame;
         }
-
         /**
          * Fired when WebSocket message is sent.
          */
@@ -10622,7 +9852,6 @@ export namespace Protocol {
              */
             response: WebSocketFrame;
         }
-
         /**
          * Fired when WebSocket handshake response becomes available.
          */
@@ -10640,7 +9869,6 @@ export namespace Protocol {
              */
             response: WebSocketResponse;
         }
-
         /**
          * Fired when WebSocket is about to initiate handshake.
          */
@@ -10662,7 +9890,6 @@ export namespace Protocol {
              */
             request: WebSocketRequest;
         }
-
         /**
          * Fired upon WebTransport creation.
          */
@@ -10684,7 +9911,6 @@ export namespace Protocol {
              */
             initiator?: Initiator;
         }
-
         /**
          * Fired when WebTransport handshake is finished.
          */
@@ -10698,7 +9924,6 @@ export namespace Protocol {
              */
             timestamp: MonotonicTime;
         }
-
         /**
          * Fired when WebTransport is disposed.
          */
@@ -10712,7 +9937,6 @@ export namespace Protocol {
              */
             timestamp: MonotonicTime;
         }
-
         /**
          * Fired when additional information about a requestWillBeSent event is available from the
          * network stack. Not every requestWillBeSent event will have an additional
@@ -10738,7 +9962,6 @@ export namespace Protocol {
              */
             clientSecurityState?: ClientSecurityState;
         }
-
         /**
          * Fired when additional information about a responseReceived event is available from the network
          * stack. Not every responseReceived event will have an additional responseReceivedExtraInfo for
@@ -10770,7 +9993,6 @@ export namespace Protocol {
              */
             headersText?: string;
         }
-
         const enum TrustTokenOperationDoneEventStatus {
             Ok = 'Ok',
             InvalidArgument = 'InvalidArgument',
@@ -10783,7 +10005,6 @@ export namespace Protocol {
             UnknownError = 'UnknownError',
             FulfilledLocally = 'FulfilledLocally',
         }
-
         /**
          * Fired exactly once for each Trust Token operation. Depending on
          * the type of the operation and whether the operation succeeded or
@@ -10813,7 +10034,6 @@ export namespace Protocol {
              */
             issuedTokenCount?: integer;
         }
-
         /**
          * Fired once when parsing the .wbn file has succeeded.
          * The event contains the information about the web bundle contents.
@@ -10828,7 +10048,6 @@ export namespace Protocol {
              */
             urls: string[];
         }
-
         /**
          * Fired once when parsing the .wbn file has failed.
          */
@@ -10842,7 +10061,6 @@ export namespace Protocol {
              */
             errorMessage: string;
         }
-
         /**
          * Fired when handling requests for resources within a .wbn file.
          * Note: this will only be fired for resources that are requested by the webpage.
@@ -10863,7 +10081,6 @@ export namespace Protocol {
              */
             bundleRequestId?: RequestId;
         }
-
         /**
          * Fired when request for resources within a .wbn file failed.
          */
@@ -10893,7 +10110,6 @@ export namespace Protocol {
      * This domain provides various functionality related to drawing atop the inspected page.
      */
     namespace Overlay {
-
         /**
          * Configuration data for drawing the source order of an elements children.
          */
@@ -10907,7 +10123,6 @@ export namespace Protocol {
              */
             childOutlineColor: DOM.RGBA;
         }
-
         /**
          * Configuration data for the highlighting of Grid elements.
          */
@@ -10993,7 +10208,6 @@ export namespace Protocol {
              */
             gridBackgroundColor?: DOM.RGBA;
         }
-
         /**
          * Configuration data for the highlighting of Flex container elements.
          */
@@ -11031,7 +10245,6 @@ export namespace Protocol {
              */
             crossAlignment?: LineStyle;
         }
-
         /**
          * Configuration data for the highlighting of Flex item elements.
          */
@@ -11049,12 +10262,10 @@ export namespace Protocol {
              */
             flexibilityArrow?: LineStyle;
         }
-
         const enum LineStylePattern {
             Dashed = 'dashed',
             Dotted = 'dotted',
         }
-
         /**
          * Style information for drawing a line.
          */
@@ -11068,7 +10279,6 @@ export namespace Protocol {
              */
             pattern?: ('dashed' | 'dotted');
         }
-
         /**
          * Style information for drawing a box.
          */
@@ -11082,9 +10292,7 @@ export namespace Protocol {
              */
             hatchColor?: DOM.RGBA;
         }
-
         type ContrastAlgorithm = ('aa' | 'aaa' | 'apca');
-
         /**
          * Configuration data for the highlighting of page elements.
          */
@@ -11162,9 +10370,7 @@ export namespace Protocol {
              */
             contrastAlgorithm?: ContrastAlgorithm;
         }
-
         type ColorFormat = ('rgb' | 'hsl' | 'hex');
-
         /**
          * Configurations for Persistent Grid Highlight
          */
@@ -11178,7 +10384,6 @@ export namespace Protocol {
              */
             nodeId: DOM.NodeId;
         }
-
         interface FlexNodeHighlightConfig {
             /**
              * A descriptor for the highlight appearance of flex containers.
@@ -11189,7 +10394,6 @@ export namespace Protocol {
              */
             nodeId: DOM.NodeId;
         }
-
         interface ScrollSnapContainerHighlightConfig {
             /**
              * The style of the snapport border (default: transparent)
@@ -11208,7 +10412,6 @@ export namespace Protocol {
              */
             scrollPaddingColor?: DOM.RGBA;
         }
-
         interface ScrollSnapHighlightConfig {
             /**
              * A descriptor for the highlight appearance of scroll snap containers.
@@ -11219,7 +10422,6 @@ export namespace Protocol {
              */
             nodeId: DOM.NodeId;
         }
-
         /**
          * Configuration for dual screen hinge
          */
@@ -11237,9 +10439,7 @@ export namespace Protocol {
              */
             outlineColor?: DOM.RGBA;
         }
-
         type InspectMode = ('searchForNode' | 'searchForUAShadowDOM' | 'captureAreaScreenshot' | 'showDistances' | 'none');
-
         interface GetHighlightObjectForTestRequest {
             /**
              * Id of the node to get highlight object for.
@@ -11262,42 +10462,36 @@ export namespace Protocol {
              */
             showAccessibilityInfo?: boolean;
         }
-
         interface GetHighlightObjectForTestResponse {
             /**
              * Highlight data for the node.
              */
             highlight: any;
         }
-
         interface GetGridHighlightObjectsForTestRequest {
             /**
              * Ids of the node to get highlight object for.
              */
             nodeIds: DOM.NodeId[];
         }
-
         interface GetGridHighlightObjectsForTestResponse {
             /**
              * Grid Highlight data for the node ids provided.
              */
             highlights: any;
         }
-
         interface GetSourceOrderHighlightObjectForTestRequest {
             /**
              * Id of the node to highlight.
              */
             nodeId: DOM.NodeId;
         }
-
         interface GetSourceOrderHighlightObjectForTestResponse {
             /**
              * Source order highlight data for the node id provided.
              */
             highlight: any;
         }
-
         interface HighlightFrameRequest {
             /**
              * Identifier of the frame to highlight.
@@ -11312,7 +10506,6 @@ export namespace Protocol {
              */
             contentOutlineColor?: DOM.RGBA;
         }
-
         interface HighlightNodeRequest {
             /**
              * A descriptor for the highlight appearance.
@@ -11335,7 +10528,6 @@ export namespace Protocol {
              */
             selector?: string;
         }
-
         interface HighlightQuadRequest {
             /**
              * Quad to highlight
@@ -11350,7 +10542,6 @@ export namespace Protocol {
              */
             outlineColor?: DOM.RGBA;
         }
-
         interface HighlightRectRequest {
             /**
              * X coordinate
@@ -11377,7 +10568,6 @@ export namespace Protocol {
              */
             outlineColor?: DOM.RGBA;
         }
-
         interface HighlightSourceOrderRequest {
             /**
              * A descriptor for the appearance of the overlay drawing.
@@ -11396,7 +10586,6 @@ export namespace Protocol {
              */
             objectId?: Runtime.RemoteObjectId;
         }
-
         interface SetInspectModeRequest {
             /**
              * Set an inspection mode.
@@ -11408,102 +10597,87 @@ export namespace Protocol {
              */
             highlightConfig?: HighlightConfig;
         }
-
         interface SetShowAdHighlightsRequest {
             /**
              * True for showing ad highlights
              */
             show: boolean;
         }
-
         interface SetPausedInDebuggerMessageRequest {
             /**
              * The message to display, also triggers resume and step over controls.
              */
             message?: string;
         }
-
         interface SetShowDebugBordersRequest {
             /**
              * True for showing debug borders
              */
             show: boolean;
         }
-
         interface SetShowFPSCounterRequest {
             /**
              * True for showing the FPS counter
              */
             show: boolean;
         }
-
         interface SetShowGridOverlaysRequest {
             /**
              * An array of node identifiers and descriptors for the highlight appearance.
              */
             gridNodeHighlightConfigs: GridNodeHighlightConfig[];
         }
-
         interface SetShowFlexOverlaysRequest {
             /**
              * An array of node identifiers and descriptors for the highlight appearance.
              */
             flexNodeHighlightConfigs: FlexNodeHighlightConfig[];
         }
-
         interface SetShowScrollSnapOverlaysRequest {
             /**
              * An array of node identifiers and descriptors for the highlight appearance.
              */
             scrollSnapHighlightConfigs: ScrollSnapHighlightConfig[];
         }
-
         interface SetShowPaintRectsRequest {
             /**
              * True for showing paint rectangles
              */
             result: boolean;
         }
-
         interface SetShowLayoutShiftRegionsRequest {
             /**
              * True for showing layout shift regions
              */
             result: boolean;
         }
-
         interface SetShowScrollBottleneckRectsRequest {
             /**
              * True for showing scroll bottleneck rects
              */
             show: boolean;
         }
-
         interface SetShowHitTestBordersRequest {
             /**
              * True for showing hit-test borders
              */
             show: boolean;
         }
-
         interface SetShowWebVitalsRequest {
             show: boolean;
         }
-
         interface SetShowViewportSizeOnResizeRequest {
             /**
              * Whether to paint size or not.
              */
             show: boolean;
         }
-
         interface SetShowHingeRequest {
             /**
              * hinge data, null means hideHinge
              */
             hingeConfig?: HingeConfig;
         }
-
         /**
          * Fired when the node should be inspected. This happens after call to `setInspectMode` or when
          * user manually inspects an element.
@@ -11514,14 +10688,12 @@ export namespace Protocol {
              */
             backendNodeId: DOM.BackendNodeId;
         }
-
         /**
          * Fired when the node should be highlighted. This happens after call to `setInspectMode`.
          */
         interface NodeHighlightRequestedEvent {
             nodeId: DOM.NodeId;
         }
-
         /**
          * Fired when user asks to capture screenshot of some area on the page.
          */
@@ -11537,64 +10709,51 @@ export namespace Protocol {
      * Actions and events related to the inspected page belong to the page domain.
      */
     namespace Page {
-
         /**
          * Unique frame identifier.
          */
         type FrameId = string;
-
         /**
          * Indicates whether a frame has been identified as an ad.
          */
         type AdFrameType = ('none' | 'child' | 'root');
-
         /**
          * Indicates whether the frame is a secure context and why it is the case.
          */
         type SecureContextType = ('Secure' | 'SecureLocalhost' | 'InsecureScheme' | 'InsecureAncestor');
-
         /**
          * Indicates whether the frame is cross-origin isolated and why it is the case.
          */
         type CrossOriginIsolatedContextType = ('Isolated' | 'NotIsolated' | 'NotIsolatedFeatureDisabled');
-
         type GatedAPIFeatures = ('SharedArrayBuffers' | 'SharedArrayBuffersTransferAllowed' | 'PerformanceMeasureMemory' | 'PerformanceProfile');
-
         /**
          * All Permissions Policy features. This enum should match the one defined
          * in third_party/blink/renderer/core/permissions_policy/permissions_policy_features.json5.
          */
         type PermissionsPolicyFeature = ('accelerometer' | 'ambient-light-sensor' | 'attribution-reporting' | 'autoplay' | 'camera' | 'ch-dpr' | 'ch-device-memory' | 'ch-downlink' | 'ch-ect' | 'ch-lang' | 'ch-prefers-color-scheme' | 'ch-rtt' | 'ch-ua' | 'ch-ua-arch' | 'ch-ua-platform' | 'ch-ua-model' | 'ch-ua-mobile' | 'ch-ua-full-version' | 'ch-ua-platform-version' | 'ch-viewport-width' | 'ch-width' | 'clipboard-read' | 'clipboard-write' | 'cross-origin-isolated' | 'direct-sockets' | 'display-capture' | 'document-domain' | 'encrypted-media' | 'execution-while-out-of-viewport' | 'execution-while-not-rendered' | 'focus-without-user-activation' | 'fullscreen' | 'frobulate' | 'gamepad' | 'geolocation' | 'gyroscope' | 'hid' | 'idle-detection' | 'interest-cohort' | 'magnetometer' | 'microphone' | 'midi' | 'otp-credentials' | 'payment' | 'picture-in-picture' | 'publickey-credentials-get' | 'screen-wake-lock' | 'serial' | 'shared-autofill' | 'storage-access-api' | 'sync-xhr' | 'trust-token-redemption' | 'usb' | 'vertical-scroll' | 'web-share' | 'window-placement' | 'xr-spatial-tracking');
-
         /**
          * Reason for a permissions policy feature to be disabled.
          */
         type PermissionsPolicyBlockReason = ('Header' | 'IframeAttribute');
-
         interface PermissionsPolicyBlockLocator {
             frameId: FrameId;
             blockReason: PermissionsPolicyBlockReason;
         }
-
         interface PermissionsPolicyFeatureState {
             feature: PermissionsPolicyFeature;
             allowed: boolean;
             locator?: PermissionsPolicyBlockLocator;
         }
-
         /**
          * Origin Trial(https://www.chromium.org/blink/origin-trials) support.
          * Status for an Origin Trial token.
          */
         type OriginTrialTokenStatus = ('Success' | 'NotSupported' | 'Insecure' | 'Expired' | 'WrongOrigin' | 'InvalidSignature' | 'Malformed' | 'WrongVersion' | 'FeatureDisabled' | 'TokenDisabled' | 'FeatureDisabledForUser');
-
         /**
          * Status for an Origin Trial.
          */
         type OriginTrialStatus = ('Enabled' | 'ValidTokenNotProvided' | 'OSNotSupported' | 'TrialNotAllowed');
-
         type OriginTrialUsageRestriction = ('None' | 'Subset');
-
         interface OriginTrialToken {
             origin: string;
             matchSubDomains: boolean;
@@ -11603,7 +10762,6 @@ export namespace Protocol {
             isThirdParty: boolean;
             usageRestriction: OriginTrialUsageRestriction;
         }
-
         interface OriginTrialTokenWithStatus {
             rawTokenText: string;
             /**
@@ -11613,13 +10771,11 @@ export namespace Protocol {
             parsedToken?: OriginTrialToken;
             status: OriginTrialTokenStatus;
         }
-
         interface OriginTrial {
             trialName: string;
             status: OriginTrialStatus;
             tokensWithStatus: OriginTrialTokenWithStatus[];
         }
-
         /**
          * Information about the Frame on the page.
          */
@@ -11688,7 +10844,6 @@ export namespace Protocol {
              */
             originTrials?: OriginTrial[];
         }
-
         /**
          * Information about the Resource on the page.
          */
@@ -11722,7 +10877,6 @@ export namespace Protocol {
              */
             canceled?: boolean;
         }
-
         /**
          * Information about the Frame hierarchy along with their cached resources.
          */
@@ -11740,7 +10894,6 @@ export namespace Protocol {
              */
             resources: FrameResource[];
         }
-
         /**
          * Information about the Frame hierarchy.
          */
@@ -11754,17 +10907,14 @@ export namespace Protocol {
              */
             childFrames?: FrameTree[];
         }
-
         /**
          * Unique script identifier.
          */
         type ScriptIdentifier = string;
-
         /**
          * Transition type.
          */
         type TransitionType = ('link' | 'typed' | 'address_bar' | 'auto_bookmark' | 'auto_subframe' | 'manual_subframe' | 'generated' | 'auto_toplevel' | 'form_submit' | 'reload' | 'keyword' | 'keyword_generated' | 'other');
-
         /**
          * Navigation history entry.
          */
@@ -11790,7 +10940,6 @@ export namespace Protocol {
              */
             transitionType: TransitionType;
         }
-
         /**
          * Screencast frame metadata.
          */
@@ -11824,12 +10973,10 @@ export namespace Protocol {
              */
             timestamp?: Network.TimeSinceEpoch;
         }
-
         /**
          * Javascript dialog type.
          */
         type DialogType = ('alert' | 'confirm' | 'prompt' | 'beforeunload');
-
         /**
          * Error while paring app manifest.
          */
@@ -11851,7 +10998,6 @@ export namespace Protocol {
              */
             column: integer;
         }
-
         /**
          * Parsed app manifest properties.
          */
@@ -11861,7 +11007,6 @@ export namespace Protocol {
              */
             scope: string;
         }
-
         /**
          * Layout viewport position and dimensions.
          */
@@ -11883,7 +11028,6 @@ export namespace Protocol {
              */
             clientHeight: integer;
         }
-
         /**
          * Visual viewport position, dimensions, and scale.
          */
@@ -11921,7 +11065,6 @@ export namespace Protocol {
              */
             zoom?: number;
         }
-
         /**
          * Viewport for capturing screenshot.
          */
@@ -11947,7 +11090,6 @@ export namespace Protocol {
              */
             scale: number;
         }
-
         /**
          * Generic font families collection.
          */
@@ -11981,7 +11123,6 @@ export namespace Protocol {
              */
             pictograph?: string;
         }
-
         /**
          * Default font sizes.
          */
@@ -11995,11 +11136,8 @@ export namespace Protocol {
              */
             fixed?: integer;
         }
-
         type ClientNavigationReason = ('formSubmissionGet' | 'formSubmissionPost' | 'httpHeaderRefresh' | 'scriptInitiated' | 'metaTagRefresh' | 'pageBlockInterstitial' | 'reload' | 'anchorClick');
-
         type ClientNavigationDisposition = ('currentTab' | 'newTab' | 'newWindow' | 'download');
-
         interface InstallabilityErrorArgument {
             /**
              * Argument name (e.g. name:'minimum-icon-size-in-pixels').
@@ -12010,7 +11148,6 @@ export namespace Protocol {
              */
             value: string;
         }
-
         /**
          * The installability error
          */
@@ -12024,12 +11161,10 @@ export namespace Protocol {
              */
             errorArguments: InstallabilityErrorArgument[];
         }
-
         /**
          * The referring-policy used for the navigation.
          */
         type ReferrerPolicy = ('noReferrer' | 'noReferrerWhenDowngrade' | 'origin' | 'originWhenCrossOrigin' | 'sameOrigin' | 'strictOrigin' | 'strictOriginWhenCrossOrigin' | 'unsafeUrl');
-
         /**
          * Per-script compilation cache parameters for `Page.produceCompilationCache`
          */
@@ -12044,22 +11179,18 @@ export namespace Protocol {
              */
             eager?: boolean;
         }
-
         /**
          * The type of a frameNavigated event.
          */
         type NavigationType = ('Navigation' | 'BackForwardCacheRestore');
-
         /**
          * List of not restored reasons for back-forward cache.
          */
         type BackForwardCacheNotRestoredReason = ('NotMainFrame' | 'BackForwardCacheDisabled' | 'RelatedActiveContentsExist' | 'HTTPStatusNotOK' | 'SchemeNotHTTPOrHTTPS' | 'Loading' | 'WasGrantedMediaAccess' | 'DisableForRenderFrameHostCalled' | 'DomainNotAllowed' | 'HTTPMethodNotGET' | 'SubframeIsNavigating' | 'Timeout' | 'CacheLimit' | 'JavaScriptExecution' | 'RendererProcessKilled' | 'RendererProcessCrashed' | 'GrantedMediaStreamAccess' | 'SchedulerTrackedFeatureUsed' | 'ConflictingBrowsingInstance' | 'CacheFlushed' | 'ServiceWorkerVersionActivation' | 'SessionRestored' | 'ServiceWorkerPostMessage' | 'EnteredBackForwardCacheBeforeServiceWorkerHostAdded' | 'RenderFrameHostReused_SameSite' | 'RenderFrameHostReused_CrossSite' | 'ServiceWorkerClaim' | 'IgnoreEventAndEvict' | 'HaveInnerContents' | 'TimeoutPuttingInCache' | 'BackForwardCacheDisabledByLowMemory' | 'BackForwardCacheDisabledByCommandLine' | 'NetworkRequestDatapipeDrainedAsBytesConsumer' | 'NetworkRequestRedirected' | 'NetworkRequestTimeout' | 'NetworkExceedsBufferLimit' | 'NavigationCancelledWhileRestoring' | 'NotMostRecentNavigationEntry' | 'BackForwardCacheDisabledForPrerender' | 'UserAgentOverrideDiffers' | 'ForegroundCacheLimit' | 'BrowsingInstanceNotSwapped' | 'BackForwardCacheDisabledForDelegate' | 'OptInUnloadHeaderNotPresent' | 'UnloadHandlerExistsInMainFrame' | 'UnloadHandlerExistsInSubFrame' | 'WebSocket' | 'WebRTC' | 'MainResourceHasCacheControlNoStore' | 'MainResourceHasCacheControlNoCache' | 'SubresourceHasCacheControlNoStore' | 'SubresourceHasCacheControlNoCache' | 'PageShowEventListener' | 'PageHideEventListener' | 'BeforeUnloadEventListener' | 'UnloadEventListener' | 'FreezeEventListener' | 'ResumeEventListener' | 'ContainsPlugins' | 'DocumentLoaded' | 'DedicatedWorkerOrWorklet' | 'OutstandingNetworkRequestOthers' | 'OutstandingIndexedDBTransaction' | 'RequestedGeolocationPermission' | 'RequestedNotificationsPermission' | 'RequestedMIDIPermission' | 'RequestedAudioCapturePermission' | 'RequestedVideoCapturePermission' | 'RequestedBackForwardCacheBlockedSensors' | 'RequestedBackgroundWorkPermission' | 'BroadcastChannel' | 'IndexedDBConnection' | 'WebVR' | 'WebXR' | 'SharedWorker' | 'WebLocks' | 'WebHID' | 'WebShare' | 'RequestedStorageAccessGrant' | 'WebNfc' | 'WebFileSystem' | 'OutstandingNetworkRequestFetch' | 'OutstandingNetworkRequestXHR' | 'AppBanner' | 'Printing' | 'WebDatabase' | 'PictureInPicture' | 'Portal' | 'SpeechRecognizer' | 'IdleManager' | 'PaymentManager' | 'SpeechSynthesis' | 'KeyboardLock' | 'WebOTPService' | 'OutstandingNetworkRequestDirectSocket' | 'IsolatedWorldScript' | 'InjectedStyleSheet' | 'MediaSessionImplOnServiceCreated' | 'Unknown');
-
         /**
          * Types of not restored reasons for back-forward cache.
          */
         type BackForwardCacheNotRestoredReasonType = ('SupportPending' | 'PageSupportNeeded' | 'Circumstantial');
-
         interface BackForwardCacheNotRestoredExplanation {
             /**
              * Type of the reason
@@ -12070,18 +11201,15 @@ export namespace Protocol {
              */
             reason: BackForwardCacheNotRestoredReason;
         }
-
         interface AddScriptToEvaluateOnLoadRequest {
             scriptSource: string;
         }
-
         interface AddScriptToEvaluateOnLoadResponse {
             /**
              * Identifier of the added script.
              */
             identifier: ScriptIdentifier;
         }
-
         interface AddScriptToEvaluateOnNewDocumentRequest {
             source: string;
             /**
@@ -12096,19 +11224,16 @@ export namespace Protocol {
              */
             includeCommandLineAPI?: boolean;
         }
-
         interface AddScriptToEvaluateOnNewDocumentResponse {
             /**
              * Identifier of the added script.
              */
             identifier: ScriptIdentifier;
         }
-
         const enum CaptureScreenshotRequestFormat {
             Jpeg = 'jpeg',
             Png = 'png',
         }
-
         interface CaptureScreenshotRequest {
             /**
              * Image compression format (defaults to png). (CaptureScreenshotRequestFormat enum)
@@ -12131,32 +11256,27 @@ export namespace Protocol {
              */
             captureBeyondViewport?: boolean;
         }
-
         interface CaptureScreenshotResponse {
             /**
              * Base64-encoded image data. (Encoded as a base64 string when passed over JSON)
              */
             data: string;
         }
-
         const enum CaptureSnapshotRequestFormat {
             MHTML = 'mhtml',
         }
-
         interface CaptureSnapshotRequest {
             /**
              * Format (defaults to mhtml). (CaptureSnapshotRequestFormat enum)
              */
             format?: ('mhtml');
         }
-
         interface CaptureSnapshotResponse {
             /**
              * Serialized page data.
              */
             data: string;
         }
-
         interface CreateIsolatedWorldRequest {
             /**
              * Id of the frame in which the isolated world should be created.
@@ -12172,14 +11292,12 @@ export namespace Protocol {
              */
             grantUniveralAccess?: boolean;
         }
-
         interface CreateIsolatedWorldResponse {
             /**
              * Execution context of the isolated world.
              */
             executionContextId: Runtime.ExecutionContextId;
         }
-
         interface DeleteCookieRequest {
             /**
              * Name of the cookie to remove.
@@ -12190,7 +11308,6 @@ export namespace Protocol {
              */
             url: string;
         }
-
         interface GetAppManifestResponse {
             /**
              * Manifest location.
@@ -12206,29 +11323,24 @@ export namespace Protocol {
              */
             parsed?: AppManifestParsedProperties;
         }
-
         interface GetInstallabilityErrorsResponse {
             installabilityErrors: InstallabilityError[];
         }
-
         interface GetManifestIconsResponse {
             primaryIcon?: string;
         }
-
         interface GetCookiesResponse {
             /**
              * Array of cookie objects.
              */
             cookies: Network.Cookie[];
         }
-
         interface GetFrameTreeResponse {
             /**
              * Present frame tree structure.
              */
             frameTree: FrameTree;
         }
-
         interface GetLayoutMetricsResponse {
             /**
              * Deprecated metrics relating to the layout viewport. Can be in DP or in CSS pixels depending on the `enable-use-zoom-for-dsf` flag. Use `cssLayoutViewport` instead.
@@ -12255,7 +11367,6 @@ export namespace Protocol {
              */
             cssContentSize: DOM.Rect;
         }
-
         interface GetNavigationHistoryResponse {
             /**
              * Index of the current navigation history entry.
@@ -12266,7 +11377,6 @@ export namespace Protocol {
              */
             entries: NavigationEntry[];
         }
-
         interface GetResourceContentRequest {
             /**
              * Frame id to get resource for.
@@ -12277,7 +11387,6 @@ export namespace Protocol {
              */
             url: string;
         }
-
         interface GetResourceContentResponse {
             /**
              * Resource content.
@@ -12288,14 +11397,12 @@ export namespace Protocol {
              */
             base64Encoded: boolean;
         }
-
         interface GetResourceTreeResponse {
             /**
              * Present frame / resource tree structure.
              */
             frameTree: FrameResourceTree;
         }
-
         interface HandleJavaScriptDialogRequest {
             /**
              * Whether to accept or dismiss the dialog.
@@ -12307,7 +11414,6 @@ export namespace Protocol {
              */
             promptText?: string;
         }
-
         interface NavigateRequest {
             /**
              * URL to navigate the page to.
@@ -12330,7 +11436,6 @@ export namespace Protocol {
              */
             referrerPolicy?: ReferrerPolicy;
         }
-
         interface NavigateResponse {
             /**
              * Frame id that has navigated (or failed to navigate)
@@ -12345,19 +11450,16 @@ export namespace Protocol {
              */
             errorText?: string;
         }
-
         interface NavigateToHistoryEntryRequest {
             /**
              * Unique id of the entry to navigate to.
              */
             entryId: integer;
         }
-
         const enum PrintToPDFRequestTransferMode {
             ReturnAsBase64 = 'ReturnAsBase64',
             ReturnAsStream = 'ReturnAsStream',
         }
-
         interface PrintToPDFRequest {
             /**
              * Paper orientation. Defaults to false.
@@ -12435,7 +11537,6 @@ export namespace Protocol {
              */
             transferMode?: ('ReturnAsBase64' | 'ReturnAsStream');
         }
-
         interface PrintToPDFResponse {
             /**
              * Base64-encoded pdf data. Empty if |returnAsStream| is specified. (Encoded as a base64 string when passed over JSON)
@@ -12446,7 +11547,6 @@ export namespace Protocol {
              */
             stream?: IO.StreamHandle;
         }
-
         interface ReloadRequest {
             /**
              * If true, browser cache is ignored (as if the user pressed Shift+refresh).
@@ -12458,22 +11558,18 @@ export namespace Protocol {
              */
             scriptToEvaluateOnLoad?: string;
         }
-
         interface RemoveScriptToEvaluateOnLoadRequest {
             identifier: ScriptIdentifier;
         }
-
         interface RemoveScriptToEvaluateOnNewDocumentRequest {
             identifier: ScriptIdentifier;
         }
-
         interface ScreencastFrameAckRequest {
             /**
              * Frame number.
              */
             sessionId: integer;
         }
-
         interface SearchInResourceRequest {
             /**
              * Frame id for resource to search in.
@@ -12496,36 +11592,30 @@ export namespace Protocol {
              */
             isRegex?: boolean;
         }
-
         interface SearchInResourceResponse {
             /**
              * List of search matches.
              */
             result: Debugger.SearchMatch[];
         }
-
         interface SetAdBlockingEnabledRequest {
             /**
              * Whether to block ads.
              */
             enabled: boolean;
         }
-
         interface SetBypassCSPRequest {
             /**
              * Whether to bypass page CSP.
              */
             enabled: boolean;
         }
-
         interface GetPermissionsPolicyStateRequest {
             frameId: FrameId;
         }
-
         interface GetPermissionsPolicyStateResponse {
             states: PermissionsPolicyFeatureState[];
         }
-
         interface SetDeviceMetricsOverrideRequest {
             /**
              * Overriding width value in pixels (minimum 0, maximum 10000000). 0 disables the override.
@@ -12577,7 +11667,6 @@ export namespace Protocol {
              */
             viewport?: Viewport;
         }
-
         interface SetDeviceOrientationOverrideRequest {
             /**
              * Mock alpha
@@ -12592,21 +11681,18 @@ export namespace Protocol {
              */
             gamma: number;
         }
-
         interface SetFontFamiliesRequest {
             /**
              * Specifies font families to set. If a font family is not specified, it won't be changed.
              */
             fontFamilies: FontFamilies;
         }
-
         interface SetFontSizesRequest {
             /**
              * Specifies font sizes to set. If a font size is not specified, it won't be changed.
              */
             fontSizes: FontSizes;
         }
-
         interface SetDocumentContentRequest {
             /**
              * Frame id to set HTML for.
@@ -12617,13 +11703,11 @@ export namespace Protocol {
              */
             html: string;
         }
-
         const enum SetDownloadBehaviorRequestBehavior {
             Deny = 'deny',
             Allow = 'allow',
             Default = 'default',
         }
-
         interface SetDownloadBehaviorRequest {
             /**
              * Whether to allow all or deny all download requests, or use default Chrome behavior if
@@ -12635,7 +11719,6 @@ export namespace Protocol {
              */
             downloadPath?: string;
         }
-
         interface SetGeolocationOverrideRequest {
             /**
              * Mock latitude
@@ -12650,19 +11733,16 @@ export namespace Protocol {
              */
             accuracy?: number;
         }
-
         interface SetLifecycleEventsEnabledRequest {
             /**
              * If true, starts emitting lifecycle events.
              */
             enabled: boolean;
         }
-
         const enum SetTouchEmulationEnabledRequestConfiguration {
             Mobile = 'mobile',
             Desktop = 'desktop',
         }
-
         interface SetTouchEmulationEnabledRequest {
             /**
              * Whether the touch event emulation should be enabled.
@@ -12673,12 +11753,10 @@ export namespace Protocol {
              */
             configuration?: ('mobile' | 'desktop');
         }
-
         const enum StartScreencastRequestFormat {
             Jpeg = 'jpeg',
             Png = 'png',
         }
-
         interface StartScreencastRequest {
             /**
              * Image compression format. (StartScreencastRequestFormat enum)
@@ -12701,27 +11779,22 @@ export namespace Protocol {
              */
             everyNthFrame?: integer;
         }
-
         const enum SetWebLifecycleStateRequestState {
             Frozen = 'frozen',
             Active = 'active',
         }
-
         interface SetWebLifecycleStateRequest {
             /**
              * Target lifecycle state (SetWebLifecycleStateRequestState enum)
              */
             state: ('frozen' | 'active');
         }
-
         interface SetProduceCompilationCacheRequest {
             enabled: boolean;
         }
-
         interface ProduceCompilationCacheRequest {
             scripts: CompilationCacheParams[];
         }
-
         interface AddCompilationCacheRequest {
             url: string;
             /**
@@ -12729,7 +11802,6 @@ export namespace Protocol {
              */
             data: string;
         }
-
         interface GenerateTestReportRequest {
             /**
              * Message to be displayed in the report.
@@ -12740,20 +11812,16 @@ export namespace Protocol {
              */
             group?: string;
         }
-
         interface SetInterceptFileChooserDialogRequest {
             enabled: boolean;
         }
-
         interface DomContentEventFiredEvent {
             timestamp: Network.MonotonicTime;
         }
-
         const enum FileChooserOpenedEventMode {
             SelectSingle = 'selectSingle',
             SelectMultiple = 'selectMultiple',
         }
-
         /**
          * Emitted only when `page.interceptFileChooser` is enabled.
          */
@@ -12771,7 +11839,6 @@ export namespace Protocol {
              */
             mode: ('selectSingle' | 'selectMultiple');
         }
-
         /**
          * Fired when frame has been attached to its parent.
          */
@@ -12789,7 +11856,6 @@ export namespace Protocol {
              */
             stack?: Runtime.StackTrace;
         }
-
         /**
          * Fired when frame no longer has a scheduled navigation.
          */
@@ -12799,12 +11865,10 @@ export namespace Protocol {
              */
             frameId: FrameId;
         }
-
         const enum FrameDetachedEventReason {
             Remove = 'remove',
             Swap = 'swap',
         }
-
         /**
          * Fired when frame has been detached from its parent.
          */
@@ -12818,7 +11882,6 @@ export namespace Protocol {
              */
             reason: ('remove' | 'swap');
         }
-
         /**
          * Fired once navigation of the frame has completed. Frame is now associated with the new loader.
          */
@@ -12829,7 +11892,6 @@ export namespace Protocol {
             frame: Frame;
             type: NavigationType;
         }
-
         /**
          * Fired when opening document to write to.
          */
@@ -12839,7 +11901,6 @@ export namespace Protocol {
              */
             frame: Frame;
         }
-
         /**
          * Fired when a renderer-initiated navigation is requested.
          * Navigation may still be cancelled after the event is issued.
@@ -12862,7 +11923,6 @@ export namespace Protocol {
              */
             disposition: ClientNavigationDisposition;
         }
-
         /**
          * Fired when frame schedules a potential navigation.
          */
@@ -12885,7 +11945,6 @@ export namespace Protocol {
              */
             url: string;
         }
-
         /**
          * Fired when frame has started loading.
          */
@@ -12895,7 +11954,6 @@ export namespace Protocol {
              */
             frameId: FrameId;
         }
-
         /**
          * Fired when frame has stopped loading.
          */
@@ -12905,7 +11963,6 @@ export namespace Protocol {
              */
             frameId: FrameId;
         }
-
         /**
          * Fired when page is about to start a download.
          * Deprecated. Use Browser.downloadWillBegin instead.
@@ -12928,13 +11985,11 @@ export namespace Protocol {
              */
             suggestedFilename: string;
         }
-
         const enum DownloadProgressEventState {
             InProgress = 'inProgress',
             Completed = 'completed',
             Canceled = 'canceled',
         }
-
         /**
          * Fired when download makes progress. Last call has |done| == true.
          * Deprecated. Use Browser.downloadProgress instead.
@@ -12957,7 +12012,6 @@ export namespace Protocol {
              */
             state: ('inProgress' | 'completed' | 'canceled');
         }
-
         /**
          * Fired when a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunload) has been
          * closed.
@@ -12972,7 +12026,6 @@ export namespace Protocol {
              */
             userInput: string;
         }
-
         /**
          * Fired when a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunload) is about to
          * open.
@@ -13001,7 +12054,6 @@ export namespace Protocol {
              */
             defaultPrompt?: string;
         }
-
         /**
          * Fired for top level page lifecycle events such as navigation, load, paint, etc.
          */
@@ -13017,7 +12069,6 @@ export namespace Protocol {
             name: string;
             timestamp: Network.MonotonicTime;
         }
-
         /**
          * Fired for failed bfcache history navigations if BackForwardCache feature is enabled. Do
          * not assume any ordering with the Page.frameNavigated event. This event is fired only for
@@ -13038,11 +12089,9 @@ export namespace Protocol {
              */
             notRestoredExplanations: BackForwardCacheNotRestoredExplanation[];
         }
-
         interface LoadEventFiredEvent {
             timestamp: Network.MonotonicTime;
         }
-
         /**
          * Fired when same-document navigation happens, e.g. due to history API usage or anchor navigation.
          */
@@ -13056,7 +12105,6 @@ export namespace Protocol {
              */
             url: string;
         }
-
         /**
          * Compressed image data requested by the `startScreencast`.
          */
@@ -13074,7 +12122,6 @@ export namespace Protocol {
              */
             sessionId: integer;
         }
-
         /**
          * Fired when the page with currently enabled screencast was shown or hidden `.
          */
@@ -13084,7 +12131,6 @@ export namespace Protocol {
              */
             visible: boolean;
         }
-
         /**
          * Fired when a new window is going to be opened, via window.open(), link click, form submission,
          * etc.
@@ -13107,7 +12153,6 @@ export namespace Protocol {
              */
             userGesture: boolean;
         }
-
         /**
          * Issued for every compilation cache generated. Is only available
          * if Page.setGenerateCompilationCache is enabled.
@@ -13122,7 +12167,6 @@ export namespace Protocol {
     }
 
     namespace Performance {
-
         /**
          * Run-time execution metric.
          */
@@ -13136,38 +12180,32 @@ export namespace Protocol {
              */
             value: number;
         }
-
         const enum EnableRequestTimeDomain {
             TimeTicks = 'timeTicks',
             ThreadTicks = 'threadTicks',
         }
-
         interface EnableRequest {
             /**
              * Time domain to use for collecting and reporting duration metrics. (EnableRequestTimeDomain enum)
              */
             timeDomain?: ('timeTicks' | 'threadTicks');
         }
-
         const enum SetTimeDomainRequestTimeDomain {
             TimeTicks = 'timeTicks',
             ThreadTicks = 'threadTicks',
         }
-
         interface SetTimeDomainRequest {
             /**
              * Time domain (SetTimeDomainRequestTimeDomain enum)
              */
             timeDomain: ('timeTicks' | 'threadTicks');
         }
-
         interface GetMetricsResponse {
             /**
              * Current values for run-time metrics.
              */
             metrics: Metric[];
         }
-
         /**
          * Current values of the metrics.
          */
@@ -13188,7 +12226,6 @@ export namespace Protocol {
      * https://w3c.github.io/performance-timeline/#dom-performanceobserver.
      */
     namespace PerformanceTimeline {
-
         /**
          * See https://github.com/WICG/LargestContentfulPaint and largest_contentful_paint.idl
          */
@@ -13209,13 +12246,11 @@ export namespace Protocol {
             url?: string;
             nodeId?: DOM.BackendNodeId;
         }
-
         interface LayoutShiftAttribution {
             previousRect: DOM.Rect;
             currentRect: DOM.Rect;
             nodeId?: DOM.BackendNodeId;
         }
-
         /**
          * See https://wicg.github.io/layout-instability/#sec-layout-shift and layout_shift.idl
          */
@@ -13228,7 +12263,6 @@ export namespace Protocol {
             lastInputTime: Network.TimeSinceEpoch;
             sources: LayoutShiftAttribution[];
         }
-
         interface TimelineEvent {
             /**
              * Identifies the frame that this event is related to. Empty for non-frame targets.
@@ -13254,7 +12288,6 @@ export namespace Protocol {
             lcpDetails?: LargestContentfulPaint;
             layoutShiftDetails?: LayoutShift;
         }
-
         interface EnableRequest {
             /**
              * The types of event to report, as specified in
@@ -13265,7 +12298,6 @@ export namespace Protocol {
              */
             eventTypes: string[];
         }
-
         /**
          * Sent when a performance timeline event is added. See reportPerformanceTimeline method.
          */
@@ -13278,23 +12310,19 @@ export namespace Protocol {
      * Security
      */
     namespace Security {
-
         /**
          * An internal certificate ID value.
          */
         type CertificateId = integer;
-
         /**
          * A description of mixed content (HTTP resources on HTTPS pages), as defined by
          * https://www.w3.org/TR/mixed-content/#categories
          */
         type MixedContentType = ('blockable' | 'optionally-blockable' | 'none');
-
         /**
          * The security level of a page or resource.
          */
         type SecurityState = ('unknown' | 'neutral' | 'insecure' | 'secure' | 'info' | 'insecure-broken');
-
         /**
          * Details about the security state of the page certificate.
          */
@@ -13372,9 +12400,7 @@ export namespace Protocol {
              */
             obsoleteSslSignature: boolean;
         }
-
         type SafetyTipStatus = ('badReputation' | 'lookalike');
-
         interface SafetyTipInfo {
             /**
              * Describes whether the page triggers any safety tips or reputation warnings. Default is unknown.
@@ -13385,7 +12411,6 @@ export namespace Protocol {
              */
             safeUrl?: string;
         }
-
         /**
          * Security state information about the page.
          */
@@ -13407,7 +12432,6 @@ export namespace Protocol {
              */
             securityStateIssueIds: string[];
         }
-
         /**
          * An explanation of an factor contributing to the security state.
          */
@@ -13441,7 +12465,6 @@ export namespace Protocol {
              */
             recommendations?: string[];
         }
-
         /**
          * Information about insecure content on the page.
          */
@@ -13475,20 +12498,17 @@ export namespace Protocol {
              */
             displayedInsecureContentStyle: SecurityState;
         }
-
         /**
          * The action to take when a certificate error occurs. continue will continue processing the
          * request and cancel will cancel the request.
          */
         type CertificateErrorAction = ('continue' | 'cancel');
-
         interface SetIgnoreCertificateErrorsRequest {
             /**
              * If true, all certificate errors will be ignored.
              */
             ignore: boolean;
         }
-
         interface HandleCertificateErrorRequest {
             /**
              * The ID of the event.
@@ -13499,14 +12519,12 @@ export namespace Protocol {
              */
             action: CertificateErrorAction;
         }
-
         interface SetOverrideCertificateErrorsRequest {
             /**
              * If true, certificate errors will be overridden.
              */
             override: boolean;
         }
-
         /**
          * There is a certificate error. If overriding certificate errors is enabled, then it should be
          * handled with the `handleCertificateError` command. Note: this event does not fire if the
@@ -13527,7 +12545,6 @@ export namespace Protocol {
              */
             requestURL: string;
         }
-
         /**
          * The security state of the page changed.
          */
@@ -13537,7 +12554,6 @@ export namespace Protocol {
              */
             visibleSecurityState: VisibleSecurityState;
         }
-
         /**
          * The security state of the page changed.
          */
@@ -13567,9 +12583,7 @@ export namespace Protocol {
     }
 
     namespace ServiceWorker {
-
         type RegistrationID = string;
-
         /**
          * ServiceWorker registration.
          */
@@ -13578,11 +12592,8 @@ export namespace Protocol {
             scopeURL: string;
             isDeleted: boolean;
         }
-
         type ServiceWorkerVersionRunningStatus = ('stopped' | 'starting' | 'running' | 'stopping');
-
         type ServiceWorkerVersionStatus = ('new' | 'installing' | 'installed' | 'activating' | 'activated' | 'redundant');
-
         /**
          * ServiceWorker version.
          */
@@ -13604,7 +12615,6 @@ export namespace Protocol {
             controlledClients?: Target.TargetID[];
             targetId?: Target.TargetID;
         }
-
         /**
          * ServiceWorker error message.
          */
@@ -13616,74 +12626,59 @@ export namespace Protocol {
             lineNumber: integer;
             columnNumber: integer;
         }
-
         interface DeliverPushMessageRequest {
             origin: string;
             registrationId: RegistrationID;
             data: string;
         }
-
         interface DispatchSyncEventRequest {
             origin: string;
             registrationId: RegistrationID;
             tag: string;
             lastChance: boolean;
         }
-
         interface DispatchPeriodicSyncEventRequest {
             origin: string;
             registrationId: RegistrationID;
             tag: string;
         }
-
         interface InspectWorkerRequest {
             versionId: string;
         }
-
         interface SetForceUpdateOnPageLoadRequest {
             forceUpdateOnPageLoad: boolean;
         }
-
         interface SkipWaitingRequest {
             scopeURL: string;
         }
-
         interface StartWorkerRequest {
             scopeURL: string;
         }
-
         interface StopWorkerRequest {
             versionId: string;
         }
-
         interface UnregisterRequest {
             scopeURL: string;
         }
-
         interface UpdateRegistrationRequest {
             scopeURL: string;
         }
-
         interface WorkerErrorReportedEvent {
             errorMessage: ServiceWorkerErrorMessage;
         }
-
         interface WorkerRegistrationUpdatedEvent {
             registrations: ServiceWorkerRegistration[];
         }
-
         interface WorkerVersionUpdatedEvent {
             versions: ServiceWorkerVersion[];
         }
     }
 
     namespace Storage {
-
         /**
          * Enum of possible storage types.
          */
         type StorageType = ('appcache' | 'cookies' | 'file_systems' | 'indexeddb' | 'local_storage' | 'shader_cache' | 'websql' | 'service_workers' | 'cache_storage' | 'all' | 'other');
-
         /**
          * Usage for a storage type.
          */
@@ -13697,7 +12692,6 @@ export namespace Protocol {
              */
             usage: number;
         }
-
         /**
          * Pair of issuer origin and number of available (signed, but not used) Trust
          * Tokens from that issuer.
@@ -13706,7 +12700,6 @@ export namespace Protocol {
             issuerOrigin: string;
             count: number;
         }
-
         interface ClearDataForOriginRequest {
             /**
              * Security origin.
@@ -13717,21 +12710,18 @@ export namespace Protocol {
              */
             storageTypes: string;
         }
-
         interface GetCookiesRequest {
             /**
              * Browser context to use when called on the browser endpoint.
              */
             browserContextId?: Browser.BrowserContextID;
         }
-
         interface GetCookiesResponse {
             /**
              * Array of cookie objects.
              */
             cookies: Network.Cookie[];
         }
-
         interface SetCookiesRequest {
             /**
              * Cookies to be set.
@@ -13742,21 +12732,18 @@ export namespace Protocol {
              */
             browserContextId?: Browser.BrowserContextID;
         }
-
         interface ClearCookiesRequest {
             /**
              * Browser context to use when called on the browser endpoint.
              */
             browserContextId?: Browser.BrowserContextID;
         }
-
         interface GetUsageAndQuotaRequest {
             /**
              * Security origin.
              */
             origin: string;
         }
-
         interface GetUsageAndQuotaResponse {
             /**
              * Storage usage (bytes).
@@ -13775,7 +12762,6 @@ export namespace Protocol {
              */
             usageBreakdown: UsageForType[];
         }
-
         interface OverrideQuotaForOriginRequest {
             /**
              * Security origin.
@@ -13792,50 +12778,42 @@ export namespace Protocol {
              */
             quotaSize?: number;
         }
-
         interface TrackCacheStorageForOriginRequest {
             /**
              * Security origin.
              */
             origin: string;
         }
-
         interface TrackIndexedDBForOriginRequest {
             /**
              * Security origin.
              */
             origin: string;
         }
-
         interface UntrackCacheStorageForOriginRequest {
             /**
              * Security origin.
              */
             origin: string;
         }
-
         interface UntrackIndexedDBForOriginRequest {
             /**
              * Security origin.
              */
             origin: string;
         }
-
         interface GetTrustTokensResponse {
             tokens: TrustTokens[];
         }
-
         interface ClearTrustTokensRequest {
             issuerOrigin: string;
         }
-
         interface ClearTrustTokensResponse {
             /**
              * True if any tokens were deleted, false otherwise.
              */
             didDeleteTokens: boolean;
         }
-
         /**
          * A cache's contents have been modified.
          */
@@ -13849,7 +12827,6 @@ export namespace Protocol {
              */
             cacheName: string;
         }
-
         /**
          * A cache has been added/deleted.
          */
@@ -13859,7 +12836,6 @@ export namespace Protocol {
              */
             origin: string;
         }
-
         /**
          * The origin's IndexedDB object store has been modified.
          */
@@ -13877,7 +12853,6 @@ export namespace Protocol {
              */
             objectStoreName: string;
         }
-
         /**
          * The origin's IndexedDB database list has been modified.
          */
@@ -13893,7 +12868,6 @@ export namespace Protocol {
      * The SystemInfo domain defines methods and events for querying low-level system information.
      */
     namespace SystemInfo {
-
         /**
          * Describes a single graphics processor (GPU).
          */
@@ -13931,7 +12905,6 @@ export namespace Protocol {
              */
             driverVersion: string;
         }
-
         /**
          * Describes the width and height dimensions of an entity.
          */
@@ -13945,7 +12918,6 @@ export namespace Protocol {
              */
             height: integer;
         }
-
         /**
          * Describes a supported video decoding profile with its associated minimum and
          * maximum resolutions.
@@ -13964,7 +12936,6 @@ export namespace Protocol {
              */
             minResolution: Size;
         }
-
         /**
          * Describes a supported video encoding profile with its associated maximum
          * resolution and maximum framerate.
@@ -13986,17 +12957,14 @@ export namespace Protocol {
             maxFramerateNumerator: integer;
             maxFramerateDenominator: integer;
         }
-
         /**
          * YUV subsampling type of the pixels of a given image.
          */
         type SubsamplingFormat = ('yuv420' | 'yuv422' | 'yuv444');
-
         /**
          * Image format of a given image.
          */
         type ImageType = ('jpeg' | 'webp' | 'unknown');
-
         /**
          * Describes a supported image decoding profile with its associated minimum and
          * maximum resolutions and subsampling.
@@ -14019,7 +12987,6 @@ export namespace Protocol {
              */
             subsamplings: SubsamplingFormat[];
         }
-
         /**
          * Provides information about the GPU(s) on the system.
          */
@@ -14053,7 +13020,6 @@ export namespace Protocol {
              */
             imageDecoding: ImageDecodeAcceleratorCapability[];
         }
-
         /**
          * Represents process info.
          */
@@ -14072,7 +13038,6 @@ export namespace Protocol {
              */
             cpuTime: number;
         }
-
         interface GetInfoResponse {
             /**
              * Information about the GPUs on the system.
@@ -14094,7 +13059,6 @@ export namespace Protocol {
              */
             commandLine: string;
         }
-
         interface GetProcessInfoResponse {
             /**
              * An array of process info blocks.
@@ -14107,14 +13071,11 @@ export namespace Protocol {
      * Supports additional targets discovery and allows to attach to them.
      */
     namespace Target {
-
         type TargetID = string;
-
         /**
          * Unique identifier of attached debugging session.
          */
         type SessionID = string;
-
         interface TargetInfo {
             targetId: TargetID;
             type: string;
@@ -14138,16 +13099,13 @@ export namespace Protocol {
             openerFrameId?: Page.FrameId;
             browserContextId?: Browser.BrowserContextID;
         }
-
         interface RemoteLocation {
             host: string;
             port: integer;
         }
-
         interface ActivateTargetRequest {
             targetId: TargetID;
         }
-
         interface AttachToTargetRequest {
             targetId: TargetID;
             /**
@@ -14157,32 +13115,27 @@ export namespace Protocol {
              */
             flatten?: boolean;
         }
-
         interface AttachToTargetResponse {
             /**
              * Id assigned to the session.
              */
             sessionId: SessionID;
         }
-
         interface AttachToBrowserTargetResponse {
             /**
              * Id assigned to the session.
              */
             sessionId: SessionID;
         }
-
         interface CloseTargetRequest {
             targetId: TargetID;
         }
-
         interface CloseTargetResponse {
             /**
              * Always set to true. If an error occurs, the response indicates protocol error.
              */
             success: boolean;
         }
-
         interface ExposeDevToolsProtocolRequest {
             targetId: TargetID;
             /**
@@ -14190,7 +13143,6 @@ export namespace Protocol {
              */
             bindingName?: string;
         }
-
         interface CreateBrowserContextRequest {
             /**
              * If specified, disposes this context when debugging session disconnects.
@@ -14205,21 +13157,18 @@ export namespace Protocol {
              */
             proxyBypassList?: string;
         }
-
         interface CreateBrowserContextResponse {
             /**
              * The id of the context created.
              */
             browserContextId: Browser.BrowserContextID;
         }
-
         interface GetBrowserContextsResponse {
             /**
              * An array of browser context ids.
              */
             browserContextIds: Browser.BrowserContextID[];
         }
-
         interface CreateTargetRequest {
             /**
              * The initial URL the page will be navigated to. An empty string indicates about:blank.
@@ -14252,14 +13201,12 @@ export namespace Protocol {
              */
             background?: boolean;
         }
-
         interface CreateTargetResponse {
             /**
              * The id of the page opened.
              */
             targetId: TargetID;
         }
-
         interface DetachFromTargetRequest {
             /**
              * Session to detach.
@@ -14270,26 +13217,21 @@ export namespace Protocol {
              */
             targetId?: TargetID;
         }
-
         interface DisposeBrowserContextRequest {
             browserContextId: Browser.BrowserContextID;
         }
-
         interface GetTargetInfoRequest {
             targetId?: TargetID;
         }
-
         interface GetTargetInfoResponse {
             targetInfo: TargetInfo;
         }
-
         interface GetTargetsResponse {
             /**
              * The list of targets.
              */
             targetInfos: TargetInfo[];
         }
-
         interface SendMessageToTargetRequest {
             message: string;
             /**
@@ -14301,7 +13243,6 @@ export namespace Protocol {
              */
             targetId?: TargetID;
         }
-
         interface SetAutoAttachRequest {
             /**
              * Whether to auto-attach to related targets.
@@ -14319,21 +13260,18 @@ export namespace Protocol {
              */
             flatten?: boolean;
         }
-
         interface SetDiscoverTargetsRequest {
             /**
              * Whether to discover available targets.
              */
             discover: boolean;
         }
-
         interface SetRemoteLocationsRequest {
             /**
              * List of remote locations.
              */
             locations: RemoteLocation[];
         }
-
         /**
          * Issued when attached to target because of auto-attach or `attachToTarget` command.
          */
@@ -14345,7 +13283,6 @@ export namespace Protocol {
             targetInfo: TargetInfo;
             waitingForDebugger: boolean;
         }
-
         /**
          * Issued when detached from target for any reason (including `detachFromTarget` command). Can be
          * issued multiple times per target if multiple sessions have been attached to it.
@@ -14360,7 +13297,6 @@ export namespace Protocol {
              */
             targetId?: TargetID;
         }
-
         /**
          * Notifies about a new protocol message received from the session (as reported in
          * `attachedToTarget` event).
@@ -14376,21 +13312,18 @@ export namespace Protocol {
              */
             targetId?: TargetID;
         }
-
         /**
          * Issued when a possible inspection target is created.
          */
         interface TargetCreatedEvent {
             targetInfo: TargetInfo;
         }
-
         /**
          * Issued when a target is destroyed.
          */
         interface TargetDestroyedEvent {
             targetId: TargetID;
         }
-
         /**
          * Issued when a target has crashed.
          */
@@ -14405,7 +13338,6 @@ export namespace Protocol {
              */
             errorCode: integer;
         }
-
         /**
          * Issued when some information about a target has changed. This only happens between
          * `targetCreated` and `targetDestroyed`.
@@ -14419,21 +13351,18 @@ export namespace Protocol {
      * The Tethering domain defines methods and events for browser port binding.
      */
     namespace Tethering {
-
         interface BindRequest {
             /**
              * Port number to bind.
              */
             port: integer;
         }
-
         interface UnbindRequest {
             /**
              * Port number to unbind.
              */
             port: integer;
         }
-
         /**
          * Informs that port was successfully bound and got a specified connection id.
          */
@@ -14450,21 +13379,18 @@ export namespace Protocol {
     }
 
     namespace Tracing {
-
         /**
          * Configuration for memory dump. Used only when "memory-infra" category is enabled.
          */
         interface MemoryDumpConfig {
             [key: string]: string;
         }
-
         const enum TraceConfigRecordMode {
             RecordUntilFull = 'recordUntilFull',
             RecordContinuously = 'recordContinuously',
             RecordAsMuchAsPossible = 'recordAsMuchAsPossible',
             EchoToConsole = 'echoToConsole',
         }
-
         interface TraceConfig {
             /**
              * Controls how the trace buffer stores data. (TraceConfigRecordMode enum)
@@ -14499,25 +13425,21 @@ export namespace Protocol {
              */
             memoryDumpConfig?: MemoryDumpConfig;
         }
-
         /**
          * Data format of a trace. Can be either the legacy JSON format or the
          * protocol buffer format. Note that the JSON format will be deprecated soon.
          */
         type StreamFormat = ('json' | 'proto');
-
         /**
          * Compression type to use for traces returned via streams.
          */
         type StreamCompression = ('none' | 'gzip');
-
         /**
          * Details exposed when memory request explicitly declared.
          * Keep consistent with memory_dump_request_args.h and
          * memory_instrumentation.mojom
          */
         type MemoryDumpLevelOfDetail = ('background' | 'light' | 'detailed');
-
         /**
          * Backend type to use for tracing. `chrome` uses the Chrome-integrated
          * tracing service and is supported on all platforms. `system` is only
@@ -14526,21 +13448,18 @@ export namespace Protocol {
          * specifies at least one non-Chrome data source; otherwise uses `chrome`.
          */
         type TracingBackend = ('auto' | 'chrome' | 'system');
-
         interface GetCategoriesResponse {
             /**
              * A list of supported tracing categories.
              */
             categories: string[];
         }
-
         interface RecordClockSyncMarkerRequest {
             /**
              * The ID of this clock sync marker
              */
             syncId: string;
         }
-
         interface RequestMemoryDumpRequest {
             /**
              * Enables more deterministic results by forcing garbage collection
@@ -14551,7 +13470,6 @@ export namespace Protocol {
              */
             levelOfDetail?: MemoryDumpLevelOfDetail;
         }
-
         interface RequestMemoryDumpResponse {
             /**
              * GUID of the resulting global memory dump.
@@ -14562,12 +13480,10 @@ export namespace Protocol {
              */
             success: boolean;
         }
-
         const enum StartRequestTransferMode {
             ReportEvents = 'ReportEvents',
             ReturnAsStream = 'ReturnAsStream',
         }
-
         interface StartRequest {
             /**
              * Category/tag filter
@@ -14608,7 +13524,6 @@ export namespace Protocol {
              */
             tracingBackend?: TracingBackend;
         }
-
         interface BufferUsageEvent {
             /**
              * A number in range [0..1] that indicates the used size of event buffer as a fraction of its
@@ -14625,7 +13540,6 @@ export namespace Protocol {
              */
             value?: number;
         }
-
         /**
          * Contains an bucket of collected trace events. When tracing is stopped collected events will be
          * send as a sequence of dataCollected events followed by tracingComplete event.
@@ -14633,7 +13547,6 @@ export namespace Protocol {
         interface DataCollectedEvent {
             value: any[];
         }
-
         /**
          * Signals that tracing is stopped and there is no trace buffers pending flush, all data were
          * delivered via dataCollected events.
@@ -14663,19 +13576,16 @@ export namespace Protocol {
      * A domain for letting clients substitute browser's network layer with client code.
      */
     namespace Fetch {
-
         /**
          * Unique request identifier.
          */
         type RequestId = string;
-
         /**
          * Stages of the request to handle. Request will intercept before the request is
          * sent. Response will intercept after the response is received (but before response
          * body is received).
          */
         type RequestStage = ('Request' | 'Response');
-
         interface RequestPattern {
             /**
              * Wildcards (`'*'` -> zero or more, `'?'` -> exactly one) are allowed. Escape character is
@@ -14691,7 +13601,6 @@ export namespace Protocol {
              */
             requestStage?: RequestStage;
         }
-
         /**
          * Response HTTP header entry
          */
@@ -14699,12 +13608,10 @@ export namespace Protocol {
             name: string;
             value: string;
         }
-
         const enum AuthChallengeSource {
             Server = 'Server',
             Proxy = 'Proxy',
         }
-
         /**
          * Authorization challenge for HTTP status code 401 or 407.
          */
@@ -14726,13 +13633,11 @@ export namespace Protocol {
              */
             realm: string;
         }
-
         const enum AuthChallengeResponseResponse {
             Default = 'Default',
             CancelAuth = 'CancelAuth',
             ProvideCredentials = 'ProvideCredentials',
         }
-
         /**
          * Response to an AuthChallenge.
          */
@@ -14754,7 +13659,6 @@ export namespace Protocol {
              */
             password?: string;
         }
-
         interface EnableRequest {
             /**
              * If specified, only requests matching any of these patterns will produce
@@ -14768,7 +13672,6 @@ export namespace Protocol {
              */
             handleAuthRequests?: boolean;
         }
-
         interface FailRequestRequest {
             /**
              * An id the client received in requestPaused event.
@@ -14779,7 +13682,6 @@ export namespace Protocol {
              */
             errorReason: Network.ErrorReason;
         }
-
         interface FulfillRequestRequest {
             /**
              * An id the client received in requestPaused event.
@@ -14810,7 +13712,6 @@ export namespace Protocol {
              */
             responsePhrase?: string;
         }
-
         interface ContinueRequestRequest {
             /**
              * An id the client received in requestPaused event.
@@ -14833,7 +13734,6 @@ export namespace Protocol {
              */
             headers?: HeaderEntry[];
         }
-
         interface ContinueWithAuthRequest {
             /**
              * An id the client received in authRequired event.
@@ -14844,14 +13744,12 @@ export namespace Protocol {
              */
             authChallengeResponse: AuthChallengeResponse;
         }
-
         interface GetResponseBodyRequest {
             /**
              * Identifier for the intercepted request to get body for.
              */
             requestId: RequestId;
         }
-
         interface GetResponseBodyResponse {
             /**
              * Response body.
@@ -14862,15 +13760,12 @@ export namespace Protocol {
              */
             base64Encoded: boolean;
         }
-
         interface TakeResponseBodyAsStreamRequest {
             requestId: RequestId;
         }
-
         interface TakeResponseBodyAsStreamResponse {
             stream: IO.StreamHandle;
         }
-
         /**
          * Issued when the domain is enabled and the request URL matches the
          * specified filter. The request is paused until the client responds
@@ -14914,7 +13809,6 @@ export namespace Protocol {
              */
             networkId?: RequestId;
         }
-
         /**
          * Issued when the domain is enabled with handleAuthRequests set to true.
          * The request is paused until client responds with continueWithAuth.
@@ -14950,47 +13844,38 @@ export namespace Protocol {
      * https://webaudio.github.io/web-audio-api/
      */
     namespace WebAudio {
-
         /**
          * An unique ID for a graph object (AudioContext, AudioNode, AudioParam) in Web Audio API
          */
         type GraphObjectId = string;
-
         /**
          * Enum of BaseAudioContext types
          */
         type ContextType = ('realtime' | 'offline');
-
         /**
          * Enum of AudioContextState from the spec
          */
         type ContextState = ('suspended' | 'running' | 'closed');
-
         /**
          * Enum of AudioNode types
          */
         type NodeType = string;
-
         /**
          * Enum of AudioNode::ChannelCountMode from the spec
          */
         type ChannelCountMode = ('clamped-max' | 'explicit' | 'max');
-
         /**
          * Enum of AudioNode::ChannelInterpretation from the spec
          */
         type ChannelInterpretation = ('discrete' | 'speakers');
-
         /**
          * Enum of AudioParam types
          */
         type ParamType = string;
-
         /**
          * Enum of AudioParam::AutomationRate from the spec
          */
         type AutomationRate = ('a-rate' | 'k-rate');
-
         /**
          * Fields in AudioContext that change in real-time.
          */
@@ -15014,7 +13899,6 @@ export namespace Protocol {
              */
             callbackIntervalVariance: number;
         }
-
         /**
          * Protocol object for BaseAudioContext
          */
@@ -15036,7 +13920,6 @@ export namespace Protocol {
              */
             sampleRate: number;
         }
-
         /**
          * Protocol object for AudioListener
          */
@@ -15044,7 +13927,6 @@ export namespace Protocol {
             listenerId: GraphObjectId;
             contextId: GraphObjectId;
         }
-
         /**
          * Protocol object for AudioNode
          */
@@ -15058,7 +13940,6 @@ export namespace Protocol {
             channelCountMode: ChannelCountMode;
             channelInterpretation: ChannelInterpretation;
         }
-
         /**
          * Protocol object for AudioParam
          */
@@ -15072,43 +13953,36 @@ export namespace Protocol {
             minValue: number;
             maxValue: number;
         }
-
         interface GetRealtimeDataRequest {
             contextId: GraphObjectId;
         }
-
         interface GetRealtimeDataResponse {
             realtimeData: ContextRealtimeData;
         }
-
         /**
          * Notifies that a new BaseAudioContext has been created.
          */
         interface ContextCreatedEvent {
             context: BaseAudioContext;
         }
-
         /**
          * Notifies that an existing BaseAudioContext will be destroyed.
          */
         interface ContextWillBeDestroyedEvent {
             contextId: GraphObjectId;
         }
-
         /**
          * Notifies that existing BaseAudioContext has changed some properties (id stays the same)..
          */
         interface ContextChangedEvent {
             context: BaseAudioContext;
         }
-
         /**
          * Notifies that the construction of an AudioListener has finished.
          */
         interface AudioListenerCreatedEvent {
             listener: AudioListener;
         }
-
         /**
          * Notifies that a new AudioListener has been created.
          */
@@ -15116,14 +13990,12 @@ export namespace Protocol {
             contextId: GraphObjectId;
             listenerId: GraphObjectId;
         }
-
         /**
          * Notifies that a new AudioNode has been created.
          */
         interface AudioNodeCreatedEvent {
             node: AudioNode;
         }
-
         /**
          * Notifies that an existing AudioNode has been destroyed.
          */
@@ -15131,14 +14003,12 @@ export namespace Protocol {
             contextId: GraphObjectId;
             nodeId: GraphObjectId;
         }
-
         /**
          * Notifies that a new AudioParam has been created.
          */
         interface AudioParamCreatedEvent {
             param: AudioParam;
         }
-
         /**
          * Notifies that an existing AudioParam has been destroyed.
          */
@@ -15147,7 +14017,6 @@ export namespace Protocol {
             nodeId: GraphObjectId;
             paramId: GraphObjectId;
         }
-
         /**
          * Notifies that two AudioNodes are connected.
          */
@@ -15158,7 +14027,6 @@ export namespace Protocol {
             sourceOutputIndex?: number;
             destinationInputIndex?: number;
         }
-
         /**
          * Notifies that AudioNodes are disconnected. The destination can be null, and it means all the outgoing connections from the source are disconnected.
          */
@@ -15169,7 +14037,6 @@ export namespace Protocol {
             sourceOutputIndex?: number;
             destinationInputIndex?: number;
         }
-
         /**
          * Notifies that an AudioNode is connected to an AudioParam.
          */
@@ -15179,7 +14046,6 @@ export namespace Protocol {
             destinationId: GraphObjectId;
             sourceOutputIndex?: number;
         }
-
         /**
          * Notifies that an AudioNode is disconnected to an AudioParam.
          */
@@ -15196,15 +14062,10 @@ export namespace Protocol {
      * API.
      */
     namespace WebAuthn {
-
         type AuthenticatorId = string;
-
         type AuthenticatorProtocol = ('u2f' | 'ctap2');
-
         type Ctap2Version = ('ctap2_0' | 'ctap2_1');
-
         type AuthenticatorTransport = ('usb' | 'nfc' | 'ble' | 'cable' | 'internal');
-
         interface VirtualAuthenticatorOptions {
             protocol: AuthenticatorProtocol;
             /**
@@ -15243,7 +14104,6 @@ export namespace Protocol {
              */
             isUserVerified?: boolean;
         }
-
         interface Credential {
             credentialId: string;
             isResidentCredential: boolean;
@@ -15273,55 +14133,43 @@ export namespace Protocol {
              */
             largeBlob?: string;
         }
-
         interface AddVirtualAuthenticatorRequest {
             options: VirtualAuthenticatorOptions;
         }
-
         interface AddVirtualAuthenticatorResponse {
             authenticatorId: AuthenticatorId;
         }
-
         interface RemoveVirtualAuthenticatorRequest {
             authenticatorId: AuthenticatorId;
         }
-
         interface AddCredentialRequest {
             authenticatorId: AuthenticatorId;
             credential: Credential;
         }
-
         interface GetCredentialRequest {
             authenticatorId: AuthenticatorId;
             credentialId: string;
         }
-
         interface GetCredentialResponse {
             credential: Credential;
         }
-
         interface GetCredentialsRequest {
             authenticatorId: AuthenticatorId;
         }
-
         interface GetCredentialsResponse {
             credentials: Credential[];
         }
-
         interface RemoveCredentialRequest {
             authenticatorId: AuthenticatorId;
             credentialId: string;
         }
-
         interface ClearCredentialsRequest {
             authenticatorId: AuthenticatorId;
         }
-
         interface SetUserVerifiedRequest {
             authenticatorId: AuthenticatorId;
             isUserVerified: boolean;
         }
-
         interface SetAutomaticPresenceSimulationRequest {
             authenticatorId: AuthenticatorId;
             enabled: boolean;
@@ -15332,21 +14180,17 @@ export namespace Protocol {
      * This domain allows detailed inspection of media elements
      */
     namespace Media {
-
         /**
          * Players will get an ID that is unique within the agent context.
          */
         type PlayerId = string;
-
         type Timestamp = number;
-
         const enum PlayerMessageLevel {
             Error = 'error',
             Warning = 'warning',
             Info = 'info',
             Debug = 'debug',
         }
-
         /**
          * Have one type per entry in MediaLogRecord::Type
          * Corresponds to kMessage
@@ -15366,7 +14210,6 @@ export namespace Protocol {
             level: ('error' | 'warning' | 'info' | 'debug');
             message: string;
         }
-
         /**
          * Corresponds to kMediaPropertyChange
          */
@@ -15374,7 +14217,6 @@ export namespace Protocol {
             name: string;
             value: string;
         }
-
         /**
          * Corresponds to kMediaEventTriggered
          */
@@ -15382,12 +14224,10 @@ export namespace Protocol {
             timestamp: Timestamp;
             value: string;
         }
-
         const enum PlayerErrorType {
             Pipeline_error = 'pipeline_error',
             Media_error = 'media_error',
         }
-
         /**
          * Corresponds to kMediaError
          */
@@ -15405,7 +14245,6 @@ export namespace Protocol {
              */
             errorCode: string;
         }
-
         /**
          * This can be called multiple times, and can be used to set / override /
          * remove player properties. A null propValue indicates removal.
@@ -15414,7 +14253,6 @@ export namespace Protocol {
             playerId: PlayerId;
             properties: PlayerProperty[];
         }
-
         /**
          * Send events as a list, allowing them to be batched on the browser for less
          * congestion. If batched, events must ALWAYS be in chronological order.
@@ -15423,7 +14261,6 @@ export namespace Protocol {
             playerId: PlayerId;
             events: PlayerEvent[];
         }
-
         /**
          * Send a list of any messages that need to be delivered.
          */
@@ -15431,7 +14268,6 @@ export namespace Protocol {
             playerId: PlayerId;
             messages: PlayerMessage[];
         }
-
         /**
          * Send a list of any errors that need to be delivered.
          */
@@ -15439,7 +14275,6 @@ export namespace Protocol {
             playerId: PlayerId;
             errors: PlayerError[];
         }
-
         /**
          * Called whenever a player is created, or when a new agent joins and receives
          * a list of active players. If an agent is restored, it will receive the full

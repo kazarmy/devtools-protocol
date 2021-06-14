@@ -182,7 +182,6 @@ const emitInlineEnums = (prefix: string, propertyTypes?: P.PropertyType[]) => {
   }
   for (const type of propertyTypes) {
     if (isPropertyInlineEnum(type)) {
-      emitLine();
       const enumName = prefix + toTitleCase(type.name);
       emitEnum(enumName, (type as P.StringType).enum || []);
     }
@@ -198,7 +197,6 @@ const emitInterface = (interfaceName: string, props?: P.PropertyType[]) => {
 
 const emitDomainType = (type: P.DomainType) => {
     emitInlineEnumForDomainType(type);
-    emitLine()
     emitDescription(type.description)
 
     if (type.type === 'object') {
@@ -218,12 +216,10 @@ const emitCommand = (command: P.Command) => {
     emitInlineEnumsForCommands(command);
     // TODO(bckenny): should description be emitted for params and return types?
     if (command.parameters) {
-        emitLine()
         emitInterface(toCmdRequestName(command.name), command.parameters)
     }
 
     if (command.returns) {
-        emitLine()
         emitInterface(toCmdResponseName(command.name), command.returns)
     }
 }
@@ -236,7 +232,6 @@ const emitEvent = (event: P.Event) => {
     }
 
     emitInlineEnumsForEvents(event);
-    emitLine()
     emitDescription(event.description)
     emitInterface(toEventPayloadName(event.name), event.parameters)
 }
