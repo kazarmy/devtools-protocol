@@ -8,7 +8,7 @@ import Protocol from './protocol';
  * Mappings from protocol event and command names to the types required for them.
  */
 export namespace ProtocolMapping {
-    export interface Events {
+    interface Events {
         /**
          * Issued when new console message is added.
          */
@@ -673,7 +673,7 @@ export namespace ProtocolMapping {
         'Media.playersCreated': [Protocol.Media.PlayersCreatedEvent];
     }
 
-    export interface Commands {
+    interface Commands {
         /**
          * Does nothing.
          */

@@ -8,7 +8,7 @@ import Protocol from './protocol';
  * API generated from Protocol commands and events.
  */
 export namespace ProtocolProxyApi {
-    export interface ProtocolApi {
+    interface ProtocolApi {
         Console: ConsoleApi;
 
         Debugger: DebuggerApi;
@@ -104,7 +104,7 @@ export namespace ProtocolProxyApi {
     }
 
 
-    export interface ConsoleApi {
+    interface ConsoleApi {
         /**
          * Does nothing.
          */
@@ -133,7 +133,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface DebuggerApi {
+    interface DebuggerApi {
         /**
          * Continues execution until specific location is reached.
          */
@@ -349,7 +349,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface HeapProfilerApi {
+    interface HeapProfilerApi {
         /**
          * Enables console to refer to the node with given id via $x (see Command Line API for more details
          * $x functions).
@@ -416,7 +416,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface ProfilerApi {
+    interface ProfilerApi {
         disable(): Promise<void>;
 
         enable(): Promise<void>;
@@ -532,7 +532,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface RuntimeApi {
+    interface RuntimeApi {
         /**
          * Add handler to promise with given promise object id.
          */
@@ -730,7 +730,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface SchemaApi {
+    interface SchemaApi {
         /**
          * Returns supported domains.
          */
@@ -738,7 +738,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface AccessibilityApi {
+    interface AccessibilityApi {
         /**
          * Disables the accessibility domain.
          */
@@ -777,7 +777,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface AnimationApi {
+    interface AnimationApi {
         /**
          * Disables animation domain notifications.
          */
@@ -860,7 +860,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface ApplicationCacheApi {
+    interface ApplicationCacheApi {
         /**
          * Enables application cache domain notifications.
          */
@@ -892,7 +892,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface AuditsApi {
+    interface AuditsApi {
         /**
          * Returns the response body and size if it were re-encoded with the specified settings. Only
          * applies to images.
@@ -922,7 +922,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface BackgroundServiceApi {
+    interface BackgroundServiceApi {
         /**
          * Enables event updates for the service.
          */
@@ -967,7 +967,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface BrowserApi {
+    interface BrowserApi {
         /**
          * Set permission settings for given origin.
          */
@@ -1076,7 +1076,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface CSSApi {
+    interface CSSApi {
         /**
          * Inserts a new rule with the given `ruleText` in a stylesheet with given `styleSheetId`, at the
          * position specified by `location`.
@@ -1273,7 +1273,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface CacheStorageApi {
+    interface CacheStorageApi {
         /**
          * Deletes a cache.
          */
@@ -1301,7 +1301,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface CastApi {
+    interface CastApi {
         /**
          * Starts observing for sinks that can be used for tab mirroring, and if set,
          * sinks compatible with |presentationUrl| as well. When sinks are found, a
@@ -1358,7 +1358,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface DOMApi {
+    interface DOMApi {
         /**
          * Collects class names for the node with given id and all of it's child nodes.
          */
@@ -1751,7 +1751,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface DOMDebuggerApi {
+    interface DOMDebuggerApi {
         /**
          * Returns event listeners of the given object.
          */
@@ -1804,7 +1804,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface DOMSnapshotApi {
+    interface DOMSnapshotApi {
         /**
          * Disables DOM snapshot agent for the given page.
          */
@@ -1833,7 +1833,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface DOMStorageApi {
+    interface DOMStorageApi {
         clear(params: Protocol.DOMStorage.ClearRequest): Promise<void>;
 
         /**
@@ -1870,7 +1870,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface DatabaseApi {
+    interface DatabaseApi {
         /**
          * Disables database tracking, prevents database events from being sent to the client.
          */
@@ -1891,7 +1891,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface DeviceOrientationApi {
+    interface DeviceOrientationApi {
         /**
          * Clears the overridden Device Orientation.
          */
@@ -1904,7 +1904,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface EmulationApi {
+    interface EmulationApi {
         /**
          * Tells whether emulation is supported.
          */
@@ -2042,7 +2042,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface HeadlessExperimentalApi {
+    interface HeadlessExperimentalApi {
         /**
          * Sends a BeginFrame to the target and returns when the frame was completed. Optionally captures a
          * screenshot from the resulting frame. Requires that the target was created with enabled
@@ -2077,7 +2077,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface IOApi {
+    interface IOApi {
         /**
          * Close the stream, discard any temporary backing storage.
          */
@@ -2095,7 +2095,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface IndexedDBApi {
+    interface IndexedDBApi {
         /**
          * Clears all entries from an object store.
          */
@@ -2143,7 +2143,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface InputApi {
+    interface InputApi {
         /**
          * Dispatches a drag event into the page.
          */
@@ -2215,7 +2215,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface InspectorApi {
+    interface InspectorApi {
         /**
          * Disables inspector domain notifications.
          */
@@ -2258,7 +2258,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface LayerTreeApi {
+    interface LayerTreeApi {
         /**
          * Provides the reasons why the given layer was composited.
          */
@@ -2311,7 +2311,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface LogApi {
+    interface LogApi {
         /**
          * Clears the log.
          */
@@ -2350,7 +2350,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface MemoryApi {
+    interface MemoryApi {
         getDOMCounters(): Promise<Protocol.Memory.GetDOMCountersResponse>;
 
         prepareForLeakDetection(): Promise<void>;
@@ -2400,7 +2400,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface NetworkApi {
+    interface NetworkApi {
         /**
          * Sets a list of content encodings that will be accepted. Empty list means no encoding is accepted.
          */
@@ -2869,7 +2869,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface OverlayApi {
+    interface OverlayApi {
         /**
          * Disables domain notifications.
          */
@@ -3038,7 +3038,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface PageApi {
+    interface PageApi {
         /**
          * Deprecated, please use addScriptToEvaluateOnNewDocument instead.
          */
@@ -3593,7 +3593,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface PerformanceApi {
+    interface PerformanceApi {
         /**
          * Disable collecting and reporting metrics.
          */
@@ -3628,7 +3628,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface PerformanceTimelineApi {
+    interface PerformanceTimelineApi {
         /**
          * Previously buffered events would be reported before method returns.
          * See also: timelineEventAdded
@@ -3647,7 +3647,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface SecurityApi {
+    interface SecurityApi {
         /**
          * Disables tracking security state changes.
          */
@@ -3712,7 +3712,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface ServiceWorkerApi {
+    interface ServiceWorkerApi {
         deliverPushMessage(params: Protocol.ServiceWorker.DeliverPushMessageRequest): Promise<void>;
 
         disable(): Promise<void>;
@@ -3753,7 +3753,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface StorageApi {
+    interface StorageApi {
         /**
          * Clears storage for origin.
          */
@@ -3858,7 +3858,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface SystemInfoApi {
+    interface SystemInfoApi {
         /**
          * Returns information about the system.
          */
@@ -3871,7 +3871,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface TargetApi {
+    interface TargetApi {
         /**
          * Activates (focuses) the target.
          */
@@ -4045,7 +4045,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface TetheringApi {
+    interface TetheringApi {
         /**
          * Request browser port binding.
          */
@@ -4068,7 +4068,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface TracingApi {
+    interface TracingApi {
         /**
          * Stop trace events collection.
          */
@@ -4124,7 +4124,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface FetchApi {
+    interface FetchApi {
         /**
          * Disables the fetch domain.
          */
@@ -4214,7 +4214,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface WebAudioApi {
+    interface WebAudioApi {
         /**
          * Enables the WebAudio domain and starts sending context lifetime events.
          */
@@ -4362,7 +4362,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface WebAuthnApi {
+    interface WebAuthnApi {
         /**
          * Enable the WebAuthn domain and start intercepting credential storage and
          * retrieval with a virtual authenticator.
@@ -4424,7 +4424,7 @@ export namespace ProtocolProxyApi {
 
     }
 
-    export interface MediaApi {
+    interface MediaApi {
         /**
          * Enables the Media domain
          */

@@ -59,7 +59,7 @@ const fixCamelCase = (name: string): string => {
 
 
 const emitEnum = (enumName: string, enumValues: string[]) => {
-    emitOpenBlock(`export const enum ${enumName}`);
+    emitOpenBlock(`const enum ${enumName}`);
     enumValues.forEach(value => {
       emitLine(`${fixCamelCase(value)} = '${value}',`);
     });
@@ -85,14 +85,14 @@ const emitModule = (moduleName: string, domains: P.Domain[]) => {
 }
 
 const emitGlobalTypeDefs = () => {
-    emitLine(`export type integer = number;`)
+    emitLine(`type integer = number;`)
 }
 
 const emitDomain = (domain: P.Domain) => {
     const domainName = toTitleCase(domain.domain)
     emitLine()
     emitDescription(domain.description)
-    emitOpenBlock(`export namespace ${domainName}`)
+    emitOpenBlock(`namespace ${domainName}`)
     if (domain.types) domain.types.forEach(emitDomainType)
     if (domain.commands) domain.commands.forEach(emitCommand)
     if (domain.events) domain.events.forEach(emitEvent)
@@ -191,7 +191,7 @@ const emitInlineEnums = (prefix: string, propertyTypes?: P.PropertyType[]) => {
 
 
 const emitInterface = (interfaceName: string, props?: P.PropertyType[]) => {
-    emitOpenBlock(`export interface ${interfaceName}`)
+    emitOpenBlock(`interface ${interfaceName}`)
     props ? props.forEach(prop => emitProperty(interfaceName, prop)) : emitLine('[key: string]: string;')
     emitCloseBlock()
 }
@@ -204,7 +204,7 @@ const emitDomainType = (type: P.DomainType) => {
     if (type.type === 'object') {
         emitInterface(type.id, type.properties)
     } else {
-        emitLine(`export type ${type.id} = ${getPropertyType(type.id, type)};`)
+        emitLine(`type ${type.id} = ${getPropertyType(type.id, type)};`)
     }
 }
 
@@ -336,7 +336,7 @@ const emitApiEvent = (event: P.Event, domainName: string, modulePrefix: string) 
 const emitDomainApi = (domain: P.Domain, modulePrefix: string) => {
     emitLine()
     const domainName = toTitleCase(domain.domain)
-    emitOpenBlock(`export interface ${domainName}Api`)
+    emitOpenBlock(`interface ${domainName}Api`)
     if (domain.commands) domain.commands.forEach(c => emitApiCommand(c, domainName, modulePrefix))
     if (domain.events) domain.events.forEach(e => emitApiEvent(e, domainName, modulePrefix))
     emitCloseBlock()
@@ -350,7 +350,7 @@ const emitApi = (moduleName: string, protocolModuleName: string, domains: P.Doma
     emitDescription('API generated from Protocol commands and events.')
     emitOpenBlock(`export namespace ${moduleName}`)
 
-    emitOpenBlock(`export interface ProtocolApi`)
+    emitOpenBlock(`interface ProtocolApi`)
     domains.forEach(d => {
         emitLine(`${d.domain}: ${d.domain}Api;`)
         emitLine()
