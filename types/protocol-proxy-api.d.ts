@@ -1643,6 +1643,7 @@ export namespace ProtocolProxyApi {
         needsBeginFramesChanged(): Promise<Protocol.HeadlessExperimental.NeedsBeginFramesChangedEvent>;
     }
 
+    // tslint:disable-next-line:interface-name
     interface IOApi {
         /**
          * Close the stream, discard any temporary backing storage.

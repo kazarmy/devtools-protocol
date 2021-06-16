@@ -333,6 +333,9 @@ const emitApiEvent = (event: P.Event, domainName: string, modulePrefix: string, 
 const emitDomainApi = (domain: P.Domain, modulePrefix: string) => {
     emitLine()
     const domainName = toTitleCase(domain.domain)
+    if (domainName === 'IO') {
+        emitLine('// tslint:disable-next-line:interface-name')
+    }
     emitOpenBlock(`interface ${domainName}Api`)
     if (domain.commands) domain.commands.forEach(c => emitApiCommand(c, domainName, modulePrefix))
     if (domain.events) {
