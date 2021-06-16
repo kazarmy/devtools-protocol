@@ -326,7 +326,8 @@ const emitApiEvent = (event: P.Event, domainName: string, modulePrefix: string, 
     if (promiseApi) {
         emitLine(`${event.name}(): Promise<${params ? params.slice(8) : 'void'}>;`)
     } else {
-        emitLine(`on(event: '${event.name}', listener: (${params}) => void): void;`)
+        emitLine(`on(event: '${event.name}', listener: (${params}) => void): void;` +
+            `${params ? '' : '  // tslint:disable-line:unified-signatures'}`)
     }
 }
 

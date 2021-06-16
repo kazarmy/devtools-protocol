@@ -225,7 +225,7 @@ export namespace ProtocolProxyApi {
         /**
          * Fired when the virtual machine resumed execution.
          */
-        on(event: 'resumed', listener: () => void): void;
+        on(event: 'resumed', listener: () => void): void;  // tslint:disable-line:unified-signatures
         /**
          * Fired when virtual machine fails to parse the script.
          */
@@ -287,7 +287,7 @@ export namespace ProtocolProxyApi {
          */
         on(event: 'lastSeenObjectId', listener: (params: Protocol.HeapProfiler.LastSeenObjectIdEvent) => void): void;
         on(event: 'reportHeapSnapshotProgress', listener: (params: Protocol.HeapProfiler.ReportHeapSnapshotProgressEvent) => void): void;
-        on(event: 'resetProfiles', listener: () => void): void;
+        on(event: 'resetProfiles', listener: () => void): void;  // tslint:disable-line:unified-signatures
         addHeapSnapshotChunk(): Promise<Protocol.HeapProfiler.AddHeapSnapshotChunkEvent>;
         /**
          * If heap objects tracking has been started then backend may send update for one or more fragments
@@ -514,7 +514,7 @@ export namespace ProtocolProxyApi {
         /**
          * Issued when all executionContexts were cleared in browser
          */
-        on(event: 'executionContextsCleared', listener: () => void): void;
+        on(event: 'executionContextsCleared', listener: () => void): void;  // tslint:disable-line:unified-signatures
         /**
          * Issued when object should be inspected (for example, as a result of inspect() command line API
          * call).
@@ -959,7 +959,7 @@ export namespace ProtocolProxyApi {
          * Fires whenever a MediaQuery result changes (for example, after a browser window has been
          * resized.) The current implementation considers only viewport-dependent media features.
          */
-        on(event: 'mediaQueryResultChanged', listener: () => void): void;
+        on(event: 'mediaQueryResultChanged', listener: () => void): void;  // tslint:disable-line:unified-signatures
         /**
          * Fired whenever an active document stylesheet is added.
          */
@@ -1301,7 +1301,7 @@ export namespace ProtocolProxyApi {
         /**
          * Fired when `Document` has been totally updated. Node ids are no longer valid.
          */
-        on(event: 'documentUpdated', listener: () => void): void;
+        on(event: 'documentUpdated', listener: () => void): void;  // tslint:disable-line:unified-signatures
         /**
          * Fired when `Element`'s inline style is modified via a CSS property modification.
          */
@@ -1606,7 +1606,7 @@ export namespace ProtocolProxyApi {
         /**
          * Notification sent after the virtual time budget for the current VirtualTimePolicy has run out.
          */
-        on(event: 'virtualTimeBudgetExpired', listener: () => void): void;
+        on(event: 'virtualTimeBudgetExpired', listener: () => void): void;  // tslint:disable-line:unified-signatures
         /**
          * Notification sent after the virtual time budget for the current VirtualTimePolicy has run out.
          */
@@ -1773,11 +1773,11 @@ export namespace ProtocolProxyApi {
         /**
          * Fired when debugging target has crashed
          */
-        on(event: 'targetCrashed', listener: () => void): void;
+        on(event: 'targetCrashed', listener: () => void): void;  // tslint:disable-line:unified-signatures
         /**
          * Fired when debugging target has reloaded after crash
          */
-        on(event: 'targetReloadedAfterCrash', listener: () => void): void;
+        on(event: 'targetReloadedAfterCrash', listener: () => void): void;  // tslint:disable-line:unified-signatures
         /**
          * Fired when remote debugging connection is about to be terminated. Contains detach reason.
          */
@@ -2402,7 +2402,7 @@ export namespace ProtocolProxyApi {
         /**
          * Fired when user cancels the inspect mode.
          */
-        on(event: 'inspectModeCanceled', listener: () => void): void;
+        on(event: 'inspectModeCanceled', listener: () => void): void;  // tslint:disable-line:unified-signatures
         /**
          * Fired when the node should be inspected. This happens after call to `setInspectMode` or when
          * user manually inspects an element.
@@ -2682,7 +2682,7 @@ export namespace ProtocolProxyApi {
          * Fired when opening document to write to.
          */
         on(event: 'documentOpened', listener: (params: Protocol.Page.DocumentOpenedEvent) => void): void;
-        on(event: 'frameResized', listener: () => void): void;
+        on(event: 'frameResized', listener: () => void): void;  // tslint:disable-line:unified-signatures
         /**
          * Fired when a renderer-initiated navigation is requested.
          * Navigation may still be cancelled after the event is issued.
@@ -2713,11 +2713,11 @@ export namespace ProtocolProxyApi {
         /**
          * Fired when interstitial page was hidden
          */
-        on(event: 'interstitialHidden', listener: () => void): void;
+        on(event: 'interstitialHidden', listener: () => void): void;  // tslint:disable-line:unified-signatures
         /**
          * Fired when interstitial page was shown
          */
-        on(event: 'interstitialShown', listener: () => void): void;
+        on(event: 'interstitialShown', listener: () => void): void;  // tslint:disable-line:unified-signatures
         /**
          * Fired when a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunload) has been
          * closed.
