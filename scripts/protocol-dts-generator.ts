@@ -78,6 +78,8 @@ const emitPublicDocDeclaration = () => {
 const emitModule = (moduleName: string, domains: P.Domain[]) => {
     moduleName = toTitleCase(moduleName)
     emitHeaderComments()
+    emitLine('// tslint:disable:no-unnecessary-qualifier')
+    emitLine()
     emitPublicDocDeclaration()
     emitOpenBlock(`export namespace ${moduleName}`)
     emitGlobalTypeDefs()

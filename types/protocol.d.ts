@@ -3,6 +3,8 @@
  * https://github.com/kazarmy/devtools-protocol, do not edit manually. *
  ***********************************************************************/
 
+// tslint:disable:no-unnecessary-qualifier
+
 /**
  * The Chrome DevTools Protocol.
  */
