@@ -149,8 +149,26 @@ const getPropertyType = (interfaceName: string, prop: P.ProtocolType): string  =
             objStr += `${getIndent()}}`
             return objStr
         }
-    else if (prop.type === 'string' && prop.enum)
-        return '(' + prop.enum.map((v: string) => `'${v}'`).join(' | ') + ')'
+    else if (prop.type === 'string' && prop.enum) {
+        numIndents++
+        let enumStr = '('
+        let curLen = 0  // hack
+        for(let i = 0; i < prop.enum.length; i++) {
+            enumStr += `'${prop.enum[i]}'`
+            if (i === prop.enum.length - 1)
+                break
+            curLen += prop.enum[i].length + 5
+            if (curLen > 80) {
+                enumStr += ` |\n${getIndent()}`
+                curLen = 0
+            } else {
+                enumStr += ' | '
+            }
+        }
+        enumStr += ')'
+        numIndents--
+        return enumStr
+    }
     return prop.type
 }
 

@@ -46,7 +46,8 @@ export namespace Protocol {
             /**
              * Message source. (ConsoleMessageSource enum)
              */
-            source: ('xml' | 'javascript' | 'network' | 'console-api' | 'storage' | 'appcache' | 'rendering' | 'security' | 'other' | 'deprecation' | 'worker');
+            source: ('xml' | 'javascript' | 'network' | 'console-api' | 'storage' | 'appcache' | 'rendering' |
+                'security' | 'other' | 'deprecation' | 'worker');
             /**
              * Message severity. (ConsoleMessageLevel enum)
              */
@@ -182,7 +183,8 @@ export namespace Protocol {
             /**
              * Scope type. (ScopeType enum)
              */
-            type: ('global' | 'local' | 'with' | 'closure' | 'catch' | 'block' | 'script' | 'eval' | 'module' | 'wasm-expression-stack');
+            type: ('global' | 'local' | 'with' | 'closure' | 'catch' | 'block' | 'script' | 'eval' |
+                'module' | 'wasm-expression-stack');
             /**
              * Object representing the scope. For `global` and `with` scopes it represents the actual
              * object; for the rest of the scopes, it is artificial transient object enumerating scope
@@ -718,7 +720,8 @@ export namespace Protocol {
             /**
              * Pause reason. (PausedEventReason enum)
              */
-            reason: ('ambiguous' | 'assert' | 'CSPViolation' | 'debugCommand' | 'DOM' | 'EventListener' | 'exception' | 'instrumentation' | 'OOM' | 'other' | 'promiseRejection' | 'XHR');
+            reason: ('ambiguous' | 'assert' | 'CSPViolation' | 'debugCommand' | 'DOM' | 'EventListener' |
+                'exception' | 'instrumentation' | 'OOM' | 'other' | 'promiseRejection' | 'XHR');
             /**
              * Object containing break-specific auxiliary properties.
              */
@@ -1416,13 +1419,16 @@ export namespace Protocol {
             /**
              * Object type. (RemoteObjectType enum)
              */
-            type: ('object' | 'function' | 'undefined' | 'string' | 'number' | 'boolean' | 'symbol' | 'bigint');
+            type: ('object' | 'function' | 'undefined' | 'string' | 'number' | 'boolean' | 'symbol' |
+                'bigint');
             /**
              * Object subtype hint. Specified for `object` type values only.
              * NOTE: If you change anything here, make sure to also update
              * `subtype` in `ObjectPreview` and `PropertyPreview` below. (RemoteObjectSubtype enum)
              */
-            subtype?: ('array' | 'null' | 'node' | 'regexp' | 'date' | 'map' | 'set' | 'weakmap' | 'weakset' | 'iterator' | 'generator' | 'error' | 'proxy' | 'promise' | 'typedarray' | 'arraybuffer' | 'dataview' | 'webassemblymemory' | 'wasmvalue');
+            subtype?: ('array' | 'null' | 'node' | 'regexp' | 'date' | 'map' | 'set' | 'weakmap' | 'weakset' |
+                'iterator' | 'generator' | 'error' | 'proxy' | 'promise' | 'typedarray' | 'arraybuffer' |
+                'dataview' | 'webassemblymemory' | 'wasmvalue');
             /**
              * Object class (constructor) name. Specified for `object` type values only.
              */
@@ -1505,11 +1511,14 @@ export namespace Protocol {
             /**
              * Object type. (ObjectPreviewType enum)
              */
-            type: ('object' | 'function' | 'undefined' | 'string' | 'number' | 'boolean' | 'symbol' | 'bigint');
+            type: ('object' | 'function' | 'undefined' | 'string' | 'number' | 'boolean' | 'symbol' |
+                'bigint');
             /**
              * Object subtype hint. Specified for `object` type values only. (ObjectPreviewSubtype enum)
              */
-            subtype?: ('array' | 'null' | 'node' | 'regexp' | 'date' | 'map' | 'set' | 'weakmap' | 'weakset' | 'iterator' | 'generator' | 'error' | 'proxy' | 'promise' | 'typedarray' | 'arraybuffer' | 'dataview' | 'webassemblymemory' | 'wasmvalue');
+            subtype?: ('array' | 'null' | 'node' | 'regexp' | 'date' | 'map' | 'set' | 'weakmap' | 'weakset' |
+                'iterator' | 'generator' | 'error' | 'proxy' | 'promise' | 'typedarray' | 'arraybuffer' |
+                'dataview' | 'webassemblymemory' | 'wasmvalue');
             /**
              * String representation of the object.
              */
@@ -1571,7 +1580,8 @@ export namespace Protocol {
             /**
              * Object type. Accessor means that the property itself is an accessor property. (PropertyPreviewType enum)
              */
-            type: ('object' | 'function' | 'undefined' | 'string' | 'number' | 'boolean' | 'symbol' | 'accessor' | 'bigint');
+            type: ('object' | 'function' | 'undefined' | 'string' | 'number' | 'boolean' | 'symbol' |
+                'accessor' | 'bigint');
             /**
              * User-friendly property value string.
              */
@@ -1583,7 +1593,9 @@ export namespace Protocol {
             /**
              * Object subtype hint. Specified for `object` type values only. (PropertyPreviewSubtype enum)
              */
-            subtype?: ('array' | 'null' | 'node' | 'regexp' | 'date' | 'map' | 'set' | 'weakmap' | 'weakset' | 'iterator' | 'generator' | 'error' | 'proxy' | 'promise' | 'typedarray' | 'arraybuffer' | 'dataview' | 'webassemblymemory' | 'wasmvalue');
+            subtype?: ('array' | 'null' | 'node' | 'regexp' | 'date' | 'map' | 'set' | 'weakmap' | 'weakset' |
+                'iterator' | 'generator' | 'error' | 'proxy' | 'promise' | 'typedarray' | 'arraybuffer' |
+                'dataview' | 'webassemblymemory' | 'wasmvalue');
         }
         interface EntryPreview {
             /**
@@ -2251,7 +2263,9 @@ export namespace Protocol {
             /**
              * Type of the call. (ConsoleAPICalledEventType enum)
              */
-            type: ('log' | 'debug' | 'info' | 'error' | 'warning' | 'dir' | 'dirxml' | 'table' | 'trace' | 'clear' | 'startGroup' | 'startGroupCollapsed' | 'endGroup' | 'assert' | 'profile' | 'profileEnd' | 'count' | 'timeEnd');
+            type: ('log' | 'debug' | 'info' | 'error' | 'warning' | 'dir' | 'dirxml' | 'table' | 'trace' |
+                'clear' | 'startGroup' | 'startGroupCollapsed' | 'endGroup' | 'assert' | 'profile' |
+                'profileEnd' | 'count' | 'timeEnd');
             /**
              * Call arguments.
              */
@@ -2361,7 +2375,9 @@ export namespace Protocol {
         /**
          * Enum of possible property types.
          */
-        type AXValueType = ('boolean' | 'tristate' | 'booleanOrUndefined' | 'idref' | 'idrefList' | 'integer' | 'node' | 'nodeList' | 'number' | 'string' | 'computedString' | 'token' | 'tokenList' | 'domRelation' | 'role' | 'internalRole' | 'valueUndefined');
+        type AXValueType = ('boolean' | 'tristate' | 'booleanOrUndefined' | 'idref' | 'idrefList' | 'integer' |
+            'node' | 'nodeList' | 'number' | 'string' | 'computedString' | 'token' | 'tokenList' |
+            'domRelation' | 'role' | 'internalRole' | 'valueUndefined');
         /**
          * Enum of possible property sources.
          */
@@ -2369,7 +2385,8 @@ export namespace Protocol {
         /**
          * Enum of possible native property sources (as a subtype of a particular AXValueSourceType).
          */
-        type AXValueNativeSourceType = ('figcaption' | 'label' | 'labelfor' | 'labelwrapped' | 'legend' | 'rubyannotation' | 'tablecaption' | 'title' | 'other');
+        type AXValueNativeSourceType = ('figcaption' | 'label' | 'labelfor' | 'labelwrapped' | 'legend' | 'rubyannotation' |
+            'tablecaption' | 'title' | 'other');
         /**
          * A single source for a computed AX property.
          */
@@ -2464,7 +2481,13 @@ export namespace Protocol {
          * - from 'checked' to 'selected': states which apply to widgets
          * - from 'activedescendant' to 'owns' - relationships between elements other than parent/child/sibling.
          */
-        type AXPropertyName = ('busy' | 'disabled' | 'editable' | 'focusable' | 'focused' | 'hidden' | 'hiddenRoot' | 'invalid' | 'keyshortcuts' | 'settable' | 'roledescription' | 'live' | 'atomic' | 'relevant' | 'root' | 'autocomplete' | 'hasPopup' | 'level' | 'multiselectable' | 'orientation' | 'multiline' | 'readonly' | 'required' | 'valuemin' | 'valuemax' | 'valuetext' | 'checked' | 'expanded' | 'modal' | 'pressed' | 'selected' | 'activedescendant' | 'controls' | 'describedby' | 'details' | 'errormessage' | 'flowto' | 'labelledby' | 'owns');
+        type AXPropertyName = ('busy' | 'disabled' | 'editable' | 'focusable' | 'focused' | 'hidden' | 'hiddenRoot' |
+            'invalid' | 'keyshortcuts' | 'settable' | 'roledescription' | 'live' | 'atomic' |
+            'relevant' | 'root' | 'autocomplete' | 'hasPopup' | 'level' | 'multiselectable' |
+            'orientation' | 'multiline' | 'readonly' | 'required' | 'valuemin' | 'valuemax' |
+            'valuetext' | 'checked' | 'expanded' | 'modal' | 'pressed' | 'selected' | 'activedescendant' |
+            'controls' | 'describedby' | 'details' | 'errormessage' | 'flowto' | 'labelledby' |
+            'owns');
         /**
          * A node in the accessibility tree.
          */
@@ -2953,8 +2976,11 @@ export namespace Protocol {
         interface AffectedFrame {
             frameId: Page.FrameId;
         }
-        type SameSiteCookieExclusionReason = ('ExcludeSameSiteUnspecifiedTreatedAsLax' | 'ExcludeSameSiteNoneInsecure' | 'ExcludeSameSiteLax' | 'ExcludeSameSiteStrict' | 'ExcludeInvalidSameParty');
-        type SameSiteCookieWarningReason = ('WarnSameSiteUnspecifiedCrossSiteContext' | 'WarnSameSiteNoneInsecure' | 'WarnSameSiteUnspecifiedLaxAllowUnsafe' | 'WarnSameSiteStrictLaxDowngradeStrict' | 'WarnSameSiteStrictCrossDowngradeStrict' | 'WarnSameSiteStrictCrossDowngradeLax' | 'WarnSameSiteLaxCrossDowngradeStrict' | 'WarnSameSiteLaxCrossDowngradeLax');
+        type SameSiteCookieExclusionReason = ('ExcludeSameSiteUnspecifiedTreatedAsLax' | 'ExcludeSameSiteNoneInsecure' | 'ExcludeSameSiteLax' |
+            'ExcludeSameSiteStrict' | 'ExcludeInvalidSameParty');
+        type SameSiteCookieWarningReason = ('WarnSameSiteUnspecifiedCrossSiteContext' | 'WarnSameSiteNoneInsecure' | 'WarnSameSiteUnspecifiedLaxAllowUnsafe' |
+            'WarnSameSiteStrictLaxDowngradeStrict' | 'WarnSameSiteStrictCrossDowngradeStrict' |
+            'WarnSameSiteStrictCrossDowngradeLax' | 'WarnSameSiteLaxCrossDowngradeStrict' | 'WarnSameSiteLaxCrossDowngradeLax');
         type SameSiteCookieOperation = ('SetCookie' | 'ReadCookie');
         /**
          * This information is currently necessary, as the front-end has a difficult
@@ -2982,7 +3008,10 @@ export namespace Protocol {
             request?: AffectedRequest;
         }
         type MixedContentResolutionStatus = ('MixedContentBlocked' | 'MixedContentAutomaticallyUpgraded' | 'MixedContentWarning');
-        type MixedContentResourceType = ('Audio' | 'Beacon' | 'CSPReport' | 'Download' | 'EventSource' | 'Favicon' | 'Font' | 'Form' | 'Frame' | 'Image' | 'Import' | 'Manifest' | 'Ping' | 'PluginData' | 'PluginResource' | 'Prefetch' | 'Resource' | 'Script' | 'ServiceWorker' | 'SharedWorker' | 'Stylesheet' | 'Track' | 'Video' | 'Worker' | 'XMLHttpRequest' | 'XSLT');
+        type MixedContentResourceType = ('Audio' | 'Beacon' | 'CSPReport' | 'Download' | 'EventSource' | 'Favicon' | 'Font' |
+            'Form' | 'Frame' | 'Image' | 'Import' | 'Manifest' | 'Ping' | 'PluginData' | 'PluginResource' |
+            'Prefetch' | 'Resource' | 'Script' | 'ServiceWorker' | 'SharedWorker' | 'Stylesheet' |
+            'Track' | 'Video' | 'Worker' | 'XMLHttpRequest' | 'XSLT');
         interface MixedContentIssueDetails {
             /**
              * The type of resource causing the mixed content issue (css, js, iframe,
@@ -3017,7 +3046,8 @@ export namespace Protocol {
          * Enum indicating the reason a response has been blocked. These reasons are
          * refinements of the net error BLOCKED_BY_RESPONSE.
          */
-        type BlockedByResponseReason = ('CoepFrameResourceNeedsCoepHeader' | 'CoopSandboxedIFrameCannotNavigateToCoopPage' | 'CorpNotSameOrigin' | 'CorpNotSameOriginAfterDefaultedToSameOriginByCoep' | 'CorpNotSameSite');
+        type BlockedByResponseReason = ('CoepFrameResourceNeedsCoepHeader' | 'CoopSandboxedIFrameCannotNavigateToCoopPage' |
+            'CorpNotSameOrigin' | 'CorpNotSameOriginAfterDefaultedToSameOriginByCoep' | 'CorpNotSameSite');
         /**
          * Details for a request that has been blocked with the BLOCKED_BY_RESPONSE
          * code. Currently only used for COEP/COOP, but may be extended to include
@@ -3045,7 +3075,8 @@ export namespace Protocol {
              */
             frame: AffectedFrame;
         }
-        type ContentSecurityPolicyViolationType = ('kInlineViolation' | 'kEvalViolation' | 'kURLViolation' | 'kTrustedTypesSinkViolation' | 'kTrustedTypesPolicyViolation');
+        type ContentSecurityPolicyViolationType = ('kInlineViolation' | 'kEvalViolation' | 'kURLViolation' | 'kTrustedTypesSinkViolation' |
+            'kTrustedTypesPolicyViolation');
         interface SourceCodeLocation {
             scriptId?: Runtime.ScriptId;
             url: string;
@@ -3118,7 +3149,8 @@ export namespace Protocol {
             resourceIPAddressSpace?: Network.IPAddressSpace;
             clientSecurityState?: Network.ClientSecurityState;
         }
-        type AttributionReportingIssueType = ('PermissionPolicyDisabled' | 'InvalidAttributionSourceEventId' | 'InvalidAttributionData' | 'AttributionSourceUntrustworthyOrigin' | 'AttributionUntrustworthyOrigin');
+        type AttributionReportingIssueType = ('PermissionPolicyDisabled' | 'InvalidAttributionSourceEventId' | 'InvalidAttributionData' |
+            'AttributionSourceUntrustworthyOrigin' | 'AttributionUntrustworthyOrigin');
         /**
          * Details for issues around "Attribution Reporting API" usage.
          * Explainer: https://github.com/WICG/conversion-measurement-api
@@ -3154,7 +3186,10 @@ export namespace Protocol {
          * optional fields in InspectorIssueDetails to convey more specific
          * information about the kind of issue.
          */
-        type InspectorIssueCode = ('SameSiteCookieIssue' | 'MixedContentIssue' | 'BlockedByResponseIssue' | 'HeavyAdIssue' | 'ContentSecurityPolicyIssue' | 'SharedArrayBufferIssue' | 'TrustedWebActivityIssue' | 'LowTextContrastIssue' | 'CorsIssue' | 'AttributionReportingIssue' | 'QuirksModeIssue' | 'NavigatorUserAgentIssue');
+        type InspectorIssueCode = ('SameSiteCookieIssue' | 'MixedContentIssue' | 'BlockedByResponseIssue' | 'HeavyAdIssue' |
+            'ContentSecurityPolicyIssue' | 'SharedArrayBufferIssue' | 'TrustedWebActivityIssue' |
+            'LowTextContrastIssue' | 'CorsIssue' | 'AttributionReportingIssue' | 'QuirksModeIssue' |
+            'NavigatorUserAgentIssue');
         /**
          * This struct holds a list of optional fields with additional information
          * specific to the kind of issue. When adding a new issue code, please also
@@ -3245,7 +3280,8 @@ export namespace Protocol {
          * Every Background Service operates independently, but they share the same
          * API.
          */
-        type ServiceName = ('backgroundFetch' | 'backgroundSync' | 'pushMessaging' | 'notifications' | 'paymentHandler' | 'periodicBackgroundSync');
+        type ServiceName = ('backgroundFetch' | 'backgroundSync' | 'pushMessaging' | 'notifications' | 'paymentHandler' |
+            'periodicBackgroundSync');
         /**
          * A key-value pair for additional event information to pass along.
          */
@@ -3347,7 +3383,11 @@ export namespace Protocol {
              */
             windowState?: WindowState;
         }
-        type PermissionType = ('accessibilityEvents' | 'audioCapture' | 'backgroundSync' | 'backgroundFetch' | 'clipboardReadWrite' | 'clipboardSanitizedWrite' | 'displayCapture' | 'durableStorage' | 'flash' | 'geolocation' | 'midi' | 'midiSysex' | 'nfc' | 'notifications' | 'paymentHandler' | 'periodicBackgroundSync' | 'protectedMediaIdentifier' | 'sensors' | 'videoCapture' | 'videoCapturePanTiltZoom' | 'idleDetection' | 'wakeLockScreen' | 'wakeLockSystem');
+        type PermissionType = ('accessibilityEvents' | 'audioCapture' | 'backgroundSync' | 'backgroundFetch' | 'clipboardReadWrite' |
+            'clipboardSanitizedWrite' | 'displayCapture' | 'durableStorage' | 'flash' | 'geolocation' |
+            'midi' | 'midiSysex' | 'nfc' | 'notifications' | 'paymentHandler' | 'periodicBackgroundSync' |
+            'protectedMediaIdentifier' | 'sensors' | 'videoCapture' | 'videoCapturePanTiltZoom' |
+            'idleDetection' | 'wakeLockScreen' | 'wakeLockSystem');
         type PermissionSetting = ('granted' | 'denied' | 'prompt');
         /**
          * Definition of PermissionDescriptor defined in the Permissions API:
@@ -4723,7 +4763,10 @@ export namespace Protocol {
         /**
          * Pseudo element type.
          */
-        type PseudoType = ('first-line' | 'first-letter' | 'before' | 'after' | 'marker' | 'backdrop' | 'selection' | 'target-text' | 'spelling-error' | 'grammar-error' | 'first-line-inherited' | 'scrollbar' | 'scrollbar-thumb' | 'scrollbar-button' | 'scrollbar-track' | 'scrollbar-track-piece' | 'scrollbar-corner' | 'resizer' | 'input-list-button');
+        type PseudoType = ('first-line' | 'first-letter' | 'before' | 'after' | 'marker' | 'backdrop' | 'selection' |
+            'target-text' | 'spelling-error' | 'grammar-error' | 'first-line-inherited' | 'scrollbar' |
+            'scrollbar-thumb' | 'scrollbar-button' | 'scrollbar-track' | 'scrollbar-track-piece' |
+            'scrollbar-corner' | 'resizer' | 'input-list-button');
         /**
          * Shadow root type.
          */
@@ -8062,7 +8105,8 @@ export namespace Protocol {
             /**
              * Log entry source. (LogEntrySource enum)
              */
-            source: ('xml' | 'javascript' | 'network' | 'storage' | 'appcache' | 'rendering' | 'security' | 'deprecation' | 'worker' | 'violation' | 'intervention' | 'recommendation' | 'other');
+            source: ('xml' | 'javascript' | 'network' | 'storage' | 'appcache' | 'rendering' | 'security' |
+                'deprecation' | 'worker' | 'violation' | 'intervention' | 'recommendation' | 'other');
             /**
              * Log entry severity. (LogEntryLevel enum)
              */
@@ -8118,7 +8162,8 @@ export namespace Protocol {
             /**
              * Violation type. (ViolationSettingName enum)
              */
-            name: ('longTask' | 'longLayout' | 'blockedEvent' | 'blockedParser' | 'discouragedAPIUse' | 'handler' | 'recurringHandler');
+            name: ('longTask' | 'longLayout' | 'blockedEvent' | 'blockedParser' | 'discouragedAPIUse' |
+                'handler' | 'recurringHandler');
             /**
              * Time threshold to trigger upon.
              */
@@ -8238,7 +8283,9 @@ export namespace Protocol {
         /**
          * Resource type as it was perceived by the rendering engine.
          */
-        type ResourceType = ('Document' | 'Stylesheet' | 'Image' | 'Media' | 'Font' | 'Script' | 'TextTrack' | 'XHR' | 'Fetch' | 'EventSource' | 'WebSocket' | 'Manifest' | 'SignedExchange' | 'Ping' | 'CSPViolationReport' | 'Preflight' | 'Other');
+        type ResourceType = ('Document' | 'Stylesheet' | 'Image' | 'Media' | 'Font' | 'Script' | 'TextTrack' |
+            'XHR' | 'Fetch' | 'EventSource' | 'WebSocket' | 'Manifest' | 'SignedExchange' | 'Ping' |
+            'CSPViolationReport' | 'Preflight' | 'Other');
         /**
          * Unique loader identifier.
          */
@@ -8254,7 +8301,9 @@ export namespace Protocol {
         /**
          * Network level fetch failure reason.
          */
-        type ErrorReason = ('Failed' | 'Aborted' | 'TimedOut' | 'AccessDenied' | 'ConnectionClosed' | 'ConnectionReset' | 'ConnectionRefused' | 'ConnectionAborted' | 'ConnectionFailed' | 'NameNotResolved' | 'InternetDisconnected' | 'AddressUnreachable' | 'BlockedByClient' | 'BlockedByResponse');
+        type ErrorReason = ('Failed' | 'Aborted' | 'TimedOut' | 'AccessDenied' | 'ConnectionClosed' | 'ConnectionReset' |
+            'ConnectionRefused' | 'ConnectionAborted' | 'ConnectionFailed' | 'NameNotResolved' |
+            'InternetDisconnected' | 'AddressUnreachable' | 'BlockedByClient' | 'BlockedByResponse');
         /**
          * UTC time in seconds, counted from January 1, 1970.
          */
@@ -8272,7 +8321,8 @@ export namespace Protocol {
         /**
          * The underlying connection technology that the browser is supposedly using.
          */
-        type ConnectionType = ('none' | 'cellular2g' | 'cellular3g' | 'cellular4g' | 'bluetooth' | 'ethernet' | 'wifi' | 'wimax' | 'other');
+        type ConnectionType = ('none' | 'cellular2g' | 'cellular3g' | 'cellular4g' | 'bluetooth' | 'ethernet' |
+            'wifi' | 'wimax' | 'other');
         /**
          * Represents the cookie's 'SameSite' status:
          * https://tools.ietf.org/html/draft-west-first-party-cookies
@@ -8432,7 +8482,8 @@ export namespace Protocol {
             /**
              * The referrer policy of the request, as defined in https://www.w3.org/TR/referrer-policy/ (RequestReferrerPolicy enum)
              */
-            referrerPolicy: ('unsafe-url' | 'no-referrer-when-downgrade' | 'no-referrer' | 'origin' | 'origin-when-cross-origin' | 'same-origin' | 'strict-origin' | 'strict-origin-when-cross-origin');
+            referrerPolicy: ('unsafe-url' | 'no-referrer-when-downgrade' | 'no-referrer' | 'origin' | 'origin-when-cross-origin' |
+                'same-origin' | 'strict-origin' | 'strict-origin-when-cross-origin');
             /**
              * Whether is loaded via link preload.
              */
@@ -8544,11 +8595,22 @@ export namespace Protocol {
         /**
          * The reason why request was blocked.
          */
-        type BlockedReason = ('other' | 'csp' | 'mixed-content' | 'origin' | 'inspector' | 'subresource-filter' | 'content-type' | 'coep-frame-resource-needs-coep-header' | 'coop-sandboxed-iframe-cannot-navigate-to-coop-page' | 'corp-not-same-origin' | 'corp-not-same-origin-after-defaulted-to-same-origin-by-coep' | 'corp-not-same-site');
+        type BlockedReason = ('other' | 'csp' | 'mixed-content' | 'origin' | 'inspector' | 'subresource-filter' |
+            'content-type' | 'coep-frame-resource-needs-coep-header' | 'coop-sandboxed-iframe-cannot-navigate-to-coop-page' |
+            'corp-not-same-origin' | 'corp-not-same-origin-after-defaulted-to-same-origin-by-coep' |
+            'corp-not-same-site');
         /**
          * The reason why request was blocked.
          */
-        type CorsError = ('DisallowedByMode' | 'InvalidResponse' | 'WildcardOriginNotAllowed' | 'MissingAllowOriginHeader' | 'MultipleAllowOriginValues' | 'InvalidAllowOriginValue' | 'AllowOriginMismatch' | 'InvalidAllowCredentials' | 'CorsDisabledScheme' | 'PreflightInvalidStatus' | 'PreflightDisallowedRedirect' | 'PreflightWildcardOriginNotAllowed' | 'PreflightMissingAllowOriginHeader' | 'PreflightMultipleAllowOriginValues' | 'PreflightInvalidAllowOriginValue' | 'PreflightAllowOriginMismatch' | 'PreflightInvalidAllowCredentials' | 'PreflightMissingAllowExternal' | 'PreflightInvalidAllowExternal' | 'InvalidAllowMethodsPreflightResponse' | 'InvalidAllowHeadersPreflightResponse' | 'MethodDisallowedByPreflightResponse' | 'HeaderDisallowedByPreflightResponse' | 'RedirectContainsCredentials' | 'InsecurePrivateNetwork' | 'NoCorsRedirectModeNotFollow');
+        type CorsError = ('DisallowedByMode' | 'InvalidResponse' | 'WildcardOriginNotAllowed' | 'MissingAllowOriginHeader' |
+            'MultipleAllowOriginValues' | 'InvalidAllowOriginValue' | 'AllowOriginMismatch' |
+            'InvalidAllowCredentials' | 'CorsDisabledScheme' | 'PreflightInvalidStatus' | 'PreflightDisallowedRedirect' |
+            'PreflightWildcardOriginNotAllowed' | 'PreflightMissingAllowOriginHeader' | 'PreflightMultipleAllowOriginValues' |
+            'PreflightInvalidAllowOriginValue' | 'PreflightAllowOriginMismatch' | 'PreflightInvalidAllowCredentials' |
+            'PreflightMissingAllowExternal' | 'PreflightInvalidAllowExternal' | 'InvalidAllowMethodsPreflightResponse' |
+            'InvalidAllowHeadersPreflightResponse' | 'MethodDisallowedByPreflightResponse' |
+            'HeaderDisallowedByPreflightResponse' | 'RedirectContainsCredentials' | 'InsecurePrivateNetwork' |
+            'NoCorsRedirectModeNotFollow');
         interface CorsErrorStatus {
             corsError: CorsError;
             failedParameter: string;
@@ -8864,11 +8926,18 @@ export namespace Protocol {
         /**
          * Types of reasons why a cookie may not be stored from a response.
          */
-        type SetCookieBlockedReason = ('SecureOnly' | 'SameSiteStrict' | 'SameSiteLax' | 'SameSiteUnspecifiedTreatedAsLax' | 'SameSiteNoneInsecure' | 'UserPreferences' | 'SyntaxError' | 'SchemeNotSupported' | 'OverwriteSecure' | 'InvalidDomain' | 'InvalidPrefix' | 'UnknownError' | 'SchemefulSameSiteStrict' | 'SchemefulSameSiteLax' | 'SchemefulSameSiteUnspecifiedTreatedAsLax' | 'SamePartyFromCrossPartyContext' | 'SamePartyConflictsWithOtherAttributes');
+        type SetCookieBlockedReason = ('SecureOnly' | 'SameSiteStrict' | 'SameSiteLax' | 'SameSiteUnspecifiedTreatedAsLax' |
+            'SameSiteNoneInsecure' | 'UserPreferences' | 'SyntaxError' | 'SchemeNotSupported' |
+            'OverwriteSecure' | 'InvalidDomain' | 'InvalidPrefix' | 'UnknownError' | 'SchemefulSameSiteStrict' |
+            'SchemefulSameSiteLax' | 'SchemefulSameSiteUnspecifiedTreatedAsLax' | 'SamePartyFromCrossPartyContext' |
+            'SamePartyConflictsWithOtherAttributes');
         /**
          * Types of reasons why a cookie may not be sent with a request.
          */
-        type CookieBlockedReason = ('SecureOnly' | 'NotOnPath' | 'DomainMismatch' | 'SameSiteStrict' | 'SameSiteLax' | 'SameSiteUnspecifiedTreatedAsLax' | 'SameSiteNoneInsecure' | 'UserPreferences' | 'UnknownError' | 'SchemefulSameSiteStrict' | 'SchemefulSameSiteLax' | 'SchemefulSameSiteUnspecifiedTreatedAsLax' | 'SamePartyFromCrossPartyContext');
+        type CookieBlockedReason = ('SecureOnly' | 'NotOnPath' | 'DomainMismatch' | 'SameSiteStrict' | 'SameSiteLax' |
+            'SameSiteUnspecifiedTreatedAsLax' | 'SameSiteNoneInsecure' | 'UserPreferences' |
+            'UnknownError' | 'SchemefulSameSiteStrict' | 'SchemefulSameSiteLax' | 'SchemefulSameSiteUnspecifiedTreatedAsLax' |
+            'SamePartyFromCrossPartyContext');
         /**
          * A cookie which was not stored from a response with the corresponding reason.
          */
@@ -9111,7 +9180,8 @@ export namespace Protocol {
         /**
          * Field type for a signed exchange related error.
          */
-        type SignedExchangeErrorField = ('signatureSig' | 'signatureIntegrity' | 'signatureCertUrl' | 'signatureCertSha256' | 'signatureValidityUrl' | 'signatureTimestamps');
+        type SignedExchangeErrorField = ('signatureSig' | 'signatureIntegrity' | 'signatureCertUrl' | 'signatureCertSha256' |
+            'signatureValidityUrl' | 'signatureTimestamps');
         /**
          * Information about a signed exchange response.
          */
@@ -10109,7 +10179,8 @@ export namespace Protocol {
              * of the operation already exists und thus, the operation was abort
              * preemptively (e.g. a cache hit). (TrustTokenOperationDoneEventStatus enum)
              */
-            status: ('Ok' | 'InvalidArgument' | 'FailedPrecondition' | 'ResourceExhausted' | 'AlreadyExists' | 'Unavailable' | 'BadResponse' | 'InternalError' | 'UnknownError' | 'FulfilledLocally');
+            status: ('Ok' | 'InvalidArgument' | 'FailedPrecondition' | 'ResourceExhausted' | 'AlreadyExists' |
+                'Unavailable' | 'BadResponse' | 'InternalError' | 'UnknownError' | 'FulfilledLocally');
             type: TrustTokenOperationType;
             requestId: RequestId;
             /**
@@ -10532,7 +10603,8 @@ export namespace Protocol {
              */
             outlineColor?: DOM.RGBA;
         }
-        type InspectMode = ('searchForNode' | 'searchForUAShadowDOM' | 'captureAreaScreenshot' | 'showDistances' | 'none');
+        type InspectMode = ('searchForNode' | 'searchForUAShadowDOM' | 'captureAreaScreenshot' | 'showDistances' |
+            'none');
         interface GetHighlightObjectForTestRequest {
             /**
              * Id of the node to get highlight object for.
@@ -10818,12 +10890,24 @@ export namespace Protocol {
          * Indicates whether the frame is cross-origin isolated and why it is the case.
          */
         type CrossOriginIsolatedContextType = ('Isolated' | 'NotIsolated' | 'NotIsolatedFeatureDisabled');
-        type GatedAPIFeatures = ('SharedArrayBuffers' | 'SharedArrayBuffersTransferAllowed' | 'PerformanceMeasureMemory' | 'PerformanceProfile');
+        type GatedAPIFeatures = ('SharedArrayBuffers' | 'SharedArrayBuffersTransferAllowed' | 'PerformanceMeasureMemory' |
+            'PerformanceProfile');
         /**
          * All Permissions Policy features. This enum should match the one defined
          * in third_party/blink/renderer/core/permissions_policy/permissions_policy_features.json5.
          */
-        type PermissionsPolicyFeature = ('accelerometer' | 'ambient-light-sensor' | 'attribution-reporting' | 'autoplay' | 'camera' | 'ch-dpr' | 'ch-device-memory' | 'ch-downlink' | 'ch-ect' | 'ch-lang' | 'ch-prefers-color-scheme' | 'ch-rtt' | 'ch-ua' | 'ch-ua-arch' | 'ch-ua-platform' | 'ch-ua-model' | 'ch-ua-mobile' | 'ch-ua-full-version' | 'ch-ua-platform-version' | 'ch-viewport-width' | 'ch-width' | 'clipboard-read' | 'clipboard-write' | 'cross-origin-isolated' | 'direct-sockets' | 'display-capture' | 'document-domain' | 'encrypted-media' | 'execution-while-out-of-viewport' | 'execution-while-not-rendered' | 'focus-without-user-activation' | 'fullscreen' | 'frobulate' | 'gamepad' | 'geolocation' | 'gyroscope' | 'hid' | 'idle-detection' | 'interest-cohort' | 'magnetometer' | 'microphone' | 'midi' | 'otp-credentials' | 'payment' | 'picture-in-picture' | 'publickey-credentials-get' | 'screen-wake-lock' | 'serial' | 'shared-autofill' | 'storage-access-api' | 'sync-xhr' | 'trust-token-redemption' | 'usb' | 'vertical-scroll' | 'web-share' | 'window-placement' | 'xr-spatial-tracking');
+        type PermissionsPolicyFeature = ('accelerometer' | 'ambient-light-sensor' | 'attribution-reporting' | 'autoplay' |
+            'camera' | 'ch-dpr' | 'ch-device-memory' | 'ch-downlink' | 'ch-ect' | 'ch-lang' |
+            'ch-prefers-color-scheme' | 'ch-rtt' | 'ch-ua' | 'ch-ua-arch' | 'ch-ua-platform' |
+            'ch-ua-model' | 'ch-ua-mobile' | 'ch-ua-full-version' | 'ch-ua-platform-version' |
+            'ch-viewport-width' | 'ch-width' | 'clipboard-read' | 'clipboard-write' | 'cross-origin-isolated' |
+            'direct-sockets' | 'display-capture' | 'document-domain' | 'encrypted-media' | 'execution-while-out-of-viewport' |
+            'execution-while-not-rendered' | 'focus-without-user-activation' | 'fullscreen' |
+            'frobulate' | 'gamepad' | 'geolocation' | 'gyroscope' | 'hid' | 'idle-detection' |
+            'interest-cohort' | 'magnetometer' | 'microphone' | 'midi' | 'otp-credentials' |
+            'payment' | 'picture-in-picture' | 'publickey-credentials-get' | 'screen-wake-lock' |
+            'serial' | 'shared-autofill' | 'storage-access-api' | 'sync-xhr' | 'trust-token-redemption' |
+            'usb' | 'vertical-scroll' | 'web-share' | 'window-placement' | 'xr-spatial-tracking');
         /**
          * Reason for a permissions policy feature to be disabled.
          */
@@ -10841,7 +10925,8 @@ export namespace Protocol {
          * Origin Trial(https://www.chromium.org/blink/origin-trials) support.
          * Status for an Origin Trial token.
          */
-        type OriginTrialTokenStatus = ('Success' | 'NotSupported' | 'Insecure' | 'Expired' | 'WrongOrigin' | 'InvalidSignature' | 'Malformed' | 'WrongVersion' | 'FeatureDisabled' | 'TokenDisabled' | 'FeatureDisabledForUser');
+        type OriginTrialTokenStatus = ('Success' | 'NotSupported' | 'Insecure' | 'Expired' | 'WrongOrigin' | 'InvalidSignature' |
+            'Malformed' | 'WrongVersion' | 'FeatureDisabled' | 'TokenDisabled' | 'FeatureDisabledForUser');
         /**
          * Status for an Origin Trial.
          */
@@ -11007,7 +11092,9 @@ export namespace Protocol {
         /**
          * Transition type.
          */
-        type TransitionType = ('link' | 'typed' | 'address_bar' | 'auto_bookmark' | 'auto_subframe' | 'manual_subframe' | 'generated' | 'auto_toplevel' | 'form_submit' | 'reload' | 'keyword' | 'keyword_generated' | 'other');
+        type TransitionType = ('link' | 'typed' | 'address_bar' | 'auto_bookmark' | 'auto_subframe' | 'manual_subframe' |
+            'generated' | 'auto_toplevel' | 'form_submit' | 'reload' | 'keyword' | 'keyword_generated' |
+            'other');
         /**
          * Navigation history entry.
          */
@@ -11229,7 +11316,8 @@ export namespace Protocol {
              */
             fixed?: integer;
         }
-        type ClientNavigationReason = ('formSubmissionGet' | 'formSubmissionPost' | 'httpHeaderRefresh' | 'scriptInitiated' | 'metaTagRefresh' | 'pageBlockInterstitial' | 'reload' | 'anchorClick');
+        type ClientNavigationReason = ('formSubmissionGet' | 'formSubmissionPost' | 'httpHeaderRefresh' | 'scriptInitiated' |
+            'metaTagRefresh' | 'pageBlockInterstitial' | 'reload' | 'anchorClick');
         type ClientNavigationDisposition = ('currentTab' | 'newTab' | 'newWindow' | 'download');
         interface InstallabilityErrorArgument {
             /**
@@ -11257,7 +11345,8 @@ export namespace Protocol {
         /**
          * The referring-policy used for the navigation.
          */
-        type ReferrerPolicy = ('noReferrer' | 'noReferrerWhenDowngrade' | 'origin' | 'originWhenCrossOrigin' | 'sameOrigin' | 'strictOrigin' | 'strictOriginWhenCrossOrigin' | 'unsafeUrl');
+        type ReferrerPolicy = ('noReferrer' | 'noReferrerWhenDowngrade' | 'origin' | 'originWhenCrossOrigin' | 'sameOrigin' |
+            'strictOrigin' | 'strictOriginWhenCrossOrigin' | 'unsafeUrl');
         /**
          * Per-script compilation cache parameters for `Page.produceCompilationCache`
          */
@@ -11279,7 +11368,35 @@ export namespace Protocol {
         /**
          * List of not restored reasons for back-forward cache.
          */
-        type BackForwardCacheNotRestoredReason = ('NotMainFrame' | 'BackForwardCacheDisabled' | 'RelatedActiveContentsExist' | 'HTTPStatusNotOK' | 'SchemeNotHTTPOrHTTPS' | 'Loading' | 'WasGrantedMediaAccess' | 'DisableForRenderFrameHostCalled' | 'DomainNotAllowed' | 'HTTPMethodNotGET' | 'SubframeIsNavigating' | 'Timeout' | 'CacheLimit' | 'JavaScriptExecution' | 'RendererProcessKilled' | 'RendererProcessCrashed' | 'GrantedMediaStreamAccess' | 'SchedulerTrackedFeatureUsed' | 'ConflictingBrowsingInstance' | 'CacheFlushed' | 'ServiceWorkerVersionActivation' | 'SessionRestored' | 'ServiceWorkerPostMessage' | 'EnteredBackForwardCacheBeforeServiceWorkerHostAdded' | 'RenderFrameHostReused_SameSite' | 'RenderFrameHostReused_CrossSite' | 'ServiceWorkerClaim' | 'IgnoreEventAndEvict' | 'HaveInnerContents' | 'TimeoutPuttingInCache' | 'BackForwardCacheDisabledByLowMemory' | 'BackForwardCacheDisabledByCommandLine' | 'NetworkRequestDatapipeDrainedAsBytesConsumer' | 'NetworkRequestRedirected' | 'NetworkRequestTimeout' | 'NetworkExceedsBufferLimit' | 'NavigationCancelledWhileRestoring' | 'NotMostRecentNavigationEntry' | 'BackForwardCacheDisabledForPrerender' | 'UserAgentOverrideDiffers' | 'ForegroundCacheLimit' | 'BrowsingInstanceNotSwapped' | 'BackForwardCacheDisabledForDelegate' | 'OptInUnloadHeaderNotPresent' | 'UnloadHandlerExistsInMainFrame' | 'UnloadHandlerExistsInSubFrame' | 'WebSocket' | 'WebRTC' | 'MainResourceHasCacheControlNoStore' | 'MainResourceHasCacheControlNoCache' | 'SubresourceHasCacheControlNoStore' | 'SubresourceHasCacheControlNoCache' | 'PageShowEventListener' | 'PageHideEventListener' | 'BeforeUnloadEventListener' | 'UnloadEventListener' | 'FreezeEventListener' | 'ResumeEventListener' | 'ContainsPlugins' | 'DocumentLoaded' | 'DedicatedWorkerOrWorklet' | 'OutstandingNetworkRequestOthers' | 'OutstandingIndexedDBTransaction' | 'RequestedGeolocationPermission' | 'RequestedNotificationsPermission' | 'RequestedMIDIPermission' | 'RequestedAudioCapturePermission' | 'RequestedVideoCapturePermission' | 'RequestedBackForwardCacheBlockedSensors' | 'RequestedBackgroundWorkPermission' | 'BroadcastChannel' | 'IndexedDBConnection' | 'WebVR' | 'WebXR' | 'SharedWorker' | 'WebLocks' | 'WebHID' | 'WebShare' | 'RequestedStorageAccessGrant' | 'WebNfc' | 'WebFileSystem' | 'OutstandingNetworkRequestFetch' | 'OutstandingNetworkRequestXHR' | 'AppBanner' | 'Printing' | 'WebDatabase' | 'PictureInPicture' | 'Portal' | 'SpeechRecognizer' | 'IdleManager' | 'PaymentManager' | 'SpeechSynthesis' | 'KeyboardLock' | 'WebOTPService' | 'OutstandingNetworkRequestDirectSocket' | 'IsolatedWorldScript' | 'InjectedStyleSheet' | 'MediaSessionImplOnServiceCreated' | 'Unknown');
+        type BackForwardCacheNotRestoredReason = ('NotMainFrame' | 'BackForwardCacheDisabled' | 'RelatedActiveContentsExist' | 'HTTPStatusNotOK' |
+            'SchemeNotHTTPOrHTTPS' | 'Loading' | 'WasGrantedMediaAccess' | 'DisableForRenderFrameHostCalled' |
+            'DomainNotAllowed' | 'HTTPMethodNotGET' | 'SubframeIsNavigating' | 'Timeout' | 'CacheLimit' |
+            'JavaScriptExecution' | 'RendererProcessKilled' | 'RendererProcessCrashed' | 'GrantedMediaStreamAccess' |
+            'SchedulerTrackedFeatureUsed' | 'ConflictingBrowsingInstance' | 'CacheFlushed' |
+            'ServiceWorkerVersionActivation' | 'SessionRestored' | 'ServiceWorkerPostMessage' |
+            'EnteredBackForwardCacheBeforeServiceWorkerHostAdded' | 'RenderFrameHostReused_SameSite' |
+            'RenderFrameHostReused_CrossSite' | 'ServiceWorkerClaim' | 'IgnoreEventAndEvict' |
+            'HaveInnerContents' | 'TimeoutPuttingInCache' | 'BackForwardCacheDisabledByLowMemory' |
+            'BackForwardCacheDisabledByCommandLine' | 'NetworkRequestDatapipeDrainedAsBytesConsumer' |
+            'NetworkRequestRedirected' | 'NetworkRequestTimeout' | 'NetworkExceedsBufferLimit' |
+            'NavigationCancelledWhileRestoring' | 'NotMostRecentNavigationEntry' | 'BackForwardCacheDisabledForPrerender' |
+            'UserAgentOverrideDiffers' | 'ForegroundCacheLimit' | 'BrowsingInstanceNotSwapped' |
+            'BackForwardCacheDisabledForDelegate' | 'OptInUnloadHeaderNotPresent' | 'UnloadHandlerExistsInMainFrame' |
+            'UnloadHandlerExistsInSubFrame' | 'WebSocket' | 'WebRTC' | 'MainResourceHasCacheControlNoStore' |
+            'MainResourceHasCacheControlNoCache' | 'SubresourceHasCacheControlNoStore' | 'SubresourceHasCacheControlNoCache' |
+            'PageShowEventListener' | 'PageHideEventListener' | 'BeforeUnloadEventListener' |
+            'UnloadEventListener' | 'FreezeEventListener' | 'ResumeEventListener' | 'ContainsPlugins' |
+            'DocumentLoaded' | 'DedicatedWorkerOrWorklet' | 'OutstandingNetworkRequestOthers' |
+            'OutstandingIndexedDBTransaction' | 'RequestedGeolocationPermission' | 'RequestedNotificationsPermission' |
+            'RequestedMIDIPermission' | 'RequestedAudioCapturePermission' | 'RequestedVideoCapturePermission' |
+            'RequestedBackForwardCacheBlockedSensors' | 'RequestedBackgroundWorkPermission' |
+            'BroadcastChannel' | 'IndexedDBConnection' | 'WebVR' | 'WebXR' | 'SharedWorker' |
+            'WebLocks' | 'WebHID' | 'WebShare' | 'RequestedStorageAccessGrant' | 'WebNfc' | 'WebFileSystem' |
+            'OutstandingNetworkRequestFetch' | 'OutstandingNetworkRequestXHR' | 'AppBanner' |
+            'Printing' | 'WebDatabase' | 'PictureInPicture' | 'Portal' | 'SpeechRecognizer' |
+            'IdleManager' | 'PaymentManager' | 'SpeechSynthesis' | 'KeyboardLock' | 'WebOTPService' |
+            'OutstandingNetworkRequestDirectSocket' | 'IsolatedWorldScript' | 'InjectedStyleSheet' |
+            'MediaSessionImplOnServiceCreated' | 'Unknown');
         /**
          * Types of not restored reasons for back-forward cache.
          */
@@ -12795,7 +12912,8 @@ export namespace Protocol {
         /**
          * Enum of possible storage types.
          */
-        type StorageType = ('appcache' | 'cookies' | 'file_systems' | 'indexeddb' | 'local_storage' | 'shader_cache' | 'websql' | 'service_workers' | 'cache_storage' | 'all' | 'other');
+        type StorageType = ('appcache' | 'cookies' | 'file_systems' | 'indexeddb' | 'local_storage' | 'shader_cache' |
+            'websql' | 'service_workers' | 'cache_storage' | 'all' | 'other');
         /**
          * Usage for a storage type.
          */
