@@ -10882,6 +10882,14 @@ export namespace Protocol {
          * Indicates whether a frame has been identified as an ad.
          */
         type AdFrameType = ('none' | 'child' | 'root');
+        type AdFrameExplanation = ('ParentIsAd' | 'CreatedByAdScript' | 'MatchedBlockingRule');
+        /**
+         * Indicates whether a frame has been identified as an ad and why.
+         */
+        interface AdFrameStatus {
+            adFrameType: AdFrameType;
+            explanations?: AdFrameExplanation[];
+        }
         /**
          * Indicates whether the frame is a secure context and why it is the case.
          */
@@ -11002,9 +11010,9 @@ export namespace Protocol {
              */
             unreachableUrl?: string;
             /**
-             * Indicates whether this frame was tagged as an ad.
+             * Indicates whether this frame was tagged as an ad and why.
              */
-            adFrameType?: AdFrameType;
+            adFrameStatus?: AdFrameStatus;
             /**
              * Indicates whether the main document is a secure context and explains why that is the case.
              */
@@ -11382,16 +11390,16 @@ export namespace Protocol {
             'NavigationCancelledWhileRestoring' | 'NotMostRecentNavigationEntry' | 'BackForwardCacheDisabledForPrerender' |
             'UserAgentOverrideDiffers' | 'ForegroundCacheLimit' | 'BrowsingInstanceNotSwapped' |
             'BackForwardCacheDisabledForDelegate' | 'OptInUnloadHeaderNotPresent' | 'UnloadHandlerExistsInMainFrame' |
-            'UnloadHandlerExistsInSubFrame' | 'WebSocket' | 'WebRTC' | 'MainResourceHasCacheControlNoStore' |
-            'MainResourceHasCacheControlNoCache' | 'SubresourceHasCacheControlNoStore' | 'SubresourceHasCacheControlNoCache' |
-            'PageShowEventListener' | 'PageHideEventListener' | 'BeforeUnloadEventListener' |
-            'UnloadEventListener' | 'FreezeEventListener' | 'ResumeEventListener' | 'ContainsPlugins' |
-            'DocumentLoaded' | 'DedicatedWorkerOrWorklet' | 'OutstandingNetworkRequestOthers' |
+            'UnloadHandlerExistsInSubFrame' | 'ServiceWorkerUnregistration' | 'WebSocket' | 'WebRTC' |
+            'MainResourceHasCacheControlNoStore' | 'MainResourceHasCacheControlNoCache' | 'SubresourceHasCacheControlNoStore' |
+            'SubresourceHasCacheControlNoCache' | 'PageShowEventListener' | 'PageHideEventListener' |
+            'BeforeUnloadEventListener' | 'UnloadEventListener' | 'FreezeEventListener' | 'ResumeEventListener' |
+            'ContainsPlugins' | 'DocumentLoaded' | 'DedicatedWorkerOrWorklet' | 'OutstandingNetworkRequestOthers' |
             'OutstandingIndexedDBTransaction' | 'RequestedGeolocationPermission' | 'RequestedNotificationsPermission' |
             'RequestedMIDIPermission' | 'RequestedAudioCapturePermission' | 'RequestedVideoCapturePermission' |
             'RequestedBackForwardCacheBlockedSensors' | 'RequestedBackgroundWorkPermission' |
-            'BroadcastChannel' | 'IndexedDBConnection' | 'WebVR' | 'WebXR' | 'SharedWorker' |
-            'WebLocks' | 'WebHID' | 'WebShare' | 'RequestedStorageAccessGrant' | 'WebNfc' | 'WebFileSystem' |
+            'BroadcastChannel' | 'IndexedDBConnection' | 'WebXR' | 'SharedWorker' | 'WebLocks' |
+            'WebHID' | 'WebShare' | 'RequestedStorageAccessGrant' | 'WebNfc' | 'WebFileSystem' |
             'OutstandingNetworkRequestFetch' | 'OutstandingNetworkRequestXHR' | 'AppBanner' |
             'Printing' | 'WebDatabase' | 'PictureInPicture' | 'Portal' | 'SpeechRecognizer' |
             'IdleManager' | 'PaymentManager' | 'SpeechSynthesis' | 'KeyboardLock' | 'WebOTPService' |
