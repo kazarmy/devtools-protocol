@@ -11392,12 +11392,10 @@ export namespace Protocol {
             'BackForwardCacheDisabledForDelegate' | 'OptInUnloadHeaderNotPresent' | 'UnloadHandlerExistsInMainFrame' |
             'UnloadHandlerExistsInSubFrame' | 'ServiceWorkerUnregistration' | 'WebSocket' | 'WebRTC' |
             'MainResourceHasCacheControlNoStore' | 'MainResourceHasCacheControlNoCache' | 'SubresourceHasCacheControlNoStore' |
-            'SubresourceHasCacheControlNoCache' | 'PageShowEventListener' | 'PageHideEventListener' |
-            'BeforeUnloadEventListener' | 'UnloadEventListener' | 'FreezeEventListener' | 'ResumeEventListener' |
-            'ContainsPlugins' | 'DocumentLoaded' | 'DedicatedWorkerOrWorklet' | 'OutstandingNetworkRequestOthers' |
-            'OutstandingIndexedDBTransaction' | 'RequestedGeolocationPermission' | 'RequestedNotificationsPermission' |
-            'RequestedMIDIPermission' | 'RequestedAudioCapturePermission' | 'RequestedVideoCapturePermission' |
-            'RequestedBackForwardCacheBlockedSensors' | 'RequestedBackgroundWorkPermission' |
+            'SubresourceHasCacheControlNoCache' | 'ContainsPlugins' | 'DocumentLoaded' | 'DedicatedWorkerOrWorklet' |
+            'OutstandingNetworkRequestOthers' | 'OutstandingIndexedDBTransaction' | 'RequestedGeolocationPermission' |
+            'RequestedNotificationsPermission' | 'RequestedMIDIPermission' | 'RequestedAudioCapturePermission' |
+            'RequestedVideoCapturePermission' | 'RequestedBackForwardCacheBlockedSensors' | 'RequestedBackgroundWorkPermission' |
             'BroadcastChannel' | 'IndexedDBConnection' | 'WebXR' | 'SharedWorker' | 'WebLocks' |
             'WebHID' | 'WebShare' | 'RequestedStorageAccessGrant' | 'WebNfc' | 'WebFileSystem' |
             'OutstandingNetworkRequestFetch' | 'OutstandingNetworkRequestXHR' | 'AppBanner' |
