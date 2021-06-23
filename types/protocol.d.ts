@@ -3791,7 +3791,9 @@ export namespace Protocol {
              */
             frameId: Page.FrameId;
             /**
-             * Stylesheet resource URL.
+             * Stylesheet resource URL. Empty if this is a constructed stylesheet created using
+             * new CSSStyleSheet() (but non-empty if this is a constructed sylesheet imported
+             * as a CSS module script).
              */
             sourceURL: string;
             /**
@@ -3831,7 +3833,8 @@ export namespace Protocol {
              */
             isMutable: boolean;
             /**
-             * Whether this stylesheet is a constructed stylesheet (created using new CSSStyleSheet()).
+             * True if this stylesheet is created through new CSSStyleSheet() or imported as a
+             * CSS module script.
              */
             isConstructed: boolean;
             /**
@@ -10906,8 +10909,8 @@ export namespace Protocol {
          */
         type PermissionsPolicyFeature = ('accelerometer' | 'ambient-light-sensor' | 'attribution-reporting' | 'autoplay' |
             'camera' | 'ch-dpr' | 'ch-device-memory' | 'ch-downlink' | 'ch-ect' | 'ch-lang' |
-            'ch-prefers-color-scheme' | 'ch-rtt' | 'ch-ua' | 'ch-ua-arch' | 'ch-ua-platform' |
-            'ch-ua-model' | 'ch-ua-mobile' | 'ch-ua-full-version' | 'ch-ua-platform-version' |
+            'ch-prefers-color-scheme' | 'ch-rtt' | 'ch-ua' | 'ch-ua-arch' | 'ch-ua-bitness' |
+            'ch-ua-platform' | 'ch-ua-model' | 'ch-ua-mobile' | 'ch-ua-full-version' | 'ch-ua-platform-version' |
             'ch-viewport-width' | 'ch-width' | 'clipboard-read' | 'clipboard-write' | 'cross-origin-isolated' |
             'direct-sockets' | 'display-capture' | 'document-domain' | 'encrypted-media' | 'execution-while-out-of-viewport' |
             'execution-while-not-rendered' | 'focus-without-user-activation' | 'fullscreen' |
@@ -11389,13 +11392,13 @@ export namespace Protocol {
             'NetworkRequestRedirected' | 'NetworkRequestTimeout' | 'NetworkExceedsBufferLimit' |
             'NavigationCancelledWhileRestoring' | 'NotMostRecentNavigationEntry' | 'BackForwardCacheDisabledForPrerender' |
             'UserAgentOverrideDiffers' | 'ForegroundCacheLimit' | 'BrowsingInstanceNotSwapped' |
-            'BackForwardCacheDisabledForDelegate' | 'OptInUnloadHeaderNotPresent' | 'UnloadHandlerExistsInMainFrame' |
-            'UnloadHandlerExistsInSubFrame' | 'ServiceWorkerUnregistration' | 'WebSocket' | 'WebRTC' |
-            'MainResourceHasCacheControlNoStore' | 'MainResourceHasCacheControlNoCache' | 'SubresourceHasCacheControlNoStore' |
-            'SubresourceHasCacheControlNoCache' | 'ContainsPlugins' | 'DocumentLoaded' | 'DedicatedWorkerOrWorklet' |
-            'OutstandingNetworkRequestOthers' | 'OutstandingIndexedDBTransaction' | 'RequestedGeolocationPermission' |
-            'RequestedNotificationsPermission' | 'RequestedMIDIPermission' | 'RequestedAudioCapturePermission' |
-            'RequestedVideoCapturePermission' | 'RequestedBackForwardCacheBlockedSensors' | 'RequestedBackgroundWorkPermission' |
+            'BackForwardCacheDisabledForDelegate' | 'OptInUnloadHeaderNotPresent' | 'UnloadHandlerExistsInSubFrame' |
+            'ServiceWorkerUnregistration' | 'WebSocket' | 'WebRTC' | 'MainResourceHasCacheControlNoStore' |
+            'MainResourceHasCacheControlNoCache' | 'SubresourceHasCacheControlNoStore' | 'SubresourceHasCacheControlNoCache' |
+            'ContainsPlugins' | 'DocumentLoaded' | 'DedicatedWorkerOrWorklet' | 'OutstandingNetworkRequestOthers' |
+            'OutstandingIndexedDBTransaction' | 'RequestedGeolocationPermission' | 'RequestedNotificationsPermission' |
+            'RequestedMIDIPermission' | 'RequestedAudioCapturePermission' | 'RequestedVideoCapturePermission' |
+            'RequestedBackForwardCacheBlockedSensors' | 'RequestedBackgroundWorkPermission' |
             'BroadcastChannel' | 'IndexedDBConnection' | 'WebXR' | 'SharedWorker' | 'WebLocks' |
             'WebHID' | 'WebShare' | 'RequestedStorageAccessGrant' | 'WebNfc' | 'WebFileSystem' |
             'OutstandingNetworkRequestFetch' | 'OutstandingNetworkRequestXHR' | 'AppBanner' |
@@ -11450,13 +11453,14 @@ export namespace Protocol {
         const enum CaptureScreenshotRequestFormat {
             Jpeg = 'jpeg',
             Png = 'png',
+            Webp = 'webp',
         }
         */
         interface CaptureScreenshotRequest {
             /**
              * Image compression format (defaults to png). (CaptureScreenshotRequestFormat enum)
              */
-            format?: ('jpeg' | 'png');
+            format?: ('jpeg' | 'png' | 'webp');
             /**
              * Compression quality from range [0..100] (jpeg only).
              */
