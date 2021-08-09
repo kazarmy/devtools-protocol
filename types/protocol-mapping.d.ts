@@ -2187,6 +2187,23 @@ export namespace ProtocolMapping {
             returnType: Protocol.DOM.GetFrameOwnerResponse;
         };
         /**
+         * Returns the container of the given node based on container query conditions.
+         * If containerName is given, it will find the nearest container with a matching name;
+         * otherwise it will find the nearest container regardless of its container name.
+         */
+        'DOM.getContainerForNode': {
+            paramsType: [Protocol.DOM.GetContainerForNodeRequest];
+            returnType: Protocol.DOM.GetContainerForNodeResponse;
+        };
+        /**
+         * Returns the descendants of a container query container that have
+         * container queries against this container.
+         */
+        'DOM.getQueryingDescendantsForContainer': {
+            paramsType: [Protocol.DOM.GetQueryingDescendantsForContainerRequest];
+            returnType: Protocol.DOM.GetQueryingDescendantsForContainerResponse;
+        };
+        /**
          * Returns event listeners of the given object.
          */
         'DOMDebugger.getEventListeners': {
@@ -2661,6 +2678,15 @@ export namespace ProtocolMapping {
          */
         'Input.insertText': {
             paramsType: [Protocol.Input.InsertTextRequest];
+            returnType: void;
+        };
+        /**
+         * This method sets the current candidate text for ime.
+         * Use imeCommitComposition to commit the final text.
+         * Use imeSetComposition with empty string as text to cancel composition.
+         */
+        'Input.imeSetComposition': {
+            paramsType: [Protocol.Input.ImeSetCompositionRequest];
             returnType: void;
         };
         /**
@@ -3177,6 +3203,9 @@ export namespace ProtocolMapping {
         };
         /**
          * Highlights owner element of the frame with given id.
+         * Deprecated: Doesn't work reliablity and cannot be fixed due to process
+         * separatation (the owner node might be in a different process). Determine
+         * the owner node in the client and use highlightNode.
          */
         'Overlay.highlightFrame': {
             paramsType: [Protocol.Overlay.HighlightFrameRequest];
@@ -3258,6 +3287,10 @@ export namespace ProtocolMapping {
         };
         'Overlay.setShowScrollSnapOverlays': {
             paramsType: [Protocol.Overlay.SetShowScrollSnapOverlaysRequest];
+            returnType: void;
+        };
+        'Overlay.setShowContainerQueryOverlays': {
+            paramsType: [Protocol.Overlay.SetShowContainerQueryOverlaysRequest];
             returnType: void;
         };
         /**
@@ -3539,6 +3572,13 @@ export namespace ProtocolMapping {
         'Page.getPermissionsPolicyState': {
             paramsType: [Protocol.Page.GetPermissionsPolicyStateRequest];
             returnType: Protocol.Page.GetPermissionsPolicyStateResponse;
+        };
+        /**
+         * Get Origin Trials on given frame.
+         */
+        'Page.getOriginTrials': {
+            paramsType: [Protocol.Page.GetOriginTrialsRequest];
+            returnType: Protocol.Page.GetOriginTrialsResponse;
         };
         /**
          * Overrides the values of device screen dimensions (window.screen.width, window.screen.height,

@@ -1271,6 +1271,17 @@ export namespace ProtocolProxyApi {
          */
         getFrameOwner(params: Protocol.DOM.GetFrameOwnerRequest): Promise<Protocol.DOM.GetFrameOwnerResponse>;
         /**
+         * Returns the container of the given node based on container query conditions.
+         * If containerName is given, it will find the nearest container with a matching name;
+         * otherwise it will find the nearest container regardless of its container name.
+         */
+        getContainerForNode(params: Protocol.DOM.GetContainerForNodeRequest): Promise<Protocol.DOM.GetContainerForNodeResponse>;
+        /**
+         * Returns the descendants of a container query container that have
+         * container queries against this container.
+         */
+        getQueryingDescendantsForContainer(params: Protocol.DOM.GetQueryingDescendantsForContainerRequest): Promise<Protocol.DOM.GetQueryingDescendantsForContainerResponse>;
+        /**
          * Fired when `Element`'s attribute is modified.
          */
         on(event: 'attributeModified', listener: (params: Protocol.DOM.AttributeModifiedEvent) => void): void;
@@ -1712,6 +1723,12 @@ export namespace ProtocolProxyApi {
          * for example an emoji keyboard or an IME.
          */
         insertText(params: Protocol.Input.InsertTextRequest): Promise<void>;
+        /**
+         * This method sets the current candidate text for ime.
+         * Use imeCommitComposition to commit the final text.
+         * Use imeSetComposition with empty string as text to cancel composition.
+         */
+        imeSetComposition(params: Protocol.Input.ImeSetCompositionRequest): Promise<void>;
         /**
          * Dispatches a mouse event to the page.
          */
@@ -2314,6 +2331,9 @@ export namespace ProtocolProxyApi {
         hideHighlight(): Promise<void>;
         /**
          * Highlights owner element of the frame with given id.
+         * Deprecated: Doesn't work reliablity and cannot be fixed due to process
+         * separatation (the owner node might be in a different process). Determine
+         * the owner node in the client and use highlightNode.
          */
         highlightFrame(params: Protocol.Overlay.HighlightFrameRequest): Promise<void>;
         /**
@@ -2358,6 +2378,7 @@ export namespace ProtocolProxyApi {
         setShowGridOverlays(params: Protocol.Overlay.SetShowGridOverlaysRequest): Promise<void>;
         setShowFlexOverlays(params: Protocol.Overlay.SetShowFlexOverlaysRequest): Promise<void>;
         setShowScrollSnapOverlays(params: Protocol.Overlay.SetShowScrollSnapOverlaysRequest): Promise<void>;
+        setShowContainerQueryOverlays(params: Protocol.Overlay.SetShowContainerQueryOverlaysRequest): Promise<void>;
         /**
          * Requests that backend shows paint rectangles
          */
@@ -2552,6 +2573,10 @@ export namespace ProtocolProxyApi {
          * Get Permissions Policy state on given frame.
          */
         getPermissionsPolicyState(params: Protocol.Page.GetPermissionsPolicyStateRequest): Promise<Protocol.Page.GetPermissionsPolicyStateResponse>;
+        /**
+         * Get Origin Trials on given frame.
+         */
+        getOriginTrials(params: Protocol.Page.GetOriginTrialsRequest): Promise<Protocol.Page.GetOriginTrialsResponse>;
         /**
          * Overrides the values of device screen dimensions (window.screen.width, window.screen.height,
          * window.innerWidth, window.innerHeight, and "device-width"/"device-height"-related CSS media

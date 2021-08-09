@@ -1,5 +1,153 @@
 
 
+## Roll protocol to r909375
+###### _2021-08-06 11:16:33_ | Diff: [8e161fc...94b504e](https://github.com/ChromeDevTools/devtools-protocol/compare/8e161fc...94b504e)
+#### `Overlay`: modified type
+* [`Overlay.ContainerQueryContainerHighlightConfig`](https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-ContainerQueryContainerHighlightConfig) - The `containerBorder` in the properties had `description` _updated_. The properties's `descendantBorder` _added_.
+
+
+## Roll protocol to r908589
+###### _2021-08-04 13:16:22_ | Diff: [c707d30...8e161fc](https://github.com/ChromeDevTools/devtools-protocol/compare/c707d30...8e161fc)
+#### `Page`: new command
+* [`Page.getOriginTrials`](https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-getOriginTrials)
+
+
+## Roll protocol to r908187
+###### _2021-08-03 16:16:22_ | Diff: [39a8210...c707d30](https://github.com/ChromeDevTools/devtools-protocol/compare/39a8210...c707d30)
+#### `Network`: modified event
+* [`Network.responseReceivedExtraInfo`](https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-responseReceivedExtraInfo) - The `statusCode` in the parameters had `description` _updated_.
+#### `Network`: modified type
+* [`Network.Response`](https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-Response) - The `headersText` in the properties had `description` _updated_. The `requestHeadersText` in the properties had `description` _updated_. The properties's `deprecated` _added_ (2 times).
+#### `Fetch`: modified command
+* [`Fetch.continueRequest`](https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-continueRequest) - The parameters's `interceptResponse` _added_.
+
+
+## Roll protocol to r907573
+###### _2021-08-02 09:16:14_ | Diff: [2ae3b1d...39a8210](https://github.com/ChromeDevTools/devtools-protocol/compare/2ae3b1d...39a8210)
+#### `DOM`: new command
+* [`DOM.getQueryingDescendantsForContainer`](https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getQueryingDescendantsForContainer)
+
+
+## Roll protocol to r906795
+###### _2021-07-29 12:17:01_ | Diff: [1c8cd5c...2ae3b1d](https://github.com/ChromeDevTools/devtools-protocol/compare/1c8cd5c...2ae3b1d)
+#### `Input`: new command
+* [`Input.imeSetComposition`](https://chromedevtools.github.io/devtools-protocol/tot/Input/#method-imeSetComposition)
+
+
+## Roll protocol to r906505
+###### _2021-07-28 18:16:19_ | Diff: [fa458e7...1c8cd5c](https://github.com/ChromeDevTools/devtools-protocol/compare/fa458e7...1c8cd5c)
+#### `Page`: modified type
+* [`Page.PermissionsPolicyFeature`](https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-PermissionsPolicyFeature) - The enum's `ch-viewport-width` _updated_. The enum's `ch-width` _updated_. The enum's `clipboard-read` _updated_. The enum's `clipboard-write` _updated_. The enum's `cross-origin-isolated` _updated_. The enum's `direct-sockets` _updated_. The enum's `display-capture` _updated_. The enum's `document-domain` _updated_. The enum's `encrypted-media` _updated_. The enum's `execution-while-out-of-viewport` _updated_. The enum's `execution-while-not-rendered` _updated_. The enum's `focus-without-user-activation` _updated_. The enum's `fullscreen` _updated_. The enum's `frobulate` _updated_. The enum's `gamepad` _updated_. The enum's `geolocation` _updated_. The enum's `gyroscope` _updated_. The enum's `hid` _updated_. The enum's `idle-detection` _updated_. The enum's `interest-cohort` _updated_. The enum's `magnetometer` _updated_. The enum's `microphone` _updated_. The enum's `midi` _updated_. The enum's `otp-credentials` _updated_. The enum's `payment` _updated_. The enum's `picture-in-picture` _updated_. The enum's `publickey-credentials-get` _updated_. The enum's `screen-wake-lock` _updated_. The enum's `serial` _updated_. The enum's `shared-autofill` _updated_. The enum's `storage-access-api` _updated_. The enum's `sync-xhr` _updated_. The enum's `trust-token-redemption` _updated_. The enum's `usb` _updated_. The enum's `vertical-scroll` _updated_. The enum's `web-share` _updated_. The enum's `window-placement` _updated_. The enum's `xr-spatial-tracking` _updated_. The enum's `xr-spatial-tracking` _added_.
+
+
+## Roll protocol to r905680
+###### _2021-07-27 04:16:20_ | Diff: [52195bf...fa458e7](https://github.com/ChromeDevTools/devtools-protocol/compare/52195bf...fa458e7)
+#### `Page`: modified type
+* [`Page.BackForwardCacheNotRestoredReason`](https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-BackForwardCacheNotRestoredReason) - The enum's `WebSocket` _updated_. The enum's `WebRTC` _updated_. The enum's `MainResourceHasCacheControlNoStore` _updated_. The enum's `MainResourceHasCacheControlNoCache` _updated_. The enum's `SubresourceHasCacheControlNoStore` _updated_. The enum's `SubresourceHasCacheControlNoCache` _updated_. The enum's `ContainsPlugins` _updated_. The enum's `DocumentLoaded` _updated_. The enum's `DedicatedWorkerOrWorklet` _updated_. The enum's `OutstandingNetworkRequestOthers` _updated_. The enum's `OutstandingIndexedDBTransaction` _updated_. The enum's `RequestedNotificationsPermission` _updated_. The enum's `RequestedMIDIPermission` _updated_. The enum's `RequestedAudioCapturePermission` _updated_. The enum's `RequestedVideoCapturePermission` _updated_. The enum's `RequestedBackForwardCacheBlockedSensors` _updated_. The enum's `RequestedBackgroundWorkPermission` _updated_. The enum's `BroadcastChannel` _updated_. The enum's `IndexedDBConnection` _updated_. The enum's `WebXR` _updated_. The enum's `SharedWorker` _updated_. The enum's `WebLocks` _updated_. The enum's `WebHID` _updated_. The enum's `WebShare` _updated_. The enum's `RequestedStorageAccessGrant` _updated_. The enum's `WebNfc` _updated_. The enum's `WebFileSystem` _updated_. The enum's `OutstandingNetworkRequestFetch` _updated_. The enum's `OutstandingNetworkRequestXHR` _updated_. The enum's `AppBanner` _updated_. The enum's `Printing` _updated_. The enum's `WebDatabase` _updated_. The enum's `PictureInPicture` _updated_. The enum's `Portal` _updated_. The enum's `SpeechRecognizer` _updated_. The enum's `IdleManager` _updated_. The enum's `PaymentManager` _updated_. The enum's `SpeechSynthesis` _updated_. The enum's `KeyboardLock` _updated_. The enum's `WebOTPService` _updated_. The enum's `OutstandingNetworkRequestDirectSocket` _updated_. The enum's `IsolatedWorldScript` _updated_. The enum's `InjectedStyleSheet` _updated_. The enum's `MediaSessionImplOnServiceCreated` _updated_. The enum's `Unknown` _updated_. The enum's `Unknown` _added_.
+
+
+## Roll protocol to r905252
+###### _2021-07-26 08:16:11_ | Diff: [6da1a03...52195bf](https://github.com/ChromeDevTools/devtools-protocol/compare/6da1a03...52195bf)
+#### `Network`: modified event
+* [`Network.responseReceivedExtraInfo`](https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-responseReceivedExtraInfo) - The `headersText` in the parameters had `optional` _removed_. The `headersText` in the parameters had `name` _updated_. The `headersText` in the parameters had `description` _updated_. The `headersText` in the parameters had `type` _updated_. The parameters's `headersText` _added_.
+
+
+## Roll protocol to r905235
+###### _2021-07-26 07:16:05_ | Diff: [ddfd9ff...6da1a03](https://github.com/ChromeDevTools/devtools-protocol/compare/ddfd9ff...6da1a03)
+#### `Input`: modified type
+* [`Input.DragData`](https://chromedevtools.github.io/devtools-protocol/tot/Input/#type-DragData) - The `dragOperationsMask` in the properties had `name` _updated_. The `dragOperationsMask` in the properties had `description` _updated_. The `dragOperationsMask` in the properties had `type` _updated_. The properties's `optional` _added_. The properties's `items` _added_. The properties's `dragOperationsMask` _added_.
+
+
+## Roll protocol to r901419
+###### _2021-07-14 02:15:57_ | Diff: [f94c0d3...ddfd9ff](https://github.com/ChromeDevTools/devtools-protocol/compare/f94c0d3...ddfd9ff)
+#### `Overlay`: modified command
+* [`Overlay.highlightFrame`](https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-highlightFrame) - `description` updated. `deprecated` added.
+
+
+## Roll protocol to r901394
+###### _2021-07-14 00:16:11_ | Diff: [2609869...f94c0d3](https://github.com/ChromeDevTools/devtools-protocol/compare/2609869...f94c0d3)
+#### `Page`: modified type
+* [`Page.BackForwardCacheNotRestoredReason`](https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-BackForwardCacheNotRestoredReason) - The enum's `WebSocket` _updated_. The enum's `WebRTC` _updated_. The enum's `MainResourceHasCacheControlNoStore` _updated_. The enum's `MainResourceHasCacheControlNoCache` _updated_. The enum's `SubresourceHasCacheControlNoStore` _updated_. The enum's `SubresourceHasCacheControlNoCache` _updated_. The enum's `ContainsPlugins` _updated_. The enum's `DocumentLoaded` _updated_. The enum's `DedicatedWorkerOrWorklet` _updated_. The enum's `OutstandingNetworkRequestOthers` _updated_. The enum's `OutstandingIndexedDBTransaction` _updated_. The enum's `RequestedNotificationsPermission` _updated_. The enum's `RequestedMIDIPermission` _updated_. The enum's `RequestedAudioCapturePermission` _updated_. The enum's `RequestedVideoCapturePermission` _updated_. The enum's `RequestedBackForwardCacheBlockedSensors` _updated_. The enum's `RequestedBackgroundWorkPermission` _updated_. The enum's `BroadcastChannel` _updated_. The enum's `IndexedDBConnection` _updated_. The enum's `WebXR` _updated_. The enum's `SharedWorker` _updated_. The enum's `WebLocks` _updated_. The enum's `WebHID` _updated_. The enum's `WebShare` _updated_. The enum's `RequestedStorageAccessGrant` _updated_. The enum's `WebNfc` _updated_. The enum's `WebFileSystem` _updated_. The enum's `OutstandingNetworkRequestFetch` _updated_. The enum's `OutstandingNetworkRequestXHR` _updated_. The enum's `AppBanner` _updated_. The enum's `Printing` _updated_. The enum's `WebDatabase` _updated_. The enum's `PictureInPicture` _updated_. The enum's `Portal` _updated_. The enum's `SpeechRecognizer` _updated_. The enum's `IdleManager` _updated_. The enum's `PaymentManager` _updated_. The enum's `SpeechSynthesis` _updated_. The enum's `KeyboardLock` _updated_. The enum's `WebOTPService` _updated_. The enum's `OutstandingNetworkRequestDirectSocket` _updated_. The enum's `IsolatedWorldScript` _updated_. The enum's `InjectedStyleSheet` _updated_. The enum's `MediaSessionImplOnServiceCreated` _updated_. The enum's `Unknown` _updated_. The enum's `InjectedStyleSheet` _added_. The enum's `MediaSessionImplOnServiceCreated` _added_. The enum's `Unknown` _added_.
+
+
+## Roll protocol to r900855
+###### _2021-07-12 23:16:27_ | Diff: [56bb0ce...2609869](https://github.com/ChromeDevTools/devtools-protocol/compare/56bb0ce...2609869)
+#### `Page`: modified type
+* [`Page.BackForwardCacheNotRestoredReason`](https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-BackForwardCacheNotRestoredReason) - The enum's `Unknown` _removed_. The enum's `RequestedGeolocationPermission` _updated_. The enum's `RequestedNotificationsPermission` _updated_. The enum's `RequestedMIDIPermission` _updated_. The enum's `RequestedAudioCapturePermission` _updated_. The enum's `RequestedVideoCapturePermission` _updated_. The enum's `RequestedBackForwardCacheBlockedSensors` _updated_. The enum's `RequestedBackgroundWorkPermission` _updated_. The enum's `BroadcastChannel` _updated_. The enum's `IndexedDBConnection` _updated_. The enum's `WebXR` _updated_. The enum's `SharedWorker` _updated_. The enum's `WebLocks` _updated_. The enum's `WebHID` _updated_. The enum's `WebShare` _updated_. The enum's `RequestedStorageAccessGrant` _updated_. The enum's `WebNfc` _updated_. The enum's `WebFileSystem` _updated_. The enum's `OutstandingNetworkRequestFetch` _updated_. The enum's `OutstandingNetworkRequestXHR` _updated_. The enum's `AppBanner` _updated_. The enum's `Printing` _updated_. The enum's `WebDatabase` _updated_. The enum's `PictureInPicture` _updated_. The enum's `Portal` _updated_. The enum's `SpeechRecognizer` _updated_. The enum's `IdleManager` _updated_. The enum's `PaymentManager` _updated_. The enum's `SpeechSynthesis` _updated_. The enum's `KeyboardLock` _updated_. The enum's `WebOTPService` _updated_. The enum's `OutstandingNetworkRequestDirectSocket` _updated_. The enum's `IsolatedWorldScript` _updated_. The enum's `InjectedStyleSheet` _updated_. The enum's `MediaSessionImplOnServiceCreated` _updated_.
+
+
+## Roll protocol to r900357
+###### _2021-07-11 23:16:08_ | Diff: [db8965f...56bb0ce](https://github.com/ChromeDevTools/devtools-protocol/compare/db8965f...56bb0ce)
+#### `DOMSnapshot`: modified type
+* [`DOMSnapshot.NodeTreeSnapshot`](https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-NodeTreeSnapshot) - The `nodeName` in the properties had `type` _removed_. The `nodeName` in the properties had `items` _removed_. The `textValue` in the properties had `$ref` _removed_. The `nodeName` in the properties had `name` _updated_. The `nodeName` in the properties had `description` _updated_. The `nodeValue` in the properties had `name` _updated_. The `nodeValue` in the properties had `description` _updated_. The `backendNodeId` in the properties had `name` _updated_. The `backendNodeId` in the properties had `description` _updated_. The `backendNodeId` in the properties had `$ref` _updated_. The `attributes` in the properties had `name` _updated_. The `attributes` in the properties had `description` _updated_. The `attributes` in the properties had `$ref` _updated_. The `textValue` in the properties had `name` _updated_. The `textValue` in the properties had `description` _updated_. The `inputValue` in the properties had `name` _updated_. The `inputValue` in the properties had `description` _updated_. The `inputChecked` in the properties had `name` _updated_. The `inputChecked` in the properties had `description` _updated_. The `inputChecked` in the properties had `$ref` _updated_. The `optionSelected` in the properties had `name` _updated_. The `optionSelected` in the properties had `description` _updated_. The `contentDocumentIndex` in the properties had `name` _updated_. The `contentDocumentIndex` in the properties had `description` _updated_. The `contentDocumentIndex` in the properties had `$ref` _updated_. The `pseudoType` in the properties had `name` _updated_. The `pseudoType` in the properties had `description` _updated_. The `pseudoType` in the properties had `$ref` _updated_. The `isClickable` in the properties had `name` _updated_. The `isClickable` in the properties had `description` _updated_. The `isClickable` in the properties had `$ref` _updated_. The `currentSourceURL` in the properties had `name` _updated_. The `currentSourceURL` in the properties had `description` _updated_. The `currentSourceURL` in the properties had `$ref` _updated_. The `originURL` in the properties had `name` _updated_. The `originURL` in the properties had `description` _updated_. The properties's `$ref` _added_. The properties's `type` _added_. The properties's `items` _added_. The properties's `originURL` _added_.
+
+
+## Roll protocol to r900033
+###### _2021-07-09 09:16:22_ | Diff: [cbb20a9...db8965f](https://github.com/ChromeDevTools/devtools-protocol/compare/cbb20a9...db8965f)
+#### `Overlay`: new command
+* [`Overlay.setShowContainerQueryOverlays`](https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowContainerQueryOverlays)
+#### `Overlay`: new types
+* [`Overlay.ContainerQueryHighlightConfig`](https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-ContainerQueryHighlightConfig)
+* [`Overlay.ContainerQueryContainerHighlightConfig`](https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-ContainerQueryContainerHighlightConfig)
+#### `Overlay`: modified type
+* [`Overlay.HighlightConfig`](https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-HighlightConfig) - The properties's `containerQueryContainerHighlightConfig` _added_.
+
+
+## Roll protocol to r898382
+###### _2021-07-02 16:16:12_ | Diff: [b531de2...c935633](https://github.com/ChromeDevTools/devtools-protocol/compare/b531de2...c935633)
+#### `DOM`: modified type
+* [`DOM.PseudoType`](https://chromedevtools.github.io/devtools-protocol/tot/DOM/#type-PseudoType) - The enum's `first-line-inherited` _updated_. The enum's `scrollbar` _updated_. The enum's `scrollbar-thumb` _updated_. The enum's `scrollbar-button` _updated_. The enum's `scrollbar-track` _updated_. The enum's `scrollbar-track-piece` _updated_. The enum's `scrollbar-corner` _updated_. The enum's `resizer` _updated_. The enum's `input-list-button` _updated_. The enum's `input-list-button` _added_.
+
+
+## Roll protocol to r898124
+###### _2021-07-02 05:16:12_ | Diff: [6814a59...b531de2](https://github.com/ChromeDevTools/devtools-protocol/compare/6814a59...b531de2)
+#### `Audits`: new type
+* [`Audits.WasmCrossOriginModuleSharingIssueDetails`](https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-WasmCrossOriginModuleSharingIssueDetails)
+#### `Audits`: modified types
+* [`Audits.InspectorIssueCode`](https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-InspectorIssueCode) - The enum's `WasmCrossOriginModuleSharingIssue` _added_.
+* [`Audits.InspectorIssueDetails`](https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-InspectorIssueDetails) - The properties's `wasmCrossOriginModuleSharingIssue` _added_.
+
+
+## Roll protocol to r897295
+###### _2021-06-30 02:16:16_ | Diff: [65148a9...6814a59](https://github.com/ChromeDevTools/devtools-protocol/compare/65148a9...6814a59)
+#### `Network`: modified type
+* [`Network.Request`](https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-Request) - The properties's `isSameSite` _added_.
+
+
+## Roll protocol to r896856
+###### _2021-06-29 04:16:10_ | Diff: [06ee96a...65148a9](https://github.com/ChromeDevTools/devtools-protocol/compare/06ee96a...65148a9)
+#### `CSS`: modified type
+* [`CSS.CSSContainerQuery`](https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSContainerQuery) - The properties's `name` _added_.
+#### `DOM`: new command
+* [`DOM.getContainerForNode`](https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getContainerForNode)
+
+
+## Roll protocol to r896125
+###### _2021-06-25 11:16:15_ | Diff: [6362220...06ee96a](https://github.com/ChromeDevTools/devtools-protocol/compare/6362220...06ee96a)
+#### `Network`: modified type
+* [`Network.Request`](https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-Request) - The properties's `isSameSite` _removed_.
+
+
+## Roll protocol to r896035
+###### _2021-06-25 07:16:07_ | Diff: [95234d8...6362220](https://github.com/ChromeDevTools/devtools-protocol/compare/95234d8...6362220)
+#### `Network`: modified type
+* [`Network.Request`](https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-Request) - The properties's `isSameSite` _added_.
+
+
+## Roll protocol to r895982
+###### _2021-06-25 03:16:12_ | Diff: [6544760...95234d8](https://github.com/ChromeDevTools/devtools-protocol/compare/6544760...95234d8)
+#### `Audits`: new type
+* [`Audits.IssueId`](https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-IssueId)
+#### `Audits`: modified type
+* [`Audits.InspectorIssue`](https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-InspectorIssue) - The `issueId` in the properties had `type` _removed_. The properties's `$ref` _added_.
+
+
+## Roll protocol to r894467
+###### _2021-06-21 17:16:13_ | Diff: [aaf1569...6544760](https://github.com/ChromeDevTools/devtools-protocol/compare/aaf1569...6544760)
+#### `CSS`: modified type
+* [`CSS.CSSStyleSheetHeader`](https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSStyleSheetHeader) - The `sourceURL` in the properties had `description` _updated_. The `isConstructed` in the properties had `description` _updated_.
+
+
 ## Roll protocol to r894172
 ###### _2021-06-21 01:16:09_ | Diff: [fe543d9...aaf1569](https://github.com/ChromeDevTools/devtools-protocol/compare/fe543d9...aaf1569)
 #### `Page`: modified type

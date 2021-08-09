@@ -2977,7 +2977,7 @@ export namespace Protocol {
             frameId: Page.FrameId;
         }
         type SameSiteCookieExclusionReason = ('ExcludeSameSiteUnspecifiedTreatedAsLax' | 'ExcludeSameSiteNoneInsecure' | 'ExcludeSameSiteLax' |
-            'ExcludeSameSiteStrict' | 'ExcludeInvalidSameParty');
+            'ExcludeSameSiteStrict' | 'ExcludeInvalidSameParty' | 'ExcludeSamePartyCrossPartyContext');
         type SameSiteCookieWarningReason = ('WarnSameSiteUnspecifiedCrossSiteContext' | 'WarnSameSiteNoneInsecure' | 'WarnSameSiteUnspecifiedLaxAllowUnsafe' |
             'WarnSameSiteStrictLaxDowngradeStrict' | 'WarnSameSiteStrictCrossDowngradeStrict' |
             'WarnSameSiteStrictCrossDowngradeLax' | 'WarnSameSiteLaxCrossDowngradeStrict' | 'WarnSameSiteLaxCrossDowngradeLax');
@@ -3181,6 +3181,12 @@ export namespace Protocol {
             url: string;
             location?: SourceCodeLocation;
         }
+        interface WasmCrossOriginModuleSharingIssueDetails {
+            wasmModuleUrl: string;
+            sourceOrigin: string;
+            targetOrigin: string;
+            isWarning: boolean;
+        }
         /**
          * A unique identifier for the type of issue. Each type may use one of the
          * optional fields in InspectorIssueDetails to convey more specific
@@ -3189,7 +3195,7 @@ export namespace Protocol {
         type InspectorIssueCode = ('SameSiteCookieIssue' | 'MixedContentIssue' | 'BlockedByResponseIssue' | 'HeavyAdIssue' |
             'ContentSecurityPolicyIssue' | 'SharedArrayBufferIssue' | 'TrustedWebActivityIssue' |
             'LowTextContrastIssue' | 'CorsIssue' | 'AttributionReportingIssue' | 'QuirksModeIssue' |
-            'NavigatorUserAgentIssue');
+            'NavigatorUserAgentIssue' | 'WasmCrossOriginModuleSharingIssue');
         /**
          * This struct holds a list of optional fields with additional information
          * specific to the kind of issue. When adding a new issue code, please also
@@ -3208,7 +3214,13 @@ export namespace Protocol {
             attributionReportingIssueDetails?: AttributionReportingIssueDetails;
             quirksModeIssueDetails?: QuirksModeIssueDetails;
             navigatorUserAgentIssueDetails?: NavigatorUserAgentIssueDetails;
+            wasmCrossOriginModuleSharingIssue?: WasmCrossOriginModuleSharingIssueDetails;
         }
+        /**
+         * A unique id for a DevTools inspector issue. Allows other entities (e.g.
+         * exceptions, CDP message, console messages, etc.) to reference an issue.
+         */
+        type IssueId = string;
         /**
          * An inspector issue reported from the back-end.
          */
@@ -3219,7 +3231,7 @@ export namespace Protocol {
              * A unique id for this issue. May be omitted if no other entity (e.g.
              * exception, CDP message, etc.) is referencing this issue.
              */
-            issueId?: string;
+            issueId?: IssueId;
         }
         /*
         const enum GetEncodedResponseRequestEncoding {
@@ -4116,6 +4128,10 @@ export namespace Protocol {
              * Identifier of the stylesheet containing this object (if exists).
              */
             styleSheetId?: StyleSheetId;
+            /**
+             * Optional name for the container.
+             */
+            name?: string;
         }
         /**
          * Information about amount of glyphs that were rendered with given font.
@@ -4767,8 +4783,8 @@ export namespace Protocol {
          * Pseudo element type.
          */
         type PseudoType = ('first-line' | 'first-letter' | 'before' | 'after' | 'marker' | 'backdrop' | 'selection' |
-            'target-text' | 'spelling-error' | 'grammar-error' | 'first-line-inherited' | 'scrollbar' |
-            'scrollbar-thumb' | 'scrollbar-button' | 'scrollbar-track' | 'scrollbar-track-piece' |
+            'target-text' | 'spelling-error' | 'grammar-error' | 'highlight' | 'first-line-inherited' |
+            'scrollbar' | 'scrollbar-thumb' | 'scrollbar-button' | 'scrollbar-track' | 'scrollbar-track-piece' |
             'scrollbar-corner' | 'resizer' | 'input-list-button');
         /**
          * Shadow root type.
@@ -5597,6 +5613,28 @@ export namespace Protocol {
              */
             nodeId?: NodeId;
         }
+        interface GetContainerForNodeRequest {
+            nodeId: NodeId;
+            containerName?: string;
+        }
+        interface GetContainerForNodeResponse {
+            /**
+             * The container node for the given node, or null if not found.
+             */
+            nodeId?: NodeId;
+        }
+        interface GetQueryingDescendantsForContainerRequest {
+            /**
+             * Id of the container node to find querying descendants from.
+             */
+            nodeId: NodeId;
+        }
+        interface GetQueryingDescendantsForContainerResponse {
+            /**
+             * Descendant nodes with container queries against the given container.
+             */
+            nodeIds: NodeId[];
+        }
         /**
          * Fired when `Element`'s attribute is modified.
          */
@@ -6227,6 +6265,10 @@ export namespace Protocol {
              * `Node`'s nodeType.
              */
             nodeType?: integer[];
+            /**
+             * Type of the shadow root the `Node` is in. String values are equal to the `ShadowRootType` enum.
+             */
+            shadowRootType?: RareStringData;
             /**
              * `Node`'s nodeName.
              */
@@ -7402,6 +7444,10 @@ export namespace Protocol {
         interface DragData {
             items: DragDataItem[];
             /**
+             * List of filenames that should be included when dropping
+             */
+            files?: string[];
+            /**
              * Bit field representing allowed drag operations. Copy = 1, Link = 2, Move = 16
              */
             dragOperationsMask: integer;
@@ -7517,6 +7563,28 @@ export namespace Protocol {
              * The text to insert.
              */
             text: string;
+        }
+        interface ImeSetCompositionRequest {
+            /**
+             * The text to insert
+             */
+            text: string;
+            /**
+             * selection start
+             */
+            selectionStart: integer;
+            /**
+             * selection end
+             */
+            selectionEnd: integer;
+            /**
+             * replacement start
+             */
+            replacementStart?: integer;
+            /**
+             * replacement end
+             */
+            replacementEnd?: integer;
         }
         /*
         const enum DispatchMouseEventRequestType {
@@ -8496,6 +8564,11 @@ export namespace Protocol {
              * passed by the developer (e.g. via "fetch") as understood by the backend.
              */
             trustTokenParams?: TrustTokenParams;
+            /**
+             * True if this resource request is considered to be the 'same site' as the
+             * request correspondinfg to the main frame.
+             */
+            isSameSite?: boolean;
         }
         /**
          * Details of a signed certificate timestamp (SCT).
@@ -8668,7 +8741,7 @@ export namespace Protocol {
              */
             headers: Headers;
             /**
-             * HTTP response headers text.
+             * HTTP response headers text. This has been replaced by the headers in Network.responseReceivedExtraInfo.
              */
             headersText?: string;
             /**
@@ -8680,7 +8753,7 @@ export namespace Protocol {
              */
             requestHeaders?: Headers;
             /**
-             * HTTP request headers text.
+             * HTTP request headers text. This has been replaced by the headers in Network.requestWillBeSentExtraInfo.
              */
             requestHeadersText?: string;
             /**
@@ -10150,6 +10223,12 @@ export namespace Protocol {
              */
             resourceIPAddressSpace: IPAddressSpace;
             /**
+             * The status code of the response. This is useful in cases the request failed and no responseReceived
+             * event is triggered, which is the case for, e.g., CORS errors. This is also the correct status code
+             * for cached requests, where the status in responseReceived is a 200 and this will be 304.
+             */
+            statusCode: integer;
+            /**
              * Raw response header text as it was received over the wire. The raw text may not always be
              * available, such as in the case of HTTP/2 or QUIC.
              */
@@ -10536,6 +10615,10 @@ export namespace Protocol {
              * The contrast algorithm to use for the contrast ratio (default: aa).
              */
             contrastAlgorithm?: ContrastAlgorithm;
+            /**
+             * The container query container highlight configuration (default: all transparent).
+             */
+            containerQueryContainerHighlightConfig?: ContainerQueryContainerHighlightConfig;
         }
         type ColorFormat = ('rgb' | 'hsl' | 'hex');
         /**
@@ -10605,6 +10688,26 @@ export namespace Protocol {
              * The content box highlight outline color (default: transparent).
              */
             outlineColor?: DOM.RGBA;
+        }
+        interface ContainerQueryHighlightConfig {
+            /**
+             * A descriptor for the highlight appearance of container query containers.
+             */
+            containerQueryContainerHighlightConfig: ContainerQueryContainerHighlightConfig;
+            /**
+             * Identifier of the container node to highlight.
+             */
+            nodeId: DOM.NodeId;
+        }
+        interface ContainerQueryContainerHighlightConfig {
+            /**
+             * The style of the container border.
+             */
+            containerBorder?: LineStyle;
+            /**
+             * The style of the descendants' borders.
+             */
+            descendantBorder?: LineStyle;
         }
         type InspectMode = ('searchForNode' | 'searchForUAShadowDOM' | 'captureAreaScreenshot' | 'showDistances' |
             'none');
@@ -10807,6 +10910,12 @@ export namespace Protocol {
              */
             scrollSnapHighlightConfigs: ScrollSnapHighlightConfig[];
         }
+        interface SetShowContainerQueryOverlaysRequest {
+            /**
+             * An array of node identifiers and descriptors for the highlight appearance.
+             */
+            containerQueryHighlightConfigs: ContainerQueryHighlightConfig[];
+        }
         interface SetShowPaintRectsRequest {
             /**
              * True for showing paint rectangles
@@ -10911,14 +11020,15 @@ export namespace Protocol {
             'camera' | 'ch-dpr' | 'ch-device-memory' | 'ch-downlink' | 'ch-ect' | 'ch-lang' |
             'ch-prefers-color-scheme' | 'ch-rtt' | 'ch-ua' | 'ch-ua-arch' | 'ch-ua-bitness' |
             'ch-ua-platform' | 'ch-ua-model' | 'ch-ua-mobile' | 'ch-ua-full-version' | 'ch-ua-platform-version' |
-            'ch-viewport-width' | 'ch-width' | 'clipboard-read' | 'clipboard-write' | 'cross-origin-isolated' |
-            'direct-sockets' | 'display-capture' | 'document-domain' | 'encrypted-media' | 'execution-while-out-of-viewport' |
-            'execution-while-not-rendered' | 'focus-without-user-activation' | 'fullscreen' |
-            'frobulate' | 'gamepad' | 'geolocation' | 'gyroscope' | 'hid' | 'idle-detection' |
-            'interest-cohort' | 'magnetometer' | 'microphone' | 'midi' | 'otp-credentials' |
-            'payment' | 'picture-in-picture' | 'publickey-credentials-get' | 'screen-wake-lock' |
-            'serial' | 'shared-autofill' | 'storage-access-api' | 'sync-xhr' | 'trust-token-redemption' |
-            'usb' | 'vertical-scroll' | 'web-share' | 'window-placement' | 'xr-spatial-tracking');
+            'ch-ua-reduced' | 'ch-viewport-width' | 'ch-width' | 'clipboard-read' | 'clipboard-write' |
+            'cross-origin-isolated' | 'direct-sockets' | 'display-capture' | 'document-domain' |
+            'encrypted-media' | 'execution-while-out-of-viewport' | 'execution-while-not-rendered' |
+            'focus-without-user-activation' | 'fullscreen' | 'frobulate' | 'gamepad' | 'geolocation' |
+            'gyroscope' | 'hid' | 'idle-detection' | 'interest-cohort' | 'magnetometer' | 'microphone' |
+            'midi' | 'otp-credentials' | 'payment' | 'picture-in-picture' | 'publickey-credentials-get' |
+            'screen-wake-lock' | 'serial' | 'shared-autofill' | 'storage-access-api' | 'sync-xhr' |
+            'trust-token-redemption' | 'usb' | 'vertical-scroll' | 'web-share' | 'window-placement' |
+            'xr-spatial-tracking');
         /**
          * Reason for a permissions policy feature to be disabled.
          */
@@ -11393,10 +11503,11 @@ export namespace Protocol {
             'NavigationCancelledWhileRestoring' | 'NotMostRecentNavigationEntry' | 'BackForwardCacheDisabledForPrerender' |
             'UserAgentOverrideDiffers' | 'ForegroundCacheLimit' | 'BrowsingInstanceNotSwapped' |
             'BackForwardCacheDisabledForDelegate' | 'OptInUnloadHeaderNotPresent' | 'UnloadHandlerExistsInSubFrame' |
-            'ServiceWorkerUnregistration' | 'WebSocket' | 'WebRTC' | 'MainResourceHasCacheControlNoStore' |
-            'MainResourceHasCacheControlNoCache' | 'SubresourceHasCacheControlNoStore' | 'SubresourceHasCacheControlNoCache' |
-            'ContainsPlugins' | 'DocumentLoaded' | 'DedicatedWorkerOrWorklet' | 'OutstandingNetworkRequestOthers' |
-            'OutstandingIndexedDBTransaction' | 'RequestedGeolocationPermission' | 'RequestedNotificationsPermission' |
+            'ServiceWorkerUnregistration' | 'CacheControlNoStore' | 'CacheControlNoStoreCookieModified' |
+            'CacheControlNoStoreHTTPOnlyCookieModified' | 'NoResponseHead' | 'WebSocket' | 'WebRTC' |
+            'MainResourceHasCacheControlNoStore' | 'MainResourceHasCacheControlNoCache' | 'SubresourceHasCacheControlNoStore' |
+            'SubresourceHasCacheControlNoCache' | 'ContainsPlugins' | 'DocumentLoaded' | 'DedicatedWorkerOrWorklet' |
+            'OutstandingNetworkRequestOthers' | 'OutstandingIndexedDBTransaction' | 'RequestedNotificationsPermission' |
             'RequestedMIDIPermission' | 'RequestedAudioCapturePermission' | 'RequestedVideoCapturePermission' |
             'RequestedBackForwardCacheBlockedSensors' | 'RequestedBackgroundWorkPermission' |
             'BroadcastChannel' | 'IndexedDBConnection' | 'WebXR' | 'SharedWorker' | 'WebLocks' |
@@ -11841,6 +11952,12 @@ export namespace Protocol {
         }
         interface GetPermissionsPolicyStateResponse {
             states: PermissionsPolicyFeatureState[];
+        }
+        interface GetOriginTrialsRequest {
+            frameId: FrameId;
+        }
+        interface GetOriginTrialsResponse {
+            originTrials: OriginTrial[];
         }
         interface SetDeviceMetricsOverrideRequest {
             /**
@@ -13986,6 +14103,10 @@ export namespace Protocol {
              * If set, overrides the request headers.
              */
             headers?: HeaderEntry[];
+            /**
+             * If set, overrides response interception behavior for this request.
+             */
+            interceptResponse?: boolean;
         }
         interface ContinueWithAuthRequest {
             /**
