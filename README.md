@@ -1,12 +1,33 @@
-# devtools-protocol
+# Welcome!
 
-:warning:
-This repository is related to Chrome DevTools Protocol, but does not track issues regarding its definition or implementation.
-If you want to file an issue for the Chrome DevTools Protocol, please open an issue on https://crbug.com under [`component: Platform>DevTools>Platform`](https://bugs.chromium.org/p/chromium/issues/entry?components=Platform%3EDevTools%3EPlatform).
+This is a fork of the [devtools-protocol repo](https://github.com/ChromeDevTools/devtools-protocol) at r927104, corresponding to the npm package `devtools-protocol@0.0.927104`. The typings here have been augmented in 3 different ways:
 
-Use the [protocol viewer](https://chromedevtools.github.io/devtools-protocol/) for navigating the protocol.
+1. Typings for Promise event methods, for statements like:
 
-TypeScript definitions for the protocol's types are available in ['types/protocol.d.ts'](https://github.com/ChromeDevTools/devtools-protocol/tree/master/types). Mappings from Commands and events to these types are available in either generated `DomainApi` style in [`types/protocol-proxy-api.d.ts`](https://github.com/ChromeDevTools/devtools-protocol/blob/master/types/protocol-proxy-api.d.ts) or in simple name-to-type-interface style in [`types/protocol-mapping.d.ts`](https://github.com/ChromeDevTools/devtools-protocol/blob/master/types/protocol-mapping.d.ts).
+```ts
+await Page.loadEventFired();
+```
 
-Also, this repo is published as the [`devtools-protocol`](https://www.npmjs.com/package/devtools-protocol) NPM module. 
-![npm](https://img.shields.io/npm/v/devtools-protocol.svg?style=flat-square)
+2. Typings for shorthand callback event methods, for statements like:
+
+```ts
+Network.requestWillBeSent((params) => {
+    console.log(params.request.url);
+});
+```
+
+3. Optional declarations on command object parameters with all-optional properties, to allow statements like:
+
+```ts
+await Network.enable();
+```
+
+instead of:
+
+```ts
+await Network.enable({});
+```
+
+----
+
+The script that generates these typings is at [scripts/protocol-dts-generator.ts](https://github.com/kazarmy/devtools-protocol/blob/master/scripts/protocol-dts-generator.ts) and can be run using `npx ts-node protocol-dts-generator.ts` in the `scripts/` directory.
