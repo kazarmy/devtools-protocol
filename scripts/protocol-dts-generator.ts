@@ -319,11 +319,7 @@ const emitMapping = (moduleName: string, protocolModuleName: string, domains: P.
 const emitApiCommand = (command: P.Command, domainName: string, modulePrefix: string) => {
     const prefix = `${modulePrefix}.${domainName}.`
     emitDescription(command.description)
-    let params = ''
-    if (command.parameters) {
-        const optional = isWeakInterface(command.parameters) ? '?' : ''
-        params = `params${optional}: ${prefix}${toCmdRequestName(command.name)}`
-    }
+    const params = command.parameters ? `params: ${prefix}${toCmdRequestName(command.name)}` : ''
     const response = command.returns ? `${prefix}${toCmdResponseName(command.name)}` : 'void'
     emitLine(`${command.name}(${params}): Promise<${response}>;`)
     emitLine()
