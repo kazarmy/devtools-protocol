@@ -1,6 +1,6 @@
 # Welcome!
 
-This is a fork of the [devtools-protocol repo](https://github.com/ChromeDevTools/devtools-protocol) at r927104, corresponding to the npm package `devtools-protocol@0.0.927104`. The typings here have been augmented in 3 different ways:
+This is a fork of the [devtools-protocol repo](https://github.com/ChromeDevTools/devtools-protocol) at r927104, corresponding to the npm package `devtools-protocol@0.0.927104`. The typings here have been augmented in 2 different ways:
 
 1. Typings for Promise event methods, for statements like:
 
@@ -14,18 +14,6 @@ await Page.loadEventFired();
 Network.requestWillBeSent((params) => {
     console.log(params.request.url);
 });
-```
-
-3. Optional declarations on command object parameters with all-optional properties, to allow statements like:
-
-```ts
-await Network.enable();
-```
-
-instead of:
-
-```ts
-await Network.enable({});
 ```
 
 ----
