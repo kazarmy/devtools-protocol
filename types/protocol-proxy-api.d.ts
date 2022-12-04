@@ -155,7 +155,7 @@ export namespace ProtocolProxyApi {
          * Enables debugger for the given page. Clients should not assume that the debugging has been
          * enabled until the result for this command is received.
          */
-        enable(params?: Protocol.Debugger.EnableRequest): Promise<Protocol.Debugger.EnableResponse>;
+        enable(params: Protocol.Debugger.EnableRequest): Promise<Protocol.Debugger.EnableResponse>;
 
         /**
          * Evaluates expression on a given call frame.
@@ -203,7 +203,7 @@ export namespace ProtocolProxyApi {
         /**
          * Resumes JavaScript execution.
          */
-        resume(params?: Protocol.Debugger.ResumeRequest): Promise<void>;
+        resume(params: Protocol.Debugger.ResumeRequest): Promise<void>;
 
         /**
          * Searches for given string in script content.
@@ -290,7 +290,7 @@ export namespace ProtocolProxyApi {
         /**
          * Steps into the function call.
          */
-        stepInto(params?: Protocol.Debugger.StepIntoRequest): Promise<void>;
+        stepInto(params: Protocol.Debugger.StepIntoRequest): Promise<void>;
 
         /**
          * Steps out of the function call.
@@ -300,7 +300,7 @@ export namespace ProtocolProxyApi {
         /**
          * Steps over the statement.
          */
-        stepOver(params?: Protocol.Debugger.StepOverRequest): Promise<void>;
+        stepOver(params: Protocol.Debugger.StepOverRequest): Promise<void>;
 
         /**
          * Fired when breakpoint is resolved to an actual script and location.
@@ -401,15 +401,15 @@ export namespace ProtocolProxyApi {
 
         getSamplingProfile(): Promise<Protocol.HeapProfiler.GetSamplingProfileResponse>;
 
-        startSampling(params?: Protocol.HeapProfiler.StartSamplingRequest): Promise<void>;
+        startSampling(params: Protocol.HeapProfiler.StartSamplingRequest): Promise<void>;
 
-        startTrackingHeapObjects(params?: Protocol.HeapProfiler.StartTrackingHeapObjectsRequest): Promise<void>;
+        startTrackingHeapObjects(params: Protocol.HeapProfiler.StartTrackingHeapObjectsRequest): Promise<void>;
 
         stopSampling(): Promise<Protocol.HeapProfiler.StopSamplingResponse>;
 
-        stopTrackingHeapObjects(params?: Protocol.HeapProfiler.StopTrackingHeapObjectsRequest): Promise<void>;
+        stopTrackingHeapObjects(params: Protocol.HeapProfiler.StopTrackingHeapObjectsRequest): Promise<void>;
 
-        takeHeapSnapshot(params?: Protocol.HeapProfiler.TakeHeapSnapshotRequest): Promise<void>;
+        takeHeapSnapshot(params: Protocol.HeapProfiler.TakeHeapSnapshotRequest): Promise<void>;
 
         on(event: 'addHeapSnapshotChunk', listener: (params: Protocol.HeapProfiler.AddHeapSnapshotChunkEvent) => void): void;
 
@@ -490,7 +490,7 @@ export namespace ProtocolProxyApi {
          * coverage may be incomplete. Enabling prevents running optimized code and resets execution
          * counters.
          */
-        startPreciseCoverage(params?: Protocol.Profiler.StartPreciseCoverageRequest): Promise<Protocol.Profiler.StartPreciseCoverageResponse>;
+        startPreciseCoverage(params: Protocol.Profiler.StartPreciseCoverageRequest): Promise<Protocol.Profiler.StartPreciseCoverageResponse>;
 
         /**
          * Enable type profile.
@@ -627,7 +627,7 @@ export namespace ProtocolProxyApi {
         /**
          * Returns all let, const and class variables from global scope.
          */
-        globalLexicalScopeNames(params?: Protocol.Runtime.GlobalLexicalScopeNamesRequest): Promise<Protocol.Runtime.GlobalLexicalScopeNamesResponse>;
+        globalLexicalScopeNames(params: Protocol.Runtime.GlobalLexicalScopeNamesRequest): Promise<Protocol.Runtime.GlobalLexicalScopeNamesResponse>;
 
         queryObjects(params: Protocol.Runtime.QueryObjectsRequest): Promise<Protocol.Runtime.QueryObjectsResponse>;
 
@@ -830,12 +830,12 @@ export namespace ProtocolProxyApi {
         /**
          * Fetches the accessibility node and partial accessibility tree for this DOM node, if it exists.
          */
-        getPartialAXTree(params?: Protocol.Accessibility.GetPartialAXTreeRequest): Promise<Protocol.Accessibility.GetPartialAXTreeResponse>;
+        getPartialAXTree(params: Protocol.Accessibility.GetPartialAXTreeRequest): Promise<Protocol.Accessibility.GetPartialAXTreeResponse>;
 
         /**
          * Fetches the entire accessibility tree for the root Document
          */
-        getFullAXTree(params?: Protocol.Accessibility.GetFullAXTreeRequest): Promise<Protocol.Accessibility.GetFullAXTreeResponse>;
+        getFullAXTree(params: Protocol.Accessibility.GetFullAXTreeRequest): Promise<Protocol.Accessibility.GetFullAXTreeResponse>;
 
         /**
          * Fetches a particular accessibility node by AXNodeId.
@@ -850,7 +850,7 @@ export namespace ProtocolProxyApi {
          * node is specified, or the DOM node does not exist, the command returns an error. If neither
          * `accessibleName` or `role` is specified, it returns all the accessibility nodes in the subtree.
          */
-        queryAXTree(params?: Protocol.Accessibility.QueryAXTreeRequest): Promise<Protocol.Accessibility.QueryAXTreeResponse>;
+        queryAXTree(params: Protocol.Accessibility.QueryAXTreeRequest): Promise<Protocol.Accessibility.QueryAXTreeResponse>;
 
     }
 
@@ -1010,7 +1010,7 @@ export namespace ProtocolProxyApi {
          * Runs the contrast check for the target page. Found issues are reported
          * using Audits.issueAdded event.
          */
-        checkContrast(params?: Protocol.Audits.CheckContrastRequest): Promise<void>;
+        checkContrast(params: Protocol.Audits.CheckContrastRequest): Promise<void>;
 
         on(event: 'issueAdded', listener: (params: Protocol.Audits.IssueAddedEvent) => void): void;
 
@@ -1090,7 +1090,7 @@ export namespace ProtocolProxyApi {
         /**
          * Reset all permission management for all origins.
          */
-        resetPermissions(params?: Protocol.Browser.ResetPermissionsRequest): Promise<void>;
+        resetPermissions(params: Protocol.Browser.ResetPermissionsRequest): Promise<void>;
 
         /**
          * Set the behavior when downloading a file.
@@ -1131,7 +1131,7 @@ export namespace ProtocolProxyApi {
         /**
          * Get Chrome histograms.
          */
-        getHistograms(params?: Protocol.Browser.GetHistogramsRequest): Promise<Protocol.Browser.GetHistogramsResponse>;
+        getHistograms(params: Protocol.Browser.GetHistogramsRequest): Promise<Protocol.Browser.GetHistogramsResponse>;
 
         /**
          * Get a Chrome histogram by name.
@@ -1146,7 +1146,7 @@ export namespace ProtocolProxyApi {
         /**
          * Get the browser window that contains the devtools target.
          */
-        getWindowForTarget(params?: Protocol.Browser.GetWindowForTargetRequest): Promise<Protocol.Browser.GetWindowForTargetResponse>;
+        getWindowForTarget(params: Protocol.Browser.GetWindowForTargetRequest): Promise<Protocol.Browser.GetWindowForTargetResponse>;
 
         /**
          * Set position and/or size of the browser window.
@@ -1156,7 +1156,7 @@ export namespace ProtocolProxyApi {
         /**
          * Set dock tile details, platform-specific.
          */
-        setDockTile(params?: Protocol.Browser.SetDockTileRequest): Promise<void>;
+        setDockTile(params: Protocol.Browser.SetDockTileRequest): Promise<void>;
 
         /**
          * Invoke custom browser commands used by telemetry.
@@ -1455,7 +1455,7 @@ export namespace ProtocolProxyApi {
          * Also starts observing for issue messages. When an issue is added or removed,
          * an |issueUpdated| event is fired.
          */
-        enable(params?: Protocol.Cast.EnableRequest): Promise<void>;
+        enable(params: Protocol.Cast.EnableRequest): Promise<void>;
 
         /**
          * Stops observing for sinks and issues.
@@ -1532,14 +1532,14 @@ export namespace ProtocolProxyApi {
          * Describes node given its id, does not require domain to be enabled. Does not start tracking any
          * objects, can be used for automation.
          */
-        describeNode(params?: Protocol.DOM.DescribeNodeRequest): Promise<Protocol.DOM.DescribeNodeResponse>;
+        describeNode(params: Protocol.DOM.DescribeNodeRequest): Promise<Protocol.DOM.DescribeNodeResponse>;
 
         /**
          * Scrolls the specified rect of the given node into view if not already visible.
          * Note: exactly one between nodeId, backendNodeId and objectId should be passed
          * to identify the node.
          */
-        scrollIntoViewIfNeeded(params?: Protocol.DOM.ScrollIntoViewIfNeededRequest): Promise<void>;
+        scrollIntoViewIfNeeded(params: Protocol.DOM.ScrollIntoViewIfNeededRequest): Promise<void>;
 
         /**
          * Disables DOM agent for the given page.
@@ -1560,7 +1560,7 @@ export namespace ProtocolProxyApi {
         /**
          * Focuses the given element.
          */
-        focus(params?: Protocol.DOM.FocusRequest): Promise<void>;
+        focus(params: Protocol.DOM.FocusRequest): Promise<void>;
 
         /**
          * Returns attributes for the specified node.
@@ -1570,25 +1570,25 @@ export namespace ProtocolProxyApi {
         /**
          * Returns boxes for the given node.
          */
-        getBoxModel(params?: Protocol.DOM.GetBoxModelRequest): Promise<Protocol.DOM.GetBoxModelResponse>;
+        getBoxModel(params: Protocol.DOM.GetBoxModelRequest): Promise<Protocol.DOM.GetBoxModelResponse>;
 
         /**
          * Returns quads that describe node position on the page. This method
          * might return multiple quads for inline nodes.
          */
-        getContentQuads(params?: Protocol.DOM.GetContentQuadsRequest): Promise<Protocol.DOM.GetContentQuadsResponse>;
+        getContentQuads(params: Protocol.DOM.GetContentQuadsRequest): Promise<Protocol.DOM.GetContentQuadsResponse>;
 
         /**
          * Returns the root DOM node (and optionally the subtree) to the caller.
          */
-        getDocument(params?: Protocol.DOM.GetDocumentRequest): Promise<Protocol.DOM.GetDocumentResponse>;
+        getDocument(params: Protocol.DOM.GetDocumentRequest): Promise<Protocol.DOM.GetDocumentResponse>;
 
         /**
          * Returns the root DOM node (and optionally the subtree) to the caller.
          * Deprecated, as it is not designed to work well with the rest of the DOM agent.
          * Use DOMSnapshot.captureSnapshot instead.
          */
-        getFlattenedDocument(params?: Protocol.DOM.GetFlattenedDocumentRequest): Promise<Protocol.DOM.GetFlattenedDocumentResponse>;
+        getFlattenedDocument(params: Protocol.DOM.GetFlattenedDocumentRequest): Promise<Protocol.DOM.GetFlattenedDocumentResponse>;
 
         /**
          * Finds nodes with a given computed style in a subtree.
@@ -1604,7 +1604,7 @@ export namespace ProtocolProxyApi {
         /**
          * Returns node's HTML markup.
          */
-        getOuterHTML(params?: Protocol.DOM.GetOuterHTMLRequest): Promise<Protocol.DOM.GetOuterHTMLResponse>;
+        getOuterHTML(params: Protocol.DOM.GetOuterHTMLRequest): Promise<Protocol.DOM.GetOuterHTMLResponse>;
 
         /**
          * Returns the id of the nearest ancestor that is a relayout boundary.
@@ -1700,7 +1700,7 @@ export namespace ProtocolProxyApi {
         /**
          * Resolves the JavaScript node object for a given NodeId or BackendNodeId.
          */
-        resolveNode(params?: Protocol.DOM.ResolveNodeRequest): Promise<Protocol.DOM.ResolveNodeResponse>;
+        resolveNode(params: Protocol.DOM.ResolveNodeRequest): Promise<Protocol.DOM.ResolveNodeResponse>;
 
         /**
          * Sets attribute for an element with given id.
@@ -2185,7 +2185,7 @@ export namespace ProtocolProxyApi {
         /**
          * Automatically render all web contents using a dark theme.
          */
-        setAutoDarkModeOverride(params?: Protocol.Emulation.SetAutoDarkModeOverrideRequest): Promise<void>;
+        setAutoDarkModeOverride(params: Protocol.Emulation.SetAutoDarkModeOverrideRequest): Promise<void>;
 
         /**
          * Enables CPU throttling to emulate slow CPUs.
@@ -2196,7 +2196,7 @@ export namespace ProtocolProxyApi {
          * Sets or clears an override of the default background color of the frame. This override is used
          * if the content does not specify one.
          */
-        setDefaultBackgroundColorOverride(params?: Protocol.Emulation.SetDefaultBackgroundColorOverrideRequest): Promise<void>;
+        setDefaultBackgroundColorOverride(params: Protocol.Emulation.SetDefaultBackgroundColorOverrideRequest): Promise<void>;
 
         /**
          * Overrides the values of device screen dimensions (window.screen.width, window.screen.height,
@@ -2214,7 +2214,7 @@ export namespace ProtocolProxyApi {
         /**
          * Emulates the given media type or media feature for CSS media queries.
          */
-        setEmulatedMedia(params?: Protocol.Emulation.SetEmulatedMediaRequest): Promise<void>;
+        setEmulatedMedia(params: Protocol.Emulation.SetEmulatedMediaRequest): Promise<void>;
 
         /**
          * Emulates the given vision deficiency.
@@ -2225,7 +2225,7 @@ export namespace ProtocolProxyApi {
          * Overrides the Geolocation Position or Error. Omitting any of the parameters emulates position
          * unavailable.
          */
-        setGeolocationOverride(params?: Protocol.Emulation.SetGeolocationOverrideRequest): Promise<void>;
+        setGeolocationOverride(params: Protocol.Emulation.SetGeolocationOverrideRequest): Promise<void>;
 
         /**
          * Overrides the Idle state.
@@ -2266,7 +2266,7 @@ export namespace ProtocolProxyApi {
         /**
          * Overrides default host system locale with the specified one.
          */
-        setLocaleOverride(params?: Protocol.Emulation.SetLocaleOverrideRequest): Promise<void>;
+        setLocaleOverride(params: Protocol.Emulation.SetLocaleOverrideRequest): Promise<void>;
 
         /**
          * Overrides default host system timezone with the specified one.
@@ -2311,7 +2311,7 @@ export namespace ProtocolProxyApi {
          * BeginFrameControl. Designed for use with --run-all-compositor-stages-before-draw, see also
          * https://goo.gl/3zHXhB for more background.
          */
-        beginFrame(params?: Protocol.HeadlessExperimental.BeginFrameRequest): Promise<Protocol.HeadlessExperimental.BeginFrameResponse>;
+        beginFrame(params: Protocol.HeadlessExperimental.BeginFrameRequest): Promise<Protocol.HeadlessExperimental.BeginFrameResponse>;
 
         /**
          * Disables headless events for the target.
@@ -2679,7 +2679,7 @@ export namespace ProtocolProxyApi {
         /**
          * Start collecting native memory profile.
          */
-        startSampling(params?: Protocol.Memory.StartSamplingRequest): Promise<void>;
+        startSampling(params: Protocol.Memory.StartSamplingRequest): Promise<void>;
 
         /**
          * Stop collecting native memory profile.
@@ -2769,7 +2769,7 @@ export namespace ProtocolProxyApi {
         /**
          * Enables network tracking, network events will now be delivered to the client.
          */
-        enable(params?: Protocol.Network.EnableRequest): Promise<void>;
+        enable(params: Protocol.Network.EnableRequest): Promise<void>;
 
         /**
          * Returns all browser cookies. Depending on the backend support, will return detailed cookie
@@ -2786,7 +2786,7 @@ export namespace ProtocolProxyApi {
          * Returns all browser cookies for the current URL. Depending on the backend support, will return
          * detailed cookie information in the `cookies` field.
          */
-        getCookies(params?: Protocol.Network.GetCookiesRequest): Promise<Protocol.Network.GetCookiesResponse>;
+        getCookies(params: Protocol.Network.GetCookiesRequest): Promise<Protocol.Network.GetCookiesResponse>;
 
         /**
          * Returns content served for the given request.
@@ -2872,7 +2872,7 @@ export namespace ProtocolProxyApi {
         /**
          * Returns information about the COEP/COOP isolation status.
          */
-        getSecurityIsolationStatus(params?: Protocol.Network.GetSecurityIsolationStatusRequest): Promise<Protocol.Network.GetSecurityIsolationStatusResponse>;
+        getSecurityIsolationStatus(params: Protocol.Network.GetSecurityIsolationStatusRequest): Promise<Protocol.Network.GetSecurityIsolationStatusResponse>;
 
         /**
          * Enables tracking for the Reporting API, events generated by the Reporting API will now be delivered to the client.
@@ -3424,7 +3424,7 @@ export namespace ProtocolProxyApi {
          */
         setShowAdHighlights(params: Protocol.Overlay.SetShowAdHighlightsRequest): Promise<void>;
 
-        setPausedInDebuggerMessage(params?: Protocol.Overlay.SetPausedInDebuggerMessageRequest): Promise<void>;
+        setPausedInDebuggerMessage(params: Protocol.Overlay.SetPausedInDebuggerMessageRequest): Promise<void>;
 
         /**
          * Requests that backend shows debug borders on layers
@@ -3480,7 +3480,7 @@ export namespace ProtocolProxyApi {
         /**
          * Add a dual screen device hinge
          */
-        setShowHinge(params?: Protocol.Overlay.SetShowHingeRequest): Promise<void>;
+        setShowHinge(params: Protocol.Overlay.SetShowHingeRequest): Promise<void>;
 
         /**
          * Show elements in isolation mode with overlays.
@@ -3571,13 +3571,13 @@ export namespace ProtocolProxyApi {
         /**
          * Capture page screenshot.
          */
-        captureScreenshot(params?: Protocol.Page.CaptureScreenshotRequest): Promise<Protocol.Page.CaptureScreenshotResponse>;
+        captureScreenshot(params: Protocol.Page.CaptureScreenshotRequest): Promise<Protocol.Page.CaptureScreenshotResponse>;
 
         /**
          * Returns a snapshot of the page as a string. For MHTML format, the serialization includes
          * iframes, shadow DOM, external resources, and element-inline styles.
          */
-        captureSnapshot(params?: Protocol.Page.CaptureSnapshotRequest): Promise<Protocol.Page.CaptureSnapshotResponse>;
+        captureSnapshot(params: Protocol.Page.CaptureSnapshotRequest): Promise<Protocol.Page.CaptureSnapshotResponse>;
 
         /**
          * Clears the overridden device metrics.
@@ -3680,12 +3680,12 @@ export namespace ProtocolProxyApi {
         /**
          * Print page as PDF.
          */
-        printToPDF(params?: Protocol.Page.PrintToPDFRequest): Promise<Protocol.Page.PrintToPDFResponse>;
+        printToPDF(params: Protocol.Page.PrintToPDFRequest): Promise<Protocol.Page.PrintToPDFResponse>;
 
         /**
          * Reloads given page optionally ignoring the cache.
          */
-        reload(params?: Protocol.Page.ReloadRequest): Promise<void>;
+        reload(params: Protocol.Page.ReloadRequest): Promise<void>;
 
         /**
          * Deprecated, please use removeScriptToEvaluateOnNewDocument instead.
@@ -3763,7 +3763,7 @@ export namespace ProtocolProxyApi {
          * Overrides the Geolocation Position or Error. Omitting any of the parameters emulates position
          * unavailable.
          */
-        setGeolocationOverride(params?: Protocol.Page.SetGeolocationOverrideRequest): Promise<void>;
+        setGeolocationOverride(params: Protocol.Page.SetGeolocationOverrideRequest): Promise<void>;
 
         /**
          * Controls whether page will emit lifecycle events.
@@ -3778,7 +3778,7 @@ export namespace ProtocolProxyApi {
         /**
          * Starts sending each frame using the `screencastFrame` event.
          */
-        startScreencast(params?: Protocol.Page.StartScreencastRequest): Promise<void>;
+        startScreencast(params: Protocol.Page.StartScreencastRequest): Promise<void>;
 
         /**
          * Force the page stop all navigations and pending resource fetches.
@@ -4258,7 +4258,7 @@ export namespace ProtocolProxyApi {
         /**
          * Enable collecting and reporting metrics.
          */
-        enable(params?: Protocol.Performance.EnableRequest): Promise<void>;
+        enable(params: Protocol.Performance.EnableRequest): Promise<void>;
 
         /**
          * Sets time domain to use for collecting and reporting duration metrics.
@@ -4452,7 +4452,7 @@ export namespace ProtocolProxyApi {
         /**
          * Returns all browser cookies.
          */
-        getCookies(params?: Protocol.Storage.GetCookiesRequest): Promise<Protocol.Storage.GetCookiesResponse>;
+        getCookies(params: Protocol.Storage.GetCookiesRequest): Promise<Protocol.Storage.GetCookiesResponse>;
 
         /**
          * Sets given cookies.
@@ -4462,7 +4462,7 @@ export namespace ProtocolProxyApi {
         /**
          * Clears cookies.
          */
-        clearCookies(params?: Protocol.Storage.ClearCookiesRequest): Promise<void>;
+        clearCookies(params: Protocol.Storage.ClearCookiesRequest): Promise<void>;
 
         /**
          * Returns usage and quota in bytes.
@@ -4618,7 +4618,7 @@ export namespace ProtocolProxyApi {
          * Creates a new empty BrowserContext. Similar to an incognito profile but you can have more than
          * one.
          */
-        createBrowserContext(params?: Protocol.Target.CreateBrowserContextRequest): Promise<Protocol.Target.CreateBrowserContextResponse>;
+        createBrowserContext(params: Protocol.Target.CreateBrowserContextRequest): Promise<Protocol.Target.CreateBrowserContextResponse>;
 
         /**
          * Returns all browser contexts created with `Target.createBrowserContext` method.
@@ -4633,7 +4633,7 @@ export namespace ProtocolProxyApi {
         /**
          * Detaches session with given id.
          */
-        detachFromTarget(params?: Protocol.Target.DetachFromTargetRequest): Promise<void>;
+        detachFromTarget(params: Protocol.Target.DetachFromTargetRequest): Promise<void>;
 
         /**
          * Deletes a BrowserContext. All the belonging pages will be closed without calling their
@@ -4644,7 +4644,7 @@ export namespace ProtocolProxyApi {
         /**
          * Returns information about a target.
          */
-        getTargetInfo(params?: Protocol.Target.GetTargetInfoRequest): Promise<Protocol.Target.GetTargetInfoResponse>;
+        getTargetInfo(params: Protocol.Target.GetTargetInfoRequest): Promise<Protocol.Target.GetTargetInfoResponse>;
 
         /**
          * Retrieves a list of available targets.
@@ -4851,12 +4851,12 @@ export namespace ProtocolProxyApi {
         /**
          * Request a global memory dump.
          */
-        requestMemoryDump(params?: Protocol.Tracing.RequestMemoryDumpRequest): Promise<Protocol.Tracing.RequestMemoryDumpResponse>;
+        requestMemoryDump(params: Protocol.Tracing.RequestMemoryDumpRequest): Promise<Protocol.Tracing.RequestMemoryDumpResponse>;
 
         /**
          * Start trace events collection.
          */
-        start(params?: Protocol.Tracing.StartRequest): Promise<void>;
+        start(params: Protocol.Tracing.StartRequest): Promise<void>;
 
         on(event: 'bufferUsage', listener: (params: Protocol.Tracing.BufferUsageEvent) => void): void;
 
@@ -4912,7 +4912,7 @@ export namespace ProtocolProxyApi {
          * Enables issuing of requestPaused events. A request will be paused until client
          * calls one of failRequest, fulfillRequest or continueRequest/continueWithAuth.
          */
-        enable(params?: Protocol.Fetch.EnableRequest): Promise<void>;
+        enable(params: Protocol.Fetch.EnableRequest): Promise<void>;
 
         /**
          * Causes the request to fail with specified reason.
