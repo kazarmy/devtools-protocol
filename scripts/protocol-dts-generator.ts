@@ -325,28 +325,14 @@ const emitApiCommand = (command: P.Command, domainName: string, modulePrefix: st
     emitLine()
 }
 
-const enum EventApi {
-    On,
-    Promise,
-    Callback
-}
-
-const emitApiEvent = (event: P.Event, domainName: string, modulePrefix: string, eventApi: EventApi) => {
+const emitApiEvent = (event: P.Event, domainName: string, modulePrefix: string, promiseApi: boolean) => {
     const prefix = `${modulePrefix}.${domainName}.`
     emitDescription(event.description)
     const params = event.parameters ? `params: ${prefix}${toEventPayloadName(event.name)}` : ''
-    switch (eventApi) {
-        case EventApi.On:
-            emitLine(`on(event: '${event.name}', listener: (${params}) => void): void;`)
-            break
-        case EventApi.Promise:
-            emitLine(`${event.name}(): Promise<${params ? params.slice(8) : 'void'}>;`)
-            break
-        case EventApi.Callback:
-            emitLine(`${event.name}(listener: (${params}) => void): void;`)
-            break
-        default:
-            throw new Error(`Unexpected event API choice: ${eventApi}`)
+    if (promiseApi) {
+        emitLine(`${event.name}(): Promise<${params ? params.slice(8) : 'void'}>;`)
+    } else {
+        emitLine(`on(event: '${event.name}', listener: (${params}) => void): void;`)
     }
     emitLine()
 }
@@ -357,9 +343,8 @@ const emitDomainApi = (domain: P.Domain, modulePrefix: string) => {
     emitOpenBlock(`export interface ${domainName}Api`)
     if (domain.commands) domain.commands.forEach(c => emitApiCommand(c, domainName, modulePrefix))
     if (domain.events) {
-        domain.events.forEach(e => emitApiEvent(e, domainName, modulePrefix, EventApi.On))
-        domain.events.forEach(e => emitApiEvent(e, domainName, modulePrefix, EventApi.Promise))
-        domain.events.forEach(e => emitApiEvent(e, domainName, modulePrefix, EventApi.Callback))
+        domain.events.forEach(e => emitApiEvent(e, domainName, modulePrefix, false))
+        domain.events.forEach(e => emitApiEvent(e, domainName, modulePrefix, true))
     }
     emitCloseBlock()
 }
