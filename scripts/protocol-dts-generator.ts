@@ -343,7 +343,7 @@ const emitApiEvent = (event: P.Event, domainName: string, modulePrefix: string, 
             emitLine(`${event.name}(): Promise<${params ? params.slice(8) : 'void'}>;`)
             break
         case EventApi.Callback:
-            emitLine(`${event.name}(listener: (${params || 'params: undefined'}, sessionId?: string) => void): () => void;`)
+            emitLine(`${event.name}(listener: (${params || 'params: undefined'}, sessionId?: string) => void): void;`)
             break
         default:
             throw new Error(`Unexpected event API choice: ${eventApi}`)
