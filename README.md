@@ -1,19 +1,11 @@
 # Welcome!
 
-This is a fork of the [devtools-protocol repo](https://github.com/ChromeDevTools/devtools-protocol) at r927104, corresponding to the npm package `devtools-protocol@0.0.927104`. The typings here have been augmented in 2 different ways:
+This is a fork of the [devtools-protocol repo](https://github.com/ChromeDevTools/devtools-protocol) at r927104, corresponding to the npm package `devtools-protocol@0.0.927104`. The typings here have been augmented as follows:
 
 1. Typings for Promise event methods, for statements like:
 
 ```ts
 await Page.loadEventFired();
-```
-
-2. Typings for shorthand callback event methods, for statements like:
-
-```ts
-Network.requestWillBeSent((params) => {
-    console.log(params.request.url);
-});
 ```
 
 ----
